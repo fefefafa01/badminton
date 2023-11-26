@@ -1,0 +1,104 @@
+<template>
+  <div class="back_ground">
+  <div class=" container">
+    <div class="slider">
+      <Splide :options="options" aria-label="My Favorite Images">
+        <SplideSlide>
+          <img src="../assets/images/slider/caulong-2-28620.png" alt="Sample 1">
+        </SplideSlide>
+        <SplideSlide>
+          <img src="../assets/images/slider/khai truong VNB Thuan An.jpg" alt="Sample 2">
+        </SplideSlide>
+        <SplideSlide>
+          <img src="../assets/images/slider/Minigame-Mừng-ngày-8-tháng-3-1.jpg" alt="Sample 3">
+        </SplideSlide>
+        <SplideSlide>
+          <img src="../assets/images/slider/LOG_7134-scaled.jpg" alt="Sample 4">
+        </SplideSlide>
+      </Splide>
+    </div>
+  </div>
+  </div>
+
+ 
+</template>
+
+
+<script>
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import { defineComponent } from 'vue';
+
+
+export default defineComponent( {
+  components: {
+    Splide,
+    SplideSlide,
+  },
+
+
+  setup() {
+    const options = {
+      rewind: true,
+      gap   : '1rem',
+    };
+    return { options };
+  },
+
+  data() {
+    return {
+      product: 'PC GVN Gaming AMD R5-5600X/ VGA RTX 3050',
+      accessory: 'RTX 4090 32GB Z790 1TB i9 14900K',
+      price: '19.190.000₫'
+    };
+  }
+} );
+
+
+
+</script>
+
+
+<style lang="scss" scoped>
+.container{
+  
+  width: 100%;
+  height: auto;
+  padding-top: 180px;
+  padding-bottom: 200px;
+}
+.slider{
+  width: 100%;
+  height: 500px;
+}
+.splide__slide img{
+  height:500px;
+  object-fit: cover;
+  display: block;
+  width: 100%;
+}
+.newProduct{
+  width: 130px;
+  background-color: rgb(2, 154, 2);
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+.nameOfProduct{
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.accessoryOfProduct{
+  background-color:rgb(166, 166, 166);
+}
+.priceOfProduct{
+  color:red;
+  font-size:larger;
+  font-weight: bold;
+}
+
+.back_ground{
+  background-color: #1F2833
+}
+</style>
