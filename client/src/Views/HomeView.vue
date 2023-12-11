@@ -1,6 +1,6 @@
 <template>
   <div class="back_ground">
-  <div class=" container">
+  <div class=" container1">
     <div class="slider">
       <Splide :options="options" aria-label="My Favorite Images">
         <SplideSlide>
@@ -17,7 +17,36 @@
         </SplideSlide>
       </Splide>
     </div>
+    
   </div>
+  <div class ="BangTin">
+        <p><strong>Bảng Tin</strong></p>
+    </div>
+    <div class ="ChuThich">
+        <p>Cập nhập thông tin về các sân cầu lông, các khuyến mãi và những sự kiện nổi bật</p>
+    </div>
+<!-- Danh sach quang cao -->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      1 of 2
+    </div>
+    <div class="col">
+      2 of 2
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      1 of 3
+    </div>
+    <div class="col">
+      2 of 3
+    </div>
+    <div class="col">
+      3 of 3
+    </div>
+  </div>
+</div>
   </div>
 
  
@@ -59,12 +88,12 @@ export default defineComponent( {
 
 
 <style lang="scss" scoped>
-.container{
+.container1{
   
   width: 100%;
   height: auto;
-  padding-top: 180px;
-  padding-bottom: 200px;
+  padding-top: 160px;
+  padding-bottom: 20px;
 }
 .slider{
   width: 100%;
@@ -97,7 +126,27 @@ export default defineComponent( {
   font-size:larger;
   font-weight: bold;
 }
+.BangTin{
+  margin-top: 30px;
+  display: flex;
+  color: white;
+  width: 100%;
+  height: auto;
+  font-size:xx-large;
+  justify-content: center; 
 
+}
+
+.ChuThich{
+  
+  display: flex;
+  color: white;
+  width: 100%;
+  height: auto;
+  font-size:large;
+  justify-content: center; 
+  font-style: italic;
+}
 .back_ground{
   background-color: #1F2833
 }
