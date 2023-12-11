@@ -7,7 +7,7 @@
       alt="Img"
       src="https://c.animaapp.com/UGutMkT8/img/da6c9e2e3c8f4d8abaf5e7e4c325ee24--1--1-1@2x.png"
     />
-    <div class="frame">
+    <div class="frame" type="button" @click="redirectToLogin">
       <div class="div">
         <div class="text-wrapper-2">Quận 7</div>
         <img

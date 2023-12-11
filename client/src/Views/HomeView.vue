@@ -1,5 +1,4 @@
 <template>
-  <div class="back_ground">
   <div class=" container1">
     <div class="slider">
       <Splide :options="options" aria-label="My Favorite Images">
@@ -47,7 +46,7 @@
     </div>
   </div>
 </div>
-  </div>
+
 
  
 </template>
@@ -147,7 +146,5 @@ export default defineComponent( {
   justify-content: center; 
   font-style: italic;
 }
-.back_ground{
-  background-color: #1F2833
-}
+
 </style>
