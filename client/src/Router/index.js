@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "../Views/Login.vue";
 import HomeView from "../Views/HomeView.vue";
+import ListOfCourt from "../Views/ListOfCourt.vue"
 // import ProductDetail from "../Views/ProductDetail.vue";
 
 const routes = [
@@ -13,13 +14,25 @@ const routes = [
     },
   },
   {
-    path: "/",
-    redirect: "/home",
+    path: "/ListOfCourt",
+    name: "ListOfCourt",
+    component: ListOfCourt,
+    meta: {
+      title: "ListOfCourt",
+    },
   },
   {
     path: "/Login",
     name: "Login",
-  }
+    component: Login,
+    meta: {
+      title: "Login",
+    },
+  },
+  {
+    path: "/",
+    redirect: "/home",
+  },
 ];
 
 const router = createRouter({
