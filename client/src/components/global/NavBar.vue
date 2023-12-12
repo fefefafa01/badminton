@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div class="header-loggin ">
     <TinTC type="button" @click="redirectToHomepage" class="SN-PHM" divClassName="TIN-t-c-instance phuc_nav" text="Trang chủ" />
     <TinTC type="button" class="design-component-instance-node phuc_nav" divClassName="SN-PHM-2" text="Tham gia vào sân cầu lông" />
@@ -22,24 +21,6 @@
           Chủ Nhật
           <br />
           29/10/2023
-=======
-    <div class="header-loggin ">
-      <TinTC type="button" class="SN-PHM" divClassName="TIN-t-c-instance phuc_nav" text="Trang chủ" />
-      <TinTC type="button" class="design-component-instance-node phuc_nav" divClassName="SN-PHM-2" text="Tham gia vào sân cầu lông" />
-      <img
-        class="img"
-        alt="Img"
-        src="https://c.animaapp.com/UGutMkT8/img/da6c9e2e3c8f4d8abaf5e7e4c325ee24--1--1-1@2x.png"
-      />
-      <div class="frame">
-        <div class="div">
-          <div class="text-wrapper-2">Quận 7</div>
-          <img
-            class="icon-location"
-            alt="Icon location"
-            src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
-          />
->>>>>>> 21dfdcabef97bbc35df03c2f6bc49e0fbe49d842
         </div>
         <div class="frame-2">
           <div class="ch-nh-t">
@@ -70,7 +51,6 @@
         </div>
       </div>
     </div>
-<<<<<<< HEAD
   </div>
 </template>
 
@@ -269,28 +249,9 @@ export default {
   align-items: center;
   height: 58px;
   left: 90%; 
-=======
-  </template>
->>>>>>> 21dfdcabef97bbc35df03c2f6bc49e0fbe49d842
   
-  <script>
-  import TinTC from "../items/TinTC.vue";
-  
-  export default {
-    name: "HeaderLoggin",
-    components: {
-      TinTC,
-    },
-    methods: {
-        redirectToLogin() {
-            // Chuyển hướng đến trang Login
-            window.location.href = 'Login';
-        },
-    },
-  };
-  </script>
-  
-  <style>
+}
+
   .header-loggin {/* Position the navbar at the top of the page */
     margin-top: 5px;
     display: block;

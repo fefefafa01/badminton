@@ -1,10 +1,5 @@
 <template>
-<<<<<<< HEAD
   <div class=" container1">
-=======
-  <div class="back_ground">
-  <div class=" container">
->>>>>>> 21dfdcabef97bbc35df03c2f6bc49e0fbe49d842
     <div class="slider">
       <Splide :options="options" aria-label="My Favorite Images">
         <SplideSlide>
@@ -22,7 +17,6 @@
       </Splide>
     </div>
   </div>
-<<<<<<< HEAD
   <div class ="BangTin">
         <p><strong>Bảng Tin</strong></p>
     </div>
@@ -52,9 +46,6 @@
   </div>
 </div>
 
-=======
-  </div>
->>>>>>> 21dfdcabef97bbc35df03c2f6bc49e0fbe49d842
 
  
 </template>
@@ -134,8 +125,6 @@ export default defineComponent( {
   font-weight: bold;
 }
 
-<<<<<<< HEAD
-}
 
 .ChuThich{
   
@@ -148,9 +137,4 @@ export default defineComponent( {
   font-style: italic;
 }
 
-=======
-.back_ground{
-  background-color: #1F2833
-}
->>>>>>> 21dfdcabef97bbc35df03c2f6bc49e0fbe49d842
 </style>
