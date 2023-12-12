@@ -2,23 +2,16 @@
     <div class="back_ground">
     <div class=" container">
         <div class="login">
-            <h2>CHÀO MỪNG ĐẾN VỚI BCB</h2>
-            <h2>ĐĂNG NHẬP NGAY!</h2>
-            <form>
-                <div class="form-group">
-                    <input type="email" placeholder="Số điện thoại/Email" v-model="email" required />
-                    <br>
-                    <input type="email" placeholder="Mật khẩu" v-model="email" required />
-                    <span @click="redirectToForgetPwd">Bạn quên mật khẩu?</span>
-                    <br>
-                    <button>ĐĂNG NHẬP</button>
-                </div>
-            </form>
+            <h2>CHÀO MỪNG ĐẾN VỚI BK-</h2>
+            <h2>ECOMERCIAL!</h2>
             <br>
+            <span>Tài khoản của bạn đã được đăng ký thành công</span>
             <br>
-            <span>BẠN CHƯA CÓ TÀI KHOẢN?</span>
-            <a @click="redirectToRegister">ĐĂNG KÝ</a>
+            <div>VUI LÒNG ĐĂNG NHẬP ĐỂ TIẾP TỤC</div>
+            <br>
+            <button @click="redirectToLogin">ĐĂNG NHẬP</button>
         </div>
+        
     </div>
     </div>
   
@@ -58,12 +51,10 @@
       TinTC,
     },
     methods: {
-        redirectToForgetPwd() {
-            window.location.href = 'ForgetPwd';
+        redirectToLogin() {
+            window.location.href = 'Login';
         },
-        redirectToRegister() {
-            window.location.href = 'Register';
-        },
+        
     },
 
 
@@ -83,10 +74,6 @@
     padding-top: 250px;
     padding-bottom: 70px;
     font-family: "Comfortaa", Helvetica;
-    a {
-        color: #45A29E;
-        cursor: pointer;
-    }
   }
   
   .back_ground{
@@ -101,44 +88,25 @@
     align-items: center;
     flex-direction: column;
     font-size: 15px;
+    span {
+        font-size: 130%;  
+    };
+    div {
+        font-size: 130%;
+        color: #45A29E;
+    }
   }
 
   .login h2 {
     color: #45A29E;
   }
 
-  .form-group {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding-top: 15%;
-  }
-
-  .form-group input {
-    align-self: center;
-    background-color: #1F2833;
-    border: none;
-    border-bottom: solid 1px white;
-    width: 200%;
-  }
-
-  .form-group input::placeholder {
-    color: white;
-  }
-
-  .form-group span {
-    width: 150%;
-    display: flex;
-    justify-content: flex-end;
-    color: #45A29E;
-    cursor: pointer;
-  }
-
-  .form-group button {
+  .login button {
     background-color: #1F2833;
     color: white;
     border: solid 1px #45A29E;
     border-radius: 50px;
+    font-size: 100%;
   }
 
   </style>

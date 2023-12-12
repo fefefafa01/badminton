@@ -4,32 +4,29 @@
         <div class="forgetpwd">
             <h2>BẠN QUÊN MẬT KHẨU?</h2>
             <a>*Lựa chọn phương thức xác minh</a>
-            
             <form>
               <span>
-                <input type="radio" id="sdt" name="sdt" value="Số điện thoại">
+                <input type="radio" id="sdt" name="check" value="sđt">
                 <label for="sdt">Số điện thoại</label> <br>
-                <input type="radio" id="mail" name="mail" value="Email">
+                <input type="radio" id="mail" name="check" value="mail">
                 <label for="mail">Email</label> <br>
-            </span>
-                <div class="form-group">
-                  <div>
-                    <input type="email" placeholder="Vui lòng nhập số điện thoại" v-model="email" required />
-                    <p>Gửi</p>
-                  </div>
-                  <br>
-                  <div>
-                    <input type="email" placeholder="Vui lòng nhập mã xác minh" v-model="email" required />
-                    <p>Xác minh</p>
-                  </div>
-                    <br>
-                    <br>
-                    <button>TIẾP TỤC</button>
+              </span>
+              <div class="form-group">
+                <div>
+                  <input type="email" placeholder="Vui lòng nhập số điện thoại/email" v-model="email" required />
+                  <p>Gửi</p>
                 </div>
+                <br>
+                <div>
+                  <input type="email" placeholder="Vui lòng nhập mã xác minh" v-model="email" required />
+                  <p>Xác minh</p>
+                </div>
+                <br>
+                <br>
+                <button @click="redirectToResetPwd">TIẾP TỤC</button>
+              </div>
             </form>
-            
         </div>
-        
     </div>
     </div>
   
@@ -40,6 +37,7 @@
   <script>
   import { Splide, SplideSlide } from '@splidejs/vue-splide';
   import { defineComponent } from 'vue';
+  import TinTC from "../components/items/TinTC.vue";
   
   
   export default defineComponent( {
@@ -63,6 +61,16 @@
         accessory: 'RTX 4090 32GB Z790 1TB i9 14900K',
         price: '19.190.000₫'
       };
+    },
+
+    name: "HeaderLoggin",
+    components: {
+      TinTC,
+    },
+    methods: {
+        redirectToResetPwd() {
+            window.location.href = 'ResetPwd';
+        },
     }
   } );
   
@@ -99,6 +107,7 @@
     flex-direction: column;
     font-size: 15px;
     align-self: center;
+    margin-left: -5%;
         h2 {
             color: #45A29E;
         }
@@ -132,7 +141,7 @@
       background-color: #1F2833;
       border: none;
       border-bottom: solid 1px white;
-      width: 80%;
+      width: 60%;
     }
     p {
       width: 20%;
@@ -141,6 +150,7 @@
       display: flex;
       justify-content: flex-end;
       color: #45A29E;
+      cursor: pointer;
     }
   }
   .form-group{
@@ -166,6 +176,7 @@
     border-radius: 50px;
     width: 50%;
     align-self: center;
+    margin-left: -20%;
   }
 
   </style>

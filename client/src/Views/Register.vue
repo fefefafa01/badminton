@@ -3,21 +3,28 @@
     <div class=" container">
         <div class="login">
             <h2>CHÀO MỪNG ĐẾN VỚI BCB</h2>
-            <h2>ĐĂNG NHẬP NGAY!</h2>
+            <h2>ĐĂNG KÝ NGAY!</h2>
             <form>
                 <div class="form-group">
                     <input type="email" placeholder="Số điện thoại/Email" v-model="email" required />
                     <br>
                     <input type="email" placeholder="Mật khẩu" v-model="email" required />
-                    <span @click="redirectToForgetPwd">Bạn quên mật khẩu?</span>
                     <br>
-                    <button>ĐĂNG NHẬP</button>
+                    <input type="email" placeholder="Nhập lại mật khẩu" v-model="email" required />
+                    <br>
+                    <button @click="redirectToSuccess">ĐĂNG KÝ</button>
                 </div>
             </form>
             <br>
             <br>
-            <span>BẠN CHƯA CÓ TÀI KHOẢN?</span>
-            <a @click="redirectToRegister">ĐĂNG KÝ</a>
+            <span>Bằng việc đăng ký, bạn đã đồng ý với Cocoon về</span>
+            <span>
+                <p>Điều khoản dịch vụ</p>
+                <a>và</a>
+                <p>Chính sách bảo mật </p>
+            </span>
+            <span>BẠN ĐÃ CÓ TÀI KHOẢN?</span>
+            <a @click="redirectToLogin">ĐĂNG NHẬP</a>
         </div>
     </div>
     </div>
@@ -58,11 +65,11 @@
       TinTC,
     },
     methods: {
-        redirectToForgetPwd() {
-            window.location.href = 'ForgetPwd';
+        redirectToLogin() {
+            window.location.href = 'Login';
         },
-        redirectToRegister() {
-            window.location.href = 'Register';
+        redirectToSuccess() {
+            window.location.href = 'Success';
         },
     },
 
@@ -86,6 +93,19 @@
     a {
         color: #45A29E;
         cursor: pointer;
+    }
+    span {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        p {
+            color: red;
+            cursor: pointer;
+        }
+        a {
+            color: white;
+            cursor: auto;
+        }
     }
   }
   

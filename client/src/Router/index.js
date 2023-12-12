@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "../Views/Login.vue";
 import HomeView from "../Views/HomeView.vue";
 import ForgetPwd from "../Views/ForgetPwd.vue";
+import Register from "../Views/Register.vue";
+import Success from "../Views/Success.vue";
+import ResetPwd from "../Views/ResetPwd.vue";
 // import ProductDetail from "../Views/ProductDetail.vue";
 
 const routes = [
@@ -26,6 +29,21 @@ const routes = [
     path: "/ForgetPwd",
     name: "ForgetPwd",
     component: ForgetPwd,
+  },
+  {
+    path: "/Register",
+    name: "Register",
+    component: Register,
+  },
+  {
+    path: "/Success",
+    name: "Success",
+    component: Success,
+  },
+  {
+    path: "/ResetPwd",
+    name: "ResetPwd",
+    component: ResetPwd,
   }
 ];
 

@@ -2,22 +2,18 @@
     <div class="back_ground">
     <div class=" container">
         <div class="login">
-            <h2>CHÀO MỪNG ĐẾN VỚI BCB</h2>
-            <h2>ĐĂNG NHẬP NGAY!</h2>
+            <h2>ĐẶT LẠI MẬT KHẨU</h2>
             <form>
                 <div class="form-group">
-                    <input type="email" placeholder="Số điện thoại/Email" v-model="email" required />
+                    <input type="email" placeholder="・・・・・" v-model="email" required />
+                    <span>Mật khẩu tối thiểu 8 ký tự bao gồm cả chữ và số</span>
                     <br>
-                    <input type="email" placeholder="Mật khẩu" v-model="email" required />
-                    <span @click="redirectToForgetPwd">Bạn quên mật khẩu?</span>
+                    <input type="email" placeholder="・・・・・" v-model="email" required />
                     <br>
-                    <button>ĐĂNG NHẬP</button>
+                    <br>
+                    <button @click="redirectToLogin">HOÀN THÀNH</button>
                 </div>
             </form>
-            <br>
-            <br>
-            <span>BẠN CHƯA CÓ TÀI KHOẢN?</span>
-            <a @click="redirectToRegister">ĐĂNG KÝ</a>
         </div>
     </div>
     </div>
@@ -58,13 +54,12 @@
       TinTC,
     },
     methods: {
-        redirectToForgetPwd() {
-            window.location.href = 'ForgetPwd';
+        redirectToLogin() {
+            window.location.href = 'Login';
         },
-        redirectToRegister() {
-            window.location.href = 'Register';
-        },
+        
     },
+
 
 
     
@@ -119,7 +114,7 @@
     background-color: #1F2833;
     border: none;
     border-bottom: solid 1px white;
-    width: 200%;
+    width: 150%;
   }
 
   .form-group input::placeholder {
@@ -127,10 +122,10 @@
   }
 
   .form-group span {
-    width: 150%;
+    width: 125%;
     display: flex;
     justify-content: flex-end;
-    color: #45A29E;
+    color: white;
     cursor: pointer;
   }
 
