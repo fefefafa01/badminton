@@ -1,5 +1,10 @@
 <template>
+<<<<<<< HEAD
   <div class=" container1">
+=======
+  <div class="back_ground">
+  <div class=" container">
+>>>>>>> 21dfdcabef97bbc35df03c2f6bc49e0fbe49d842
     <div class="slider">
       <Splide :options="options" aria-label="My Favorite Images">
         <SplideSlide>
@@ -16,8 +21,8 @@
         </SplideSlide>
       </Splide>
     </div>
-    
   </div>
+<<<<<<< HEAD
   <div class ="BangTin">
         <p><strong>Bảng Tin</strong></p>
     </div>
@@ -47,6 +52,9 @@
   </div>
 </div>
 
+=======
+  </div>
+>>>>>>> 21dfdcabef97bbc35df03c2f6bc49e0fbe49d842
 
  
 </template>
@@ -87,12 +95,12 @@ export default defineComponent( {
 
 
 <style lang="scss" scoped>
-.container1{
+.container{
   
   width: 100%;
   height: auto;
-  padding-top: 160px;
-  padding-bottom: 20px;
+  padding-top: 180px;
+  padding-bottom: 200px;
 }
 .slider{
   width: 100%;
@@ -125,15 +133,8 @@ export default defineComponent( {
   font-size:larger;
   font-weight: bold;
 }
-.BangTin{
-  margin-top: 30px;
-  display: flex;
-  color: white;
-  width: 100%;
-  height: auto;
-  font-size:xx-large;
-  justify-content: center; 
 
+<<<<<<< HEAD
 }
 
 .ChuThich{
@@ -147,4 +148,9 @@ export default defineComponent( {
   font-style: italic;
 }
 
+=======
+.back_ground{
+  background-color: #1F2833
+}
+>>>>>>> 21dfdcabef97bbc35df03c2f6bc49e0fbe49d842
 </style>
