@@ -5,6 +5,7 @@ import ForgetPwd from "../Views/ForgetPwd.vue";
 import Register from "../Views/Register.vue";
 import Success from "../Views/Success.vue";
 import ResetPwd from "../Views/ResetPwd.vue";
+import ListOfCourt from "../Views/ListOfCourt.vue"
 // import ProductDetail from "../Views/ProductDetail.vue";
 
 const routes = [
@@ -17,8 +18,12 @@ const routes = [
     },
   },
   {
-    path: "/",
-    redirect: "/home",
+    path: "/ListOfCourt",
+    name: "ListOfCourt",
+    component: ListOfCourt,
+    meta: {
+      title: "ListOfCourt",
+    },
   },
   {
     path: "/Login",
@@ -44,7 +49,11 @@ const routes = [
     path: "/ResetPwd",
     name: "ResetPwd",
     component: ResetPwd,
-  }
+  },
+  {
+    path: "/",
+    redirect: "/home",
+  },
 ];
 
 const router = createRouter({

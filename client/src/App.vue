@@ -10,7 +10,7 @@ import Foot from "./components/global/Footer.vue";
 </script>
 
 <template >
-  <div>
+  <div class="back_ground">
   <NavBar/>
   <router-view />
   <Foot/>
@@ -45,5 +45,7 @@ body {
   background-color: aquamarine;
   padding: 60px;
 }
-
+.back_ground{
+  background-color: #1F2833
+}
 </style>
