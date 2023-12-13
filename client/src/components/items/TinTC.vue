@@ -1,6 +1,8 @@
 <template>
     <div :class="['TIN-t-c', className]">
-      <div v-if="hasDiv" :class="['text-wrapper', divClassName]">{{ text }}</div>
+      <div 
+        v-if="hasDiv"
+        :class="['text-wrapper', divClassName]">{{ text }}</div>
     </div>
   </template>
   
