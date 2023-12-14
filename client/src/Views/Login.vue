@@ -30,7 +30,7 @@
   </template>
   
 <script>
-  import { callWithAsyncErrorHandling, defineComponent, ref } from 'vue';
+  import {defineComponent, ref } from 'vue';
   import axios from 'axios';
    
   export default defineComponent( {
@@ -60,6 +60,9 @@
   
           // Handle response data as needed
           console.log(response.data);
+          if (response.data.loggedIn) {
+            window.location.assign("/home");
+          }
         } catch (error) {
           // Handle error
           console.error(error);

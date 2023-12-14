@@ -62,6 +62,10 @@ export default defineComponent( {
                     email: this.email,
                     password: this.password
                 })
+                console.log(response.data);
+                if (response.data.registered){
+                    window.location.assign("/Success");
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -73,9 +77,6 @@ export default defineComponent( {
             window.location.href = 'Success';
         },
     },
-
-
-    
 });
   
   

@@ -2,7 +2,7 @@
 -- PostgreSQL database cluster dump
 --
 
--- Started on 2023-12-13 14:49:25
+-- Started on 2023-12-14 13:29:20
 
 SET default_transaction_read_only = off;
 
@@ -44,7 +44,7 @@ ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-12-13 14:49:25
+-- Started on 2023-12-14 13:29:20
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -57,7 +57,7 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
--- Completed on 2023-12-13 14:49:25
+-- Completed on 2023-12-14 13:29:20
 
 --
 -- PostgreSQL database dump complete
@@ -76,7 +76,7 @@ SET row_security = off;
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-12-13 14:49:25
+-- Started on 2023-12-14 13:29:20
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -183,7 +183,8 @@ CREATE TABLE public.notification (
     notification_id integer NOT NULL,
     message text,
     admin_id integer,
-    customer_id integer
+    customer_id integer,
+    href character varying(255) NOT NULL
 );
 
 
@@ -211,6 +212,7 @@ ALTER TABLE public.payment OWNER TO postgres;
 --
 
 COPY public.admin (name, admin_id, email, password) FROM stdin;
+khoa	1	dangkhoa0521@gmail.com	123456
 \.
 
 
@@ -241,6 +243,10 @@ COPY public.court (court_id, name, availability, type, payment_id, customer_id) 
 --
 
 COPY public.customer (name, customer_id, email, password) FROM stdin;
+Khoa	1	dangkhoa0521@gmail.com	123456
+khoa	2	khoa@gmail.com	123456
+khoa	3	khoa1@gmail.com	123456
+khoa	4	khoa2@gmail.com	123
 \.
 
 
@@ -250,7 +256,13 @@ COPY public.customer (name, customer_id, email, password) FROM stdin;
 -- Data for Name: notification; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.notification (notification_id, message, admin_id, customer_id) FROM stdin;
+COPY public.notification (notification_id, message, admin_id, customer_id, href) FROM stdin;
+1	sample 1\n\n	1	1	/src/assets/images/slider/caulong-2-28620.png
+2	sample 2\n	1	1	/src/assets/images/slider/khai truong VNB Thuan An.jpg
+3	sample 3\n	1	1	src/assets/images/slider/Minigame-Mừng-ngày-8-tháng-3-1.jpg
+4	sample 4	1	1	/src/assets/images/slider/LOG_7134-scaled.jpg
+6	sample 6	1	1	/src/assets/images/slider/giai_cau_long.png
+5	sample 5	1	1	/src/assets/images/slider/giay_cau_long.jpg
 \.
 
 
@@ -381,13 +393,13 @@ ALTER TABLE ONLY public.payment
     ADD CONSTRAINT payment_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
 
 
--- Completed on 2023-12-13 14:49:25
+-- Completed on 2023-12-14 13:29:20
 
 --
 -- PostgreSQL database dump complete
 --
 
--- Completed on 2023-12-13 14:49:25
+-- Completed on 2023-12-14 13:29:21
 
 --
 -- PostgreSQL database cluster dump complete
