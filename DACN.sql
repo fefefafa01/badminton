@@ -2,7 +2,7 @@
 -- PostgreSQL database cluster dump
 --
 
--- Started on 2023-12-14 13:29:20
+-- Started on 2023-12-15 19:38:48
 
 SET default_transaction_read_only = off;
 
@@ -44,7 +44,7 @@ ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-12-14 13:29:20
+-- Started on 2023-12-15 19:38:48
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -57,7 +57,7 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
--- Completed on 2023-12-14 13:29:20
+-- Completed on 2023-12-15 19:38:48
 
 --
 -- PostgreSQL database dump complete
@@ -76,7 +76,7 @@ SET row_security = off;
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-12-14 13:29:20
+-- Started on 2023-12-15 19:38:48
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -98,7 +98,7 @@ CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 3366 (class 0 OID 0)
+-- TOC entry 3374 (class 0 OID 0)
 -- Dependencies: 2
 -- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
 --
@@ -124,6 +124,21 @@ CREATE TABLE public.admin (
 
 
 ALTER TABLE public.admin OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 32771)
+-- Name: bangtin; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.bangtin (
+    bangtin_id character varying(255) NOT NULL,
+    admin_id integer NOT NULL,
+    description character varying(255) NOT NULL,
+    path character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.bangtin OWNER TO postgres;
 
 --
 -- TOC entry 220 (class 1259 OID 16457)
@@ -206,7 +221,7 @@ CREATE TABLE public.payment (
 ALTER TABLE public.payment OWNER TO postgres;
 
 --
--- TOC entry 3355 (class 0 OID 16398)
+-- TOC entry 3362 (class 0 OID 16398)
 -- Dependencies: 215
 -- Data for Name: admin; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -217,7 +232,26 @@ khoa	1	dangkhoa0521@gmail.com	123456
 
 
 --
--- TOC entry 3360 (class 0 OID 16457)
+-- TOC entry 3368 (class 0 OID 32771)
+-- Dependencies: 221
+-- Data for Name: bangtin; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.bangtin (bangtin_id, admin_id, description, path) FROM stdin;
+1	1	Khám phá những cửa hàng bán vợt cầu lông uy tín	/src/assets/images/BangTin/Sample1.png
+2	1	Khám phá các lớp dạy cầu lông	/src/assets/images/BangTin/Sample2.png
+3	1	Khám phá những cửa hàng bán vợt cầu lông uy tín	/src/assets/images/BangTin/Sample3.png
+4	1	Khám phá cửa hàng cầu lông chât lượng	/src/assets/images/BangTin/Sample4.png
+5	1	Hội thi cầu lông quận 7	/src/assets/images/BangTin/Sample5.png
+6	1	Cửa hàng bán sỉ cầu lông	/src/assets/images/BangTin/Sample6.png
+7	1	Cửa hàng dán thảm cầu lông	/src/assets/images/BangTin/Sample7.png
+8	1	Hội thi cầu lông quận 10	/src/assets/images/BangTin/Sample8.png
+9	1	Khám phá những cửa hàng bán vợt cầu lông uy tín	/src/assets/images/BangTin/Sample9.png
+\.
+
+
+--
+-- TOC entry 3367 (class 0 OID 16457)
 -- Dependencies: 220
 -- Data for Name: booking; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -227,7 +261,7 @@ COPY public.booking (date, "time", status, booking_id, payment_id, customer_id) 
 
 
 --
--- TOC entry 3359 (class 0 OID 16439)
+-- TOC entry 3366 (class 0 OID 16439)
 -- Dependencies: 219
 -- Data for Name: court; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -237,7 +271,7 @@ COPY public.court (court_id, name, availability, type, payment_id, customer_id) 
 
 
 --
--- TOC entry 3356 (class 0 OID 16405)
+-- TOC entry 3363 (class 0 OID 16405)
 -- Dependencies: 216
 -- Data for Name: customer; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -251,7 +285,7 @@ khoa	4	khoa2@gmail.com	123
 
 
 --
--- TOC entry 3358 (class 0 OID 16422)
+-- TOC entry 3365 (class 0 OID 16422)
 -- Dependencies: 218
 -- Data for Name: notification; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -267,7 +301,7 @@ COPY public.notification (notification_id, message, admin_id, customer_id, href)
 
 
 --
--- TOC entry 3357 (class 0 OID 16412)
+-- TOC entry 3364 (class 0 OID 16412)
 -- Dependencies: 217
 -- Data for Name: payment; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -277,7 +311,7 @@ COPY public.payment (payment_date, payment_id, amount, customer_id) FROM stdin;
 
 
 --
--- TOC entry 3195 (class 2606 OID 16404)
+-- TOC entry 3199 (class 2606 OID 16404)
 -- Name: admin admin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -286,7 +320,16 @@ ALTER TABLE ONLY public.admin
 
 
 --
--- TOC entry 3205 (class 2606 OID 16461)
+-- TOC entry 3211 (class 2606 OID 32777)
+-- Name: bangtin bangtin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bangtin
+    ADD CONSTRAINT bangtin_pkey PRIMARY KEY (bangtin_id);
+
+
+--
+-- TOC entry 3209 (class 2606 OID 16461)
 -- Name: booking booking_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -295,7 +338,7 @@ ALTER TABLE ONLY public.booking
 
 
 --
--- TOC entry 3203 (class 2606 OID 16446)
+-- TOC entry 3207 (class 2606 OID 16446)
 -- Name: court court_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -304,7 +347,7 @@ ALTER TABLE ONLY public.court
 
 
 --
--- TOC entry 3197 (class 2606 OID 16411)
+-- TOC entry 3201 (class 2606 OID 16411)
 -- Name: customer customer_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -313,7 +356,7 @@ ALTER TABLE ONLY public.customer
 
 
 --
--- TOC entry 3201 (class 2606 OID 16428)
+-- TOC entry 3205 (class 2606 OID 16428)
 -- Name: notification notification_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -322,7 +365,7 @@ ALTER TABLE ONLY public.notification
 
 
 --
--- TOC entry 3199 (class 2606 OID 16416)
+-- TOC entry 3203 (class 2606 OID 16416)
 -- Name: payment payment_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -331,7 +374,16 @@ ALTER TABLE ONLY public.payment
 
 
 --
--- TOC entry 3211 (class 2606 OID 16467)
+-- TOC entry 3219 (class 2606 OID 32778)
+-- Name: bangtin admin; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bangtin
+    ADD CONSTRAINT admin FOREIGN KEY (admin_id) REFERENCES public.admin(admin_id) NOT VALID;
+
+
+--
+-- TOC entry 3217 (class 2606 OID 16467)
 -- Name: booking booking_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -340,7 +392,7 @@ ALTER TABLE ONLY public.booking
 
 
 --
--- TOC entry 3212 (class 2606 OID 16462)
+-- TOC entry 3218 (class 2606 OID 16462)
 -- Name: booking booking_payment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -349,7 +401,7 @@ ALTER TABLE ONLY public.booking
 
 
 --
--- TOC entry 3209 (class 2606 OID 16452)
+-- TOC entry 3215 (class 2606 OID 16452)
 -- Name: court court_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -358,7 +410,7 @@ ALTER TABLE ONLY public.court
 
 
 --
--- TOC entry 3210 (class 2606 OID 16447)
+-- TOC entry 3216 (class 2606 OID 16447)
 -- Name: court court_payment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -367,7 +419,7 @@ ALTER TABLE ONLY public.court
 
 
 --
--- TOC entry 3207 (class 2606 OID 16429)
+-- TOC entry 3213 (class 2606 OID 16429)
 -- Name: notification notification_admin_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -376,7 +428,7 @@ ALTER TABLE ONLY public.notification
 
 
 --
--- TOC entry 3208 (class 2606 OID 16434)
+-- TOC entry 3214 (class 2606 OID 16434)
 -- Name: notification notification_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -385,7 +437,7 @@ ALTER TABLE ONLY public.notification
 
 
 --
--- TOC entry 3206 (class 2606 OID 16417)
+-- TOC entry 3212 (class 2606 OID 16417)
 -- Name: payment payment_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -393,13 +445,13 @@ ALTER TABLE ONLY public.payment
     ADD CONSTRAINT payment_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
 
 
--- Completed on 2023-12-14 13:29:20
+-- Completed on 2023-12-15 19:38:49
 
 --
 -- PostgreSQL database dump complete
 --
 
--- Completed on 2023-12-14 13:29:21
+-- Completed on 2023-12-15 19:38:49
 
 --
 -- PostgreSQL database cluster dump complete

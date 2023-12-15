@@ -1,3 +1,5 @@
+/** @format */
+
 // var createError = require('http-errors');
 // var express = require('express');
 // var path = require('path');
@@ -16,10 +18,8 @@
 
 // //Router
 
-
 // const server = require('http').createServer(app);
 // const db = pgp('postgres://username:@host:port/database')
-
 
 // // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -52,15 +52,15 @@
 
 // module.exports = app;
 
-
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 const port = 5000;
-const usersRouter = require('./routes/users.js');
-const loginRouter = require('./routes/login.js');
-const registerRouter = require('./routes/register.js');
-const notifRouter = require('./routes/notif.js');
+const usersRouter = require("./routes/users.js");
+const loginRouter = require("./routes/login.js");
+const registerRouter = require("./routes/register.js");
+const notifRouter = require("./routes/notif.js");
+const bangtinRouter = require("./routes/bangtin.js");
 
 const app = express();
 app.use(cors());
@@ -69,7 +69,8 @@ app.use(bodyParser.json());
 
 app.use("/users", usersRouter);
 app.use("/login", loginRouter);
-app.use('/register', registerRouter);
-app.use('/notif', notifRouter);
+app.use("/register", registerRouter);
+app.use("/notif", notifRouter);
+app.use("/bangtin", bangtinRouter);
 
-app.listen(port, () => console.log('listening on port ' + port));
+app.listen(port, () => console.log("listening on port " + port));

@@ -5,12 +5,12 @@ const router = express.Router();
 const db = require("../db");
 
 router.get("/", async (req, res) => {
-	const notifData = await db.query(`Select * from notification order by notification_id asc`);
+	const notifData = await db.query(`Select * from bangtin order by bangtin_id asc`);
 	if (notifData.length > 0) {
-		res.json({ notifData: notifData });
-		console.log("Notification found");
+		res.json({ bangTinData: notifData });
+		console.log("Bang Tin found");
 	} else {
-		console.log("No notification");
+		console.log("No Bang Tin");
 	}
 });
 
