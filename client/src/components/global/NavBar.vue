@@ -1,50 +1,106 @@
 <template>
-  <div class="header-loggin ">
-    <TinTC type="button" @click="redirectToHomepage" class="SN-PHM" divClassName="TIN-t-c-instance phuc_nav" text="Trang chủ" />
-    <TinTC type="button" class="design-component-instance-node phuc_nav" divClassName="SN-PHM-2" text="Tham gia vào sân cầu lông" />
-    <img
-      class="img"
-      alt="Img"
-      src="https://c.animaapp.com/UGutMkT8/img/da6c9e2e3c8f4d8abaf5e7e4c325ee24--1--1-1@2x.png"
-    />
-    <div class="frame" type="button" @click="redirectToListOfCourt">
-      <div class="div">
-        <div class="text-wrapper-2">Quận 7</div>
-        <img
-          class="icon-location"
-          alt="Icon location"
-          src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
+    <!-- <div class="header-loggin ">
+        <div type="button" @click="redirectToHomepage" class="grid-item1">
+            <img
+            class="img"
+            alt="Img"
+            src="https://c.animaapp.com/UGutMkT8/img/da6c9e2e3c8f4d8abaf5e7e4c325ee24--1--1-1@2x.png"
         />
-      </div>
-      <div class="frame-2">
-        <div class="ch-nh-t">
-          Chủ Nhật
-          <br />
-          29/10/2023
         </div>
-        <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
-      </div>
-      <div class="frame-3">
-        <img
-          class="icon-clock"
-          alt="Icon clock"
-          src="https://c.animaapp.com/UGutMkT8/img/---icon--clock--1@2x.png"
-        />
-        <div class="text-wrapper-3">7:00 - 9:00</div>
-      </div>
-    </div>
-    <div class="group-wrapper">
-      <div class="group">
-        <div class="overlap-group nav-link phuc_nav" type="button " @click="redirectToLogin">
-          <div class="log_icon"><img src="../../assets/images/TAI KHOAN.png" alt="this is logo" ></div>
-          <div class="ng-xu-t">      
-            Đăng <br>nhập
-          </div>
-          
+        <TinTC type="button" @click="redirectToHomepage" class="SN-PHM grid-item2" divClassName="TIN-t-c-instance phuc_nav" text="Trang chủ" />
+        <div class="frame" type="button" @click="redirectToListOfCourt">
+            <div class="div">
+                <div class="text-wrapper-2">Quận 7</div>
+                <img
+                class="icon-location"
+                alt="Icon location"
+                src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
+                />
+            </div>
+            <div class="frame-2">
+                <div class="ch-nh-t">
+                Chủ Nhật
+                <br />
+                29/10/2023
+                </div>
+                <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
+            </div>
+            <div class="frame-3">
+                <img
+                class="icon-clock"
+                alt="Icon clock"
+                src="https://c.animaapp.com/UGutMkT8/img/---icon--clock--1@2x.png"
+                />
+                <div class="text-wrapper-3">7:00 - 9:00</div>
+            </div>
         </div>
-      </div>
+        <TinTC type="button" class="design-component-instance-node phuc_nav" divClassName="SN-PHM-2" text="Tham gia vào sân cầu lông" />
+        <div class="group-wrapper">
+            <div class=group"">
+                <div class="overlap-group nav-link phuc_nav" type="button " @click="redirectToLogin">
+                <div class="log_icon"><img src="../../assets/images/TAI KHOAN.png" alt="this is logo" ></div>
+                <div class="ng-xu-t">      
+                    Đăng <br>nhập
+                </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="header-loggin">
+        <div type="button" @click="redirectToHomepage" class="grid-item1">
+            <img
+            class="img"
+            alt="Img"
+            src="https://c.animaapp.com/UGutMkT8/img/da6c9e2e3c8f4d8abaf5e7e4c325ee24--1--1-1@2x.png"
+            />
+        </div>
+        
+        
+        <TinTC type="button" @click="redirectToHomepage" class="grid-item2" divClassName="TIN-t-c-instance phuc_nav" text="Trang chủ" />
+        
+        <div class="frame grid-item3" type="button" @click="redirectToListOfCourt">
+            <div class="div">
+                <div class="text-wrapper-2">Quận 7</div>
+                <img
+                class="icon-location"
+                alt="Icon location"
+                src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
+                />
+                
+            </div>
+            <div class="frame-2">
+                <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
+                <div class="ch-nh-t">
+                Chủ Nhật
+                <br />
+                29/10/2023
+                </div>
+            </div>
+            <div class="frame-3">
+                <img
+                class="icon-clock"
+                alt="Icon clock"
+                src="https://c.animaapp.com/UGutMkT8/img/---icon--clock--1@2x.png"
+                />
+                <div class="text-wrapper-3">7:00 - 9:00</div>
+            </div>
+            
+            
+        </div>
+        <TinTC type="button" class="design-component-instance-node phuc_nav" divClassName="SN-PHM-2" text="Tham gia vào sân cầu lông" />
+        <div class="group-wrapper">
+            <div class="group">
+                <div class="overlap-group nav-link phuc_nav" type="button " @click="redirectToLogin">
+                <div class="log_icon"><img src="../../assets/images/TAI KHOAN.png" alt="this is logo" ></div>
+                <div class="ng-xu-t">      
+                    Đăng <br>nhập
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+
+    
 </template>
 
 <script>
@@ -72,19 +128,24 @@ export default {
 
 <style>
 .header-loggin {/* Position the navbar at the top of the page */
-  margin-top: 5px;
-  display: block;
-  box-shadow: 0px 2px 2px rgba(0,0,0,0.5); /*Đổ bóng cho menu*/
-  position: fixed; /*Cho menu cố định 1 vị trí với top và left*/
-  top: 0; /*Nằm trên cùng*/
-  left: 0; /*Nằm sát bên trái*/
-/* Set the navbar to fixed position */
-  background-color: #0b0c10;
-  border-radius: 30px;
-  height: 115px;
-  overflow: hidden;
-  width: 100%;
-  z-index: 100000; 
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr 2fr 2fr;
+    align-items: center;
+
+
+    margin-top: 5px;
+    /* display: block; */
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.5); /*Đổ bóng cho menu*/
+    /* position: fixed; Cho menu cố định 1 vị trí với top và left */
+    /* top: 0; Nằm trên cùng
+    left: 0; Nằm sát bên trái */
+    /* Set the navbar to fixed position */
+    background-color: #0b0c10;
+    border-radius: 30px;
+    height: 115px;
+    overflow: hidden;
+    width: 100%;
+    /* z-index: 100000;  */
 }
 
 .header-loggin .SN-PHM {
@@ -111,11 +172,10 @@ export default {
   text-align: center;
   align-items: center;
   height: 50px !important;
-  left: 72% !important;
-  position: absolute !important;
-  top: 35px !important;
+  position: relative;
   width: 147px !important;
-  color: #ffffff
+  color: #ffffff;
+  margin: 0 33.33%
 }
 
 .header-loggin .SN-PHM-2 {
@@ -128,30 +188,24 @@ export default {
 }
 
 .header-loggin .img {
-  height: 114px;
-  left: 28px;
-  object-fit: cover;
-  position: absolute;
-  top: 1px;
-  width: 115px;
+    max-width: 115px;
 }
 
 .header-loggin .frame {
-  background-color: #45a29e;
-  border-radius: 40px;
-  height: 97px;
-  left: 30%;
-  overflow: hidden;
-  position: absolute;
-  top: 9px;
-  width: 518px;
+    background-color: #45a29e;
+    position: relative;
+    border-radius: 40px;
+    height: 97px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .header-loggin .div {
   height: 58px;
   left: 22px;
-  position: absolute;
-  top: 17px;
+  position: relative;
   width: 129px;
 }
 
@@ -179,10 +233,9 @@ export default {
 
 .header-loggin .frame-2 {
   height: 58px;
-  left: 165px;
-  position: absolute;
-  top: 17px;
+  position: relative;
   width: 165px;
+  display: flex;
 }
 
 .header-loggin .ch-nh-t {
@@ -190,35 +243,34 @@ export default {
   font-family: "Comfortaa", Helvetica;
   font-size: 20px;
   font-weight: 700;
-  left: 48px;
+  left: 20px;
   letter-spacing: 0;
   line-height: normal;
-  position: absolute;
+  position: relative;
   text-align: center;
-  top: 13px;
+  top: 10px;
 }
 
 .header-loggin .vector {
   height: 34px;
   left: 4px;
-  position: absolute;
+  position: relative;
   top: 14px;
   width: 30px;
 }
 
 .header-loggin .frame-3 {
   height: 58px;
-  left: 353px;
   overflow: hidden;
-  position: absolute;
-  top: 17px;
+  position: relative;
   width: 147px;
+  display: flex;
 }
 
 .header-loggin .icon-clock {
   height: 37px;
   left: 0;
-  position: absolute;
+  position: relative;
   top: 11px;
   width: 37px;
 }
@@ -228,10 +280,10 @@ export default {
   font-family: "Comfortaa", Helvetica;
   font-size: 20px;
   font-weight: 700;
-  left: 51px;
+  left: 10px;
   letter-spacing: 0;
   line-height: normal;
-  position: absolute;
+  position: relative;
   text-align: center;
   top: 19px;
   white-space: nowrap;
@@ -241,11 +293,9 @@ export default {
   display :flex ;
   align-items: center;
   height: 58px;
-  left: 90%; 
-  
-  position: absolute;
-  top: 26px;
+  position: relative;
   width: 150px;
+  margin: 0 33.33%;
 }
 
 .header-loggin .group {

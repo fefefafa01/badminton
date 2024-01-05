@@ -11,37 +11,6 @@
     </div>    
     <div class ="BangTin">
         <p><strong>Bảng Tin</strong></p>
-        <!-- <div class="item">
-            <ul class="sampleList">
-                <div class="sample">
-                    <div class="sampleGroup">
-                        <div class="sampleText">
-                            <p>Khám phá những của hàng bán vợt cầu lông uy tín</p>
-                        </div>
-                        <img src="../assets/images/Rectangle 47.png" alt="" class="sampleImg">
-                    </div>
-                </div>
-                <div class="sample">
-                    <div class="sampleGroup">
-                        <div class="sampleText">
-                            <p>Khám phá những của hàng bán vợt cầu lông uy tín</p>
-                        </div>
-                        <img src="../assets/images/BangTin/Sample1.png" alt="" class="sampleImg">
-                    </div>
-                </div>
-                <div class="sample">
-                    <div class="sampleGroup">
-                        <div class="sampleText">
-                            <p>Khám phá những của hàng bán vợt cầu lông uy tín</p>
-                        </div>
-                        <img src="../assets/images/Rectangle 47.png" alt="" class="sampleImg">
-                    </div>
-                </div>
-            </ul>
-            <ul class="sampleList">
-                
-            </ul>
-        </div> -->
         <div class="item">
             <ul v-for="(group, index) in slicedBangTinData" :key="index" class="sampleList">
                 <div v-for="id in group" :key="id.bangtin_id" class="sample">
@@ -136,7 +105,7 @@ setup() {
 .container1{
     width: 100%;
     height: auto;
-    padding-top: 160px;
+    padding-top: 50px;
     padding-bottom: 20px;
 }
 .slider{
