@@ -1,51 +1,4 @@
 <template>
-    <!-- <div class="header-loggin ">
-        <div type="button" @click="redirectToHomepage" class="grid-item1">
-            <img
-            class="img"
-            alt="Img"
-            src="https://c.animaapp.com/UGutMkT8/img/da6c9e2e3c8f4d8abaf5e7e4c325ee24--1--1-1@2x.png"
-        />
-        </div>
-        <TinTC type="button" @click="redirectToHomepage" class="SN-PHM grid-item2" divClassName="TIN-t-c-instance phuc_nav" text="Trang chủ" />
-        <div class="frame" type="button" @click="redirectToListOfCourt">
-            <div class="div">
-                <div class="text-wrapper-2">Quận 7</div>
-                <img
-                class="icon-location"
-                alt="Icon location"
-                src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
-                />
-            </div>
-            <div class="frame-2">
-                <div class="ch-nh-t">
-                Chủ Nhật
-                <br />
-                29/10/2023
-                </div>
-                <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
-            </div>
-            <div class="frame-3">
-                <img
-                class="icon-clock"
-                alt="Icon clock"
-                src="https://c.animaapp.com/UGutMkT8/img/---icon--clock--1@2x.png"
-                />
-                <div class="text-wrapper-3">7:00 - 9:00</div>
-            </div>
-        </div>
-        <TinTC type="button" class="design-component-instance-node phuc_nav" divClassName="SN-PHM-2" text="Tham gia vào sân cầu lông" />
-        <div class="group-wrapper">
-            <div class=group"">
-                <div class="overlap-group nav-link phuc_nav" type="button " @click="redirectToLogin">
-                <div class="log_icon"><img src="../../assets/images/TAI KHOAN.png" alt="this is logo" ></div>
-                <div class="ng-xu-t">      
-                    Đăng <br>nhập
-                </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="header-loggin">
         <div type="button" @click="redirectToHomepage" class="grid-item1">
             <img
@@ -90,11 +43,49 @@
         <TinTC type="button" class="design-component-instance-node phuc_nav" divClassName="SN-PHM-2" text="Tham gia vào sân cầu lông" />
         <div class="group-wrapper">
             <div class="group">
-                <div class="overlap-group nav-link phuc_nav" type="button " @click="redirectToLogin">
-                <div class="log_icon"><img src="../../assets/images/TAI KHOAN.png" alt="this is logo" ></div>
-                <div class="ng-xu-t">      
-                    Đăng <br>nhập
+                <div v-if="isLoggedIn" class="overlap-group nav-link phuc_nav" type="button" @click="toggleMenu">
+                    <div class="log_icon"><img src="../../assets/images/TAI KHOAN.png" alt="this is logo"  ></div>
+                    <div class="ng-xu-t"> 
+                        Cá <br/>nhân
+                    </div>  
+                    <!-- dropdown -->
+                    <div :class="['sub-menu-wrap', { 'open-menu': isSubMenuOpen }]" id="subMenu">
+                        <div class="sub-menu">
+                            <div class="user-info">
+                                <img src="../../assets/images/TAI KHOAN.png" alt="this is logo" >
+                                <h3>Khoa</h3>
+                            </div>
+                            <hr>
+
+                            <a href="#" class="sub-menu-link">
+                                <img src="../../assets/images/TAI KHOAN.png" alt="">
+                                <span class="p">Edit Profile</span>
+                                <span class="trans">></span>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="../../assets/images/TAI KHOAN.png" alt="">
+                                <span class="p">Edit Profile</span>
+                                <span class="trans">></span>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="../../assets/images/TAI KHOAN.png" alt="">
+                                <span class="p">Edit Profile</span>
+                                <span class="trans">></span>
+                            </a>
+                            <a href="#" class="sub-menu-link" @click="logout">
+                                <img src="../../assets/images/TAI KHOAN.png" alt="">
+                                <span class="p">Logout</span>
+                                <span class="trans">></span>
+                            </a>
+                        </div>
+                    </div>
+                    
                 </div>
+                <div v-else class="overlap-group nav-link phuc_nav" type="button " @click="redirectToLogin">
+                    <div class="log_icon"><img src="../../assets/images/TAI KHOAN.png" alt="this is logo" ></div>
+                    <div class="ng-xu-t"> 
+                        Đăng <br/>nhập
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,32 +98,53 @@
 import TinTC from "../items/TinTC.vue";
 
 export default {
-  name: "HeaderLoggin",
-  components: {
-    TinTC,
-  },
-  methods: {
-      redirectToLogin() {
-          // Chuyển hướng đến trang Login
-          window.location.href = 'Login';
-      },
-      redirectToHomepage() {
-        window.location.href = 'home'
-      },
-      redirectToListOfCourt() {
-        window.location.href = 'ListOfCourt'
-      },
-  },
+    name: "HeaderLoggin",
+    components: {
+        TinTC,
+    },
+    data() {
+        return {
+            isLoggedIn: false,
+            isSubMenuOpen: false,
+        }
+    },
+
+    created() {
+        this.checkLoginStatus();
+    },
+
+    methods: {
+        redirectToLogin() {
+            // Chuyển hướng đến trang Login
+            window.location.href = 'Login';
+        },
+        redirectToHomepage() {
+            window.location.href = 'home';
+        },
+        redirectToListOfCourt() {
+            window.location.href = 'ListOfCourt';
+        },
+        checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('loggedIn');
+            this.isLoggedIn = isLoggedIn === 'true';
+        },
+        toggleMenu() {
+            this.isSubMenuOpen = !this.isSubMenuOpen;
+        },
+        logout() {
+            localStorage.removeItem('loggedIn');
+            window.location.href = 'home';
+        }
+    },
 };
+
 </script>
 
 <style>
 .header-loggin {/* Position the navbar at the top of the page */
     display: grid;
-    grid-template-columns: 1fr 2fr 3fr 2fr 2fr;
+    grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
     align-items: center;
-
-
     margin-top: 5px;
     /* display: block; */
     box-shadow: 0px 2px 2px rgba(0,0,0,0.5); /*Đổ bóng cho menu*/
@@ -143,7 +155,7 @@ export default {
     background-color: #0b0c10;
     border-radius: 30px;
     height: 115px;
-    overflow: hidden;
+    /* overflow: hidden; */
     width: 100%;
     /* z-index: 100000;  */
 }
@@ -308,28 +320,26 @@ export default {
 }
 
 .header-loggin .overlap-group {
-  padding-left: 20px;
-  align-items: center;
-  border-radius: 18px;
-  height: 84px;
-  position: relative;
-  width: 150px;
+    display: flex;
+    padding-left: 20px;
+    align-items: center;
+    border-radius: 18px;
+    height: 84px;
+    position: relative;
+    width: 100%;
+    cursor: pointer;
 }
 
 .header-loggin .ng-xu-t {
-  display: flex;
-  padding-left: 25px;
   color: #ffffffcc;
   font-family: "Comfortaa", Helvetica;
   font-size: 20px;
   font-weight: 700;
-  left: 42px;
+  left: 10px;
   letter-spacing: 0;
   line-height: normal;
-  position: absolute;
+  position: relative;
   text-align: justify;
-  top: 18px;
-  width: 180px;
 }
 
 .header-loggin .rectangle {
@@ -343,7 +353,6 @@ export default {
   width: 125px;
 }
 .header-loggin .log_icon{
-  padding-top: 22px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -367,6 +376,76 @@ export default {
 .phuc_nav:hover {
   background-color: #45a29e;
   color: black;
+}
+
+/* Info */
+.sub-menu-wrap{
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    width: 250px;  
+    max-height: 0px;
+    float: left;
+    overflow: hidden;
+    transition: max-height 0.5s;
+}
+.sub-menu-wrap.open-menu{
+    max-height: 400px;
+}
+
+.sub-menu{
+    background: #45a29e;
+    padding: 20px;
+    margin: 10px 10px 10px 0;
+    border-radius: 10%;
+}
+.user-info{
+    display: flex;
+    align-items: center;
+}
+.user-info h3{
+    font-weight: 500;
+}
+.user-info img{
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+.sub-menu hr{
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #ccc;
+    margin: 15px 0 10px;
+    
+}
+.sub-menu-link{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    margin: 12px 0;
+}
+.sub-menu-link .p{
+    width: 100%;
+    margin-top: none;
+}
+.sub-menu-link img{
+    width: 40px;
+    background: #e5e5e5;
+    border-radius: 50%;
+    padding: 8px;
+    margin-right: 15px;
+}
+.sub-menu-link span.trans{
+    font-size: 22px;
+    transition: transform 0.5s;
+}
+.sub-menu-link:hover span{
+    transform: translateX(5px);
+}
+.sub-menu-link:hover p{
+    font-weight: 600;
 }
 
 </style>

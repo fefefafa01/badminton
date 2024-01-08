@@ -61,6 +61,8 @@
           // Handle response data as needed
           console.log(response.data);
           if (response.data.loggedIn) {
+            localStorage.setItem('loggedIn', true);
+            localStorage.setItem('user_data', response.data);
             window.location.assign("/home");
           }
         } catch (error) {
@@ -130,6 +132,7 @@
     border: none;
     border-bottom: solid 1px white;
     width: 200%;
+    color: white;
   }
 
   .form-group input::placeholder {
