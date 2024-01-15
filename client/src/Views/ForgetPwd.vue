@@ -12,14 +12,16 @@
                 <label for="mail">Email</label> <br>
               </span>
               <div class="form-group">
-                <div>
+                <div class="input">
                   <input type="email" placeholder="Vui lòng nhập số điện thoại/email" v-model="email" required />
-                  <p>Gửi</p>
                 </div>
                 <br>
-                <div>
-                  <input type="email" placeholder="Vui lòng nhập mã xác minh" v-model="email" required />
-                  <p>Xác minh</p>
+                <div class="input">
+                  <input type="password" placeholder="Vui lòng nhập mật khẩu mới" v-model="email" required />
+                </div>
+                <br>
+                <div class="input">
+                    <input type="password" placeholder="Vui lòng nhập lại mật khẩu mới" v-model="email" required />
                 </div>
                 <br>
                 <br>
@@ -83,7 +85,7 @@
   .container{
     width: 100%;
     height: auto;
-    padding-top: 250px;
+    padding-top: 100px;
     padding-bottom: 70px;
     font-family: "Comfortaa", Helvetica;
     a {
@@ -105,7 +107,6 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    font-size: 15px;
     align-self: center;
     margin-left: -5%;
         h2 {
@@ -113,6 +114,7 @@
         }
         a {
             color: white;
+            font-size: 1.25em;
         }
         span {
           width: 100%;
@@ -120,8 +122,8 @@
           flex-direction: row;
           justify-content: space-between;
           padding-top: 20px;
-          font-size: larger;
           color: #45A29E;
+          font-size: 1.25em;
         }
         
   }
@@ -130,7 +132,7 @@
     width: 200%;
     display: flex;
     flex-direction: column;
-    padding-top: 15%;
+    padding-top: 20px;
     align-content: center;
   }
 
@@ -138,11 +140,15 @@
     display: flex;
     flex-direction: row;
     input {
-      background-color: #1F2833;
-      border: none;
-      border-bottom: solid 1px white;
-      width: 60%;
+        color: white;
+        background-color: #1F2833;
+        border: none;
+        border-bottom: solid 1px white;
+        outline: none;
+        width: 60%;
+        font-size: 1.25em;
     }
+
     p {
       width: 20%;
       margin-bottom: -0px;
@@ -151,6 +157,13 @@
       justify-content: flex-end;
       color: #45A29E;
       cursor: pointer;
+      font-size: 1.25em;
+    }
+    p:hover {
+        text-decoration: underline;
+    }
+    .input{
+        width: 100%;
     }
   }
   .form-group{
@@ -177,6 +190,8 @@
     width: 50%;
     align-self: center;
     margin-left: -20%;
+    height: 50px;
+    font-size: 1.25em;
   }
 
   </style>

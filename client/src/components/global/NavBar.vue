@@ -49,7 +49,7 @@
                         Cá <br/>nhân
                     </div>  
                     <!-- dropdown -->
-                    <div :class="['sub-menu-wrap', { 'open-menu': isSubMenuOpen }]" id="subMenu">
+                    <div :class="['sub-menu-wrap', { 'open-menu': isSubMenuOpen }]">
                         <div class="sub-menu">
                             <div class="user-info">
                                 <img src="../../assets/images/TAI KHOAN.png" alt="this is logo" >
@@ -57,23 +57,18 @@
                             </div>
                             <hr>
 
-                            <a href="#" class="sub-menu-link">
-                                <img src="../../assets/images/TAI KHOAN.png" alt="">
-                                <span class="p">Edit Profile</span>
+                            <a href="#" class="sub-menu-link" @click="redirectToProfile">
+                                <img src="../../assets/images/Profile.png" alt="">
+                                <span class="p">Trang cá nhân</span>
                                 <span class="trans">></span>
                             </a>
-                            <a href="#" class="sub-menu-link">
-                                <img src="../../assets/images/TAI KHOAN.png" alt="">
-                                <span class="p">Edit Profile</span>
-                                <span class="trans">></span>
-                            </a>
-                            <a href="#" class="sub-menu-link">
-                                <img src="../../assets/images/TAI KHOAN.png" alt="">
-                                <span class="p">Edit Profile</span>
+                            <a href="#" class="sub-menu-link" @click="redirectToHistory">
+                                <img src="../../assets/images/history.png" alt="">
+                                <span class="p">Lịch sử đặt sân</span>
                                 <span class="trans">></span>
                             </a>
                             <a href="#" class="sub-menu-link" @click="logout">
-                                <img src="../../assets/images/TAI KHOAN.png" alt="">
+                                <img src="../../assets/images/Logout.png" alt="">
                                 <span class="p">Logout</span>
                                 <span class="trans">></span>
                             </a>
@@ -93,50 +88,55 @@
 
     
 </template>
-
 <script>
-import TinTC from "../items/TinTC.vue";
+    import TinTC from "../items/TinTC.vue";
 
-export default {
-    name: "HeaderLoggin",
-    components: {
-        TinTC,
-    },
-    data() {
-        return {
-            isLoggedIn: false,
-            isSubMenuOpen: false,
-        }
-    },
+    export default {
+        name: "HeaderLoggin",
+        components: {
+            TinTC,
+        },
+        data() {
+            return {
+                isLoggedIn: false,
+                isSubMenuOpen: false,
+            }
+        },
 
-    created() {
-        this.checkLoginStatus();
-    },
+        created() {
+            this.checkLoginStatus();
+        },
 
-    methods: {
-        redirectToLogin() {
-            // Chuyển hướng đến trang Login
-            window.location.href = 'Login';
+        methods: {
+            redirectToLogin() {
+                // Chuyển hướng đến trang Login
+                window.location.href = 'Login';
+            },
+            redirectToHomepage() {
+                window.location.href = 'home';
+            },
+            redirectToListOfCourt() {
+                window.location.href = 'ListOfCourt';
+            },
+            redirectToProfile(){
+                window.location.href = 'profile';
+            },
+            redirectToHistory(){
+                window.location.href = 'History';
+            },
+            checkLoginStatus() {
+                const isLoggedIn = localStorage.getItem('loggedIn');
+                this.isLoggedIn = isLoggedIn === 'true';
+            },
+            toggleMenu() {
+                this.isSubMenuOpen = !this.isSubMenuOpen;
+            },
+            logout() {
+                localStorage.removeItem('loggedIn');
+                window.location.href = 'home';
+            }
         },
-        redirectToHomepage() {
-            window.location.href = 'home';
-        },
-        redirectToListOfCourt() {
-            window.location.href = 'ListOfCourt';
-        },
-        checkLoginStatus() {
-            const isLoggedIn = localStorage.getItem('loggedIn');
-            this.isLoggedIn = isLoggedIn === 'true';
-        },
-        toggleMenu() {
-            this.isSubMenuOpen = !this.isSubMenuOpen;
-        },
-        logout() {
-            localStorage.removeItem('loggedIn');
-            window.location.href = 'home';
-        }
-    },
-};
+    };
 
 </script>
 
@@ -307,7 +307,6 @@ export default {
   height: 58px;
   position: relative;
   width: 150px;
-  margin: 0 33.33%;
 }
 
 .header-loggin .group {
@@ -382,12 +381,13 @@ export default {
 .sub-menu-wrap{
     position: absolute;
     top: 100%;
-    left: 0px;
-    width: 250px;  
+    right: 0px;
+    width: 300px;  
     max-height: 0px;
     float: left;
     overflow: hidden;
     transition: max-height 0.5s;
+    z-index: 1000;
 }
 .sub-menu-wrap.open-menu{
     max-height: 400px;
@@ -395,40 +395,47 @@ export default {
 
 .sub-menu{
     background: #45a29e;
-    padding: 20px;
-    margin: 10px 10px 10px 0;
+    padding: 20px 20px 10px 20px;
+    margin: 10px 0 10px 10px;
     border-radius: 10%;
+    font-family: "Comfortaa", Helvetica;
 }
 .user-info{
     display: flex;
     align-items: center;
 }
 .user-info h3{
-    font-weight: 500;
+    font-weight: 600;
 }
 .user-info img{
-    width: 60px;
+    width: 40px;
     border-radius: 50%;
     margin-right: 15px;
 }
 .sub-menu hr{
     border: 0;
-    height: 1px;
+    height: 2px;
     width: 100%;
-    background-color: #ccc;
-    margin: 15px 0 10px;
+    background-color:black;
+    margin: 10px 0 10px;
     
 }
+
 .sub-menu-link{
     display: flex;
     align-items: center;
     text-decoration: none;
     color: white;
     margin: 12px 0;
+    :hover{
+        background-color: #ccc;
+    }
 }
 .sub-menu-link .p{
     width: 100%;
     margin-top: none;
+    font-size: 1.25em;
+    transition: transform 0.5s;
 }
 .sub-menu-link img{
     width: 40px;
@@ -444,8 +451,12 @@ export default {
 .sub-menu-link:hover span{
     transform: translateX(5px);
 }
-.sub-menu-link:hover p{
+.sub-menu-link:hover .p{
     font-weight: 600;
+    background: transparent;
+}
+.sub-menu-link:hover span.trans{
+    background: transparent;
 }
 
 </style>

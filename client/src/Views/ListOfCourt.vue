@@ -20,13 +20,58 @@
                 </div>
             </div>
             <div class="item2">
-                fsddfsdfdsssssssssssssssssssssss
+                <div class="left-part">
+                    <div class="image-container">
+                        <img src="../assets/images/badminton court/1696400900372-co-nen-kinh-doanh-san-cau-long.jpg">
+                    </div>
+                </div>
+                <div class="right-part">
+                    <div class="court-name">Sân cầu lông Thiên Vân</div>
+                    <p>
+                        <i class=" fas fa-home text-white" style="font-size: 23px; margin-right: 5px;"></i>
+                        57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh
+                    </p>
+                    <p>
+                        <i class=" fas fa-phone text-white" style="font-size: 23px; margin-right: 5px;"></i>
+                        0913404924
+                    </p>
+                </div>
             </div>
             <div class="item1">
-                fsddfsdfdsssssssssssssssssssssss
+                <div class="left-part">
+                    <div class="image-container">
+                        <img src="../assets/images/badminton court/1696400900372-co-nen-kinh-doanh-san-cau-long.jpg">
+                    </div>
+                </div>
+                <div class="right-part">
+                    <div class="court-name">Sân cầu lông Thiên Vân</div>
+                    <p>
+                        <i class=" fas fa-home text-white" style="font-size: 23px; margin-right: 5px;"></i>
+                        57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh
+                    </p>
+                    <p>
+                        <i class=" fas fa-phone text-white" style="font-size: 23px; margin-right: 5px;"></i>
+                        0913404924
+                    </p>
+                </div>
             </div>
             <div class="item2">
-                fsddfsdfdsssssssssssssssssssssss
+                <div class="left-part">
+                    <div class="image-container">
+                        <img src="../assets/images/badminton court/1696400900372-co-nen-kinh-doanh-san-cau-long.jpg">
+                    </div>
+                </div>
+                <div class="right-part">
+                    <div class="court-name">Sân cầu lông Thiên Vân</div>
+                    <p>
+                        <i class=" fas fa-home text-white" style="font-size: 23px; margin-right: 5px;"></i>
+                        57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh
+                    </p>
+                    <p>
+                        <i class=" fas fa-phone text-white" style="font-size: 23px; margin-right: 5px;"></i>
+                        0913404924
+                    </p>
+                </div>
             </div>
         </div>
     </div>
