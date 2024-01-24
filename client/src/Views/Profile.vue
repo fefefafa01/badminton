@@ -62,7 +62,25 @@
             
             <div class="title">
                 <h2>LỊCH SỬ ĐẶT SÂN</h2>
-                <a href="">Xem tất cả</a>
+                <a href="#" @click="redirectToHistory">Xem tất cả</a>
+            </div>
+            <div v-for="(item, index) in items" :key="index" :class="{ 'item1': index % 2 === 0, 'item2': index % 2 !== 0 }">
+                <div class="left-part">
+                    <div class="image-container">
+                        <img :src= "item.imageSrc" alt="CourtBadminton">
+                    </div>
+                </div>
+                <div class="right-part">
+                    <div class="court-name">{{ item.courtName }}</div>
+                        <p>
+                            <i class="fas fa-home text-white" style="font-size: 23px; margin-right: 5px;"></i>
+                            {{ item.address }}
+                        </p>
+                        <p>
+                            <i class="fas fa-phone text-white" style="font-size: 23px; margin-right: 5px;"></i>
+                            {{ item.phoneNumber }}
+                        </p>
+                </div>
             </div>
         </div>
     </div>    
@@ -73,8 +91,6 @@
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import { defineComponent, ref, onMounted } from 'vue';
 import axios from 'axios';
-import History from "./ListOfCourt.vue";
-
 
 export default defineComponent( {
     components: {
@@ -85,6 +101,11 @@ export default defineComponent( {
     data() {
         return {
             isMenuOpen: false,
+            items: [
+        { imageSrc: "https://sonsanepoxy.vn/wp-content/uploads/2023/07/lap-dat-he-thong-den-chieu-san-cau-long.jpg", courtName: "Sân cầu lông Thiên Vân", address: "57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh", phoneNumber: "0913 404 924" },
+        { imageSrc: "https://limosa.vn/wp-content/uploads/2023/08/san-cau-long-cay-keo.jpg", courtName: "Sân cầu lông ABC", address: "710/53/2, Lũy Bán Bích, Tân Thành, Tân Phú, Thành phố Hồ Chí Minh", phoneNumber: "0983 916 646" },
+            ]
+        
         }
     },
 
@@ -143,7 +164,8 @@ export default defineComponent( {
 <style lang="scss" scoped>
 .container{
     width: 100%;
-    height: 500px;
+    min-height: 500px;
+    height: fit-content;
     padding-top: 50px;
     padding-bottom: 20px;
     display: flex;
@@ -282,5 +304,58 @@ export default defineComponent( {
             font-weight: 500;
         }
     }
+}
+
+//court
+.item1,
+.item2 {
+    display: flex;
+    height: 180px;
+    width: 1200px;
+}
+
+.item1 {
+    background: rgba(69, 162, 158, 0.6);
+}
+
+.left-part {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 18%; /* Chiếm 20% */
+    
+}
+
+.right-part {
+    padding: 20px 5px 5px 4%;
+    align-items: center;
+    flex: 82%; /* Chiếm 80% */
+    font-family: 'Comfortaa';
+    color: #ffffff;
+    font-size: 22px;
+}
+
+.court-name{
+    font-size:xx-large;
+}
+.item2 {
+    background-color: #45A29E;
+}
+
+
+.image-container{
+    justify-content: center;
+    height: 90%;
+    width: auto;
+    
+}
+
+.image-container img {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    height: 100% ;
+    display: block;
+    border-radius: 50%; /* Áp dụng border-radius cho ảnh */
 }
 </style>
