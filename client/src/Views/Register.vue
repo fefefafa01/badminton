@@ -89,7 +89,7 @@ export default defineComponent( {
   .container{
     width: 100%;
     height: auto;
-    padding-top: 250px;
+    padding-top: 100px;
     padding-bottom: 70px;
     font-family: "Comfortaa", Helvetica;
     a {
@@ -100,6 +100,7 @@ export default defineComponent( {
         display: flex;
         flex-direction: row;
         gap: 5px;
+        font-size: 1.25em;
         p {
             color: red;
             cursor: pointer;
@@ -140,8 +141,11 @@ export default defineComponent( {
     align-self: center;
     background-color: #1F2833;
     border: none;
+    outline: none;
     border-bottom: solid 1px white;
     width: 200%;
+    font-size: 1.25em;
+    color: white;
   }
 
   .form-group input::placeholder {
@@ -161,6 +165,8 @@ export default defineComponent( {
     color: white;
     border: solid 1px #45A29E;
     border-radius: 50px;
+    height: 50px;
+    font-size: 1.25em;
   }
 
   </style>

@@ -1,9 +1,6 @@
 <template>
     <div>
         <div class="container">
-            <div class="tieuDe">
-                <h1>DANH SÁCH SÂN CẦU LÔNG</h1>
-            </div>
             <div v-for="(item, index) in items" :key="index" :class="{ 'item1': index % 2 === 0, 'item2': index % 2 !== 0 }">
                 <div class="left-part">
                     <div class="image-container">

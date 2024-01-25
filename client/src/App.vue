@@ -10,22 +10,11 @@ import Foot from "./components/global/Footer.vue";
 </script>
 
 <template >
-  <div class="back_ground">
-  <NavBar/>
-  <router-view />
-  <Foot/>
-  </div>
-  <!-- <HomeView/> -->
-  <!-- <div class="phuc_clear" />
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>-->
-  <!-- <HelloWorld msg="Vite and Vue" />  -->
+    <div class="back_ground">
+        <NavBar/>
+        <router-view />
+        <Foot/>
+    </div>
 </template>
 
 <style scoped>
@@ -46,6 +35,8 @@ body {
   padding: 60px;
 }
 .back_ground{
-  background-color: #1F2833
+    background-color: #1F2833;
+    display: flex;
+    flex-direction: column;
 }
 </style>
