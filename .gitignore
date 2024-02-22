@@ -6,3 +6,4 @@ vue_client
 */.git*
 
 temp
+node_modules
