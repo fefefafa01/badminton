@@ -1,4 +1,4 @@
-import nodeMailer from 'nodemailer';
+const nodeMailer = require("nodemailer");
 
 async function sendMail(email) {
     const username = email.split('@')[0];

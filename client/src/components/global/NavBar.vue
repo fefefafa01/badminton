@@ -11,39 +11,65 @@
         
         <TinTC type="button" @click="redirectToHomepage" class="grid-item2" divClassName="TIN-t-c-instance phuc_nav" text="Trang chủ" />
         
-        <div class="frame grid-item3" type="button" @click="redirectToListOfCourt">
-            <div class="div">
-                <div class="text-wrapper-2">Quận 7</div>
-                <img
-                class="icon-location"
-                alt="Icon location"
-                src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
-                />
-                
-            </div>
-            <div class="frame-2">
-                <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
-                <div class="ch-nh-t">
-                Chủ Nhật
-                <br />
-                29/10/2023
+        <!-- type="button" @click="redirectToListOfCourt" -->
+        <div class="frame grid-item4" >
+            <div class="frame-1">
+                <div class="phuc_nav" type="button" >
+                    <img
+                    class="icon-location"
+                    alt="Icon location"
+                    src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
+                    />
+                    <div class="text-wrapper-2">Địa điểm</div>
+                </div>
+                <div class="content">
+                    <div class="search">
+                        <span class="uil--search-alt"></span>
+                        <input type="text" placeholder="Tìm kiếm">
+                    </div>
+                    <ul class="options">
+                        <li>Quận 1</li>
+                        <li>Quận 3</li>
+                        <li>Quận 4</li>
+                        <li>Quận 5</li>
+                        <li>Quận 6</li>
+                        <li>Quận 7</li>
+                        <li>Quận 8</li>
+                        <li>Quận 10</li>
+                        <li>Quận 11</li>
+                        <li>Quận 12</li>
+                    </ul>
                 </div>
             </div>
-            <div class="frame-3">
+            <div class="frame-2 phuc_nav"  type="button" @click="redirectToListOfCourt">
+                <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
+                <div class="ch-nh-t">
+                Ngày tháng
+                </div>
+            </div>
+            <div class="frame-3 phuc_nav"  type="button" @click="redirectToListOfCourt">
                 <img
                 class="icon-clock"
                 alt="Icon clock"
                 src="https://c.animaapp.com/UGutMkT8/img/---icon--clock--1@2x.png"
                 />
-                <div class="text-wrapper-3">7:00 - 9:00</div>
+                <div class="text-wrapper-3">Thời gian</div>
             </div>
             
-            
+            <!-- frame-4 -->
+            <div class="frame-3 phuc_nav"  type="button" @click="redirectToListOfCourt">
+                <img
+                class="icon-clock"
+                alt="Icon clock"
+                src="../../assets/images/icon/icon.png"
+                />
+                <div class="text-wrapper-3">Giá</div>
+            </div>    
         </div>
-        <TinTC type="button" class="design-component-instance-node phuc_nav" divClassName="SN-PHM-2" text="Tham gia vào sân cầu lông" />
+        <TinTC type="button" class="design-component-instance-node " divClassName="SN-PHM-2 phuc_nav" text="Tham gia vào sân cầu lông" />
         <div class="group-wrapper">
             <div class="group">
-                <div v-if="isLoggedIn" class="overlap-group nav-link phuc_nav" type="button" @click="toggleMenu">
+                <div v-if="isLoggedIn" class="overlap-group nav-link phuc_nav" divClassName="phuc_nav" type="button" @click="toggleMenu">
                     <div class="log_icon"><img src="../../assets/images/TAI KHOAN.png" alt="this is logo"  ></div>
                     <div class="ng-xu-t"> 
                         Cá <br/>nhân
@@ -76,9 +102,9 @@
                     </div>
                     
                 </div>
-                <div v-else class="overlap-group nav-link phuc_nav" type="button " @click="redirectToLogin">
+                <div v-else class="overlap-group phuc_nav nav-link " type="button " @click="redirectToLogin">
                     <div class="log_icon"><img src="../../assets/images/TAI KHOAN.png" alt="this is logo" ></div>
-                    <div class="ng-xu-t"> 
+                    <div class="ng-xu-t "> 
                         Đăng <br/>nhập
                     </div>
                 </div>
@@ -90,9 +116,10 @@
 </template>
 <script>
     import TinTC from "../items/TinTC.vue";
-
+    
     export default {
         name: "HeaderLoggin",
+        name: 'UilSearchAlt',
         components: {
             TinTC,
         },
@@ -173,7 +200,7 @@
   display: flex;
   justify-content: center; /* Căn giữa theo chiều ngang */
   align-items: center;
-  color: #ffffffcc !important;
+  color: #ffffffcc ;
   font-size: 22px !important;
   font-weight: 700 !important;
   width: 120px !important;
@@ -191,7 +218,7 @@
 }
 
 .header-loggin .SN-PHM-2 {
-  color: #ffffffcc !important;
+  color: #ffffffcc ;
   font-size: 20px !important;
   font-weight: 700 !important;
   text-align: center !important;
@@ -208,31 +235,99 @@
     position: relative;
     border-radius: 40px;
     height: 97px;
-    width: 100%;
+    width: 800px;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-.header-loggin .div {
+.uil--search-alt {
+    color: #999;
+  margin: 13px;
+  position: absolute;
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M21.07 16.83L19 14.71a3.08 3.08 0 0 0-3.4-.57l-.9-.9a7 7 0 1 0-1.41 1.41l.89.89a3 3 0 0 0 .53 3.46l2.12 2.12a3 3 0 0 0 4.24 0a3 3 0 0 0 0-4.29m-8.48-4.24a5 5 0 1 1 0-7.08a5 5 0 0 1 0 7.08m7.07 7.07a1 1 0 0 1-1.42 0l-2.12-2.12a1 1 0 0 1 0-1.42a1 1 0 0 1 1.42 0l2.12 2.12a1 1 0 0 1 0 1.42'/%3E%3C/svg%3E");
+}
+
+.content {
+    display: inline-block;
+    width: 160%;
+    padding: 20px;
+    margin-top: 80px;
+    margin-left: -10px;
+    border-radius: 7px;
+    background: #ffffff;
+    color:#0b0c10;
+}
+
+.content .search {
+    position: relative;
+    display: flex;
+}
+
+.search input {
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    padding-left: 40px;
+   
+}
+
+.content .options{
+    margin-top: 10px;
+    padding-left: 0px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.options li{
+    font-size: 21px;
+    height: 50px;
+    border-radius: 5px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.options::-webkit-scrollbar{
+    width: 7px;
+}
+.options::-webkit-scrollbar-track{
+    background: #f1f1f1;
+    border-radius: 25px;
+}
+.options::-webkit-scrollbar-thumb{
+    background: #ccc;
+    border-radius: 25px;
+}
+.options li:hover{
+    background: #f2f2f2;
+}
+
+.header-loggin .frame-1 {
+  color: #ffffff;
   height: 58px;
-  left: 22px;
   position: relative;
-  width: 129px;
+  width: 150px;
+  max-width: 150px;
 }
 
 .header-loggin .text-wrapper-2 {
-  color: #ffffff;
+  margin-left: 40px;
   font-family: "Comfortaa", Helvetica;
   font-size: 20px;
   font-weight: 700;
-  left: 44px;
-  letter-spacing: 0;
-  line-height: normal;
+  top: 50%; /* Đưa về giữa theo chiều dọc */
+  transform: translateY(-50%); /* Dịch chuyển về giữa */
+  white-space: normal;
   position: absolute;
-  text-align: center;
-  top: 19px;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  width: 100%; /* Đảm bảo chiều rộng 100% để căn giữa */
 }
 
 .header-loggin .icon-location {
@@ -244,6 +339,7 @@
 }
 
 .header-loggin .frame-2 {
+  color: #ffffff;
   height: 58px;
   position: relative;
   width: 165px;
@@ -251,16 +347,17 @@
 }
 
 .header-loggin .ch-nh-t {
-  color: #ffffff;
+  margin-left: 42px;
   font-family: "Comfortaa", Helvetica;
   font-size: 20px;
   font-weight: 700;
-  left: 20px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: relative;
-  text-align: center;
-  top: 10px;
+  top: 50%; /* Đưa về giữa theo chiều dọc */
+  transform: translateY(-50%); /* Dịch chuyển về giữa */
+  white-space: normal;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 100%; /* Đảm bảo chiều rộng 100% để căn giữa */
 }
 
 .header-loggin .vector {
@@ -272,6 +369,7 @@
 }
 
 .header-loggin .frame-3 {
+  color: #ffffff;
   height: 58px;
   overflow: hidden;
   position: relative;
@@ -288,7 +386,6 @@
 }
 
 .header-loggin .text-wrapper-3 {
-  color: #ffffff;
   font-family: "Comfortaa", Helvetica;
   font-size: 20px;
   font-weight: 700;
@@ -319,8 +416,9 @@
 }
 
 .header-loggin .overlap-group {
+    color: #ffffffcc;
     display: flex;
-    padding-left: 20px;
+    padding-left: 30px;
     align-items: center;
     border-radius: 18px;
     height: 84px;
@@ -330,7 +428,6 @@
 }
 
 .header-loggin .ng-xu-t {
-  color: #ffffffcc;
   font-family: "Comfortaa", Helvetica;
   font-size: 20px;
   font-weight: 700;
@@ -344,6 +441,7 @@
 .header-loggin .rectangle {
   border: 1px solid;
   border-color: #45a29e;
+  /* #45a29e */
   border-radius: 18px;
   height: 84px;
   left: 0;
@@ -374,7 +472,7 @@
 
 .phuc_nav:hover {
   background-color: #45a29e;
-  color: black;
+  color: mistyrose ;
 }
 
 /* Info */

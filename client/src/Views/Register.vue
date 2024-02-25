@@ -34,7 +34,6 @@
   
   
 <script>
-import { sendEmail } from '../controller/email/sendWelcomeEmail';
 import { defineComponent } from 'vue';
 import axios from "axios";
 
