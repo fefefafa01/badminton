@@ -105,7 +105,7 @@ setup() {
 .container1{
     width: 100%;
     height: auto;
-    padding-top: 150px;
+    padding-top: 50px;
     padding-bottom: 20px;
 }
 .slider{
