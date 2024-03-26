@@ -1,7 +1,9 @@
 <template>
     <div class="header-loggin">
+    <div class="navbar">
         <div type="button" @click="redirectToHomepage" class="grid-item1">
             <img
+            style="height: 100px;"
             class="img"
             alt="Img"
             src="https://c.animaapp.com/UGutMkT8/img/da6c9e2e3c8f4d8abaf5e7e4c325ee24--1--1-1@2x.png"
@@ -12,32 +14,25 @@
         <TinTC type="button" @click="redirectToHomepage" class="grid-item2" divClassName="TIN-t-c-instance phuc_nav" text="Trang chủ" />
         
         <!-- type="button" @click="redirectToListOfCourt" -->
-        <div class="frame grid-item4" >
-            <div class="frame-1">
-                <div class="phuc_nav" type="button" >
+        <div class="frame grid-item4" style="z-index: 3;">
+            <div class="frame-1" >
+                <div class="phuc_nav" type="button" @click="togglePlaceMenu">
                     <img
                     class="icon-location"
                     alt="Icon location"
                     src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
                     />
-                    <div class="text-wrapper-2">Địa điểm</div>
+                    <div class="text-wrapper-2 select-btn">{{ selectedDistrict || 'Địa điểm' }}</div>
                 </div>
-                <div class="content">
+                <div class="content" :class="{ 'show': isMenuVisible }">
                     <div class="search">
                         <span class="uil--search-alt"></span>
-                        <input type="text" placeholder="Tìm kiếm">
+                        <input type="text" placeholder="Tìm kiếm" @keyup="handleKeyUp">
                     </div>
                     <ul class="options">
-                        <li>Quận 1</li>
-                        <li>Quận 3</li>
-                        <li>Quận 4</li>
-                        <li>Quận 5</li>
-                        <li>Quận 6</li>
-                        <li>Quận 7</li>
-                        <li>Quận 8</li>
-                        <li>Quận 10</li>
-                        <li>Quận 11</li>
-                        <li>Quận 12</li>
+                        <li v-for="(dis, index) in districtTemp" :key="index" @click="updateName(dis)">
+                        {{ dis }}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -111,6 +106,7 @@
             </div>
         </div>
     </div>
+    </div>
 
     
 </template>
@@ -125,13 +121,35 @@
         },
         data() {
             return {
+                district: ['Quận 1', 'Quận 3', 'Quận 4', 'Quận 5', 'Quận 6','Quận Tân Phú', 'Quận Tân Bình', 'Quận Bình Thạnh', 'TP Thủ Đức'],
+                districtTemp: [],
+                isMenuVisible: false, // Trạng thái của drop-down place menu
                 isLoggedIn: false,
                 isSubMenuOpen: false,
+                wrapper: null,
+                options: null,
+                selectBtn: null,
+                isActive: false,
+                selectedDistrict: '',
+                searchInp: null,
             }
         },
 
         created() {
             this.checkLoginStatus();
+        },
+
+        mounted() {
+            this.wrapper = document.querySelector(".wrapper"); 
+            this.options = document.querySelector(".options");
+            this.districtTemp = this.district;
+
+            if (this.wrapper) {
+                this.selectBtn = this.wrapper.querySelector(".select-btn");
+                this.searchInp = this.wrapper.querySelector(".input");
+            }
+
+            // this.addDistinct();
         },
 
         methods: {
@@ -155,6 +173,29 @@
                 const isLoggedIn = localStorage.getItem('loggedIn');
                 this.isLoggedIn = isLoggedIn === 'true';
             },
+            // addDistinct() {
+            //     this.district.forEach(district => {
+            //         let li = `<li @click="updateName(this)">${district}</li>`;
+            //         this.options.insertAdjacentHTML("beforeend", li);
+            //     });
+            // },
+            updateName(selectedLi) {
+                // this.wrapper.classList.remove("active");
+                // this.selectBtn.firstElementChild.innerText = selectedLi.innerText; 
+                this.selectedDistrict = selectedLi;
+                this.togglePlaceMenu();
+            },
+            togglePlaceMenu() {
+                this.isMenuVisible = !this.isMenuVisible; // Đảo ngược trạng thái của menu}
+            },
+            handleKeyUp(event) {
+                let arr = []; // creating empty array
+                let searchedVal = event.target.value.toLowerCase();
+                arr = this.district.filter( data => {
+                    return data.toLowerCase().includes(searchedVal);
+                })
+                this.districtTemp = arr;
+            },
             toggleMenu() {
                 this.isSubMenuOpen = !this.isSubMenuOpen;
             },
@@ -169,24 +210,36 @@
 
 <style>
 .header-loggin {/* Position the navbar at the top of the page */
-    display: grid;
-    grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
-    align-items: center;
     margin-top: 5px;
-    /* display: block; */
     box-shadow: 0px 2px 2px rgba(0,0,0,0.5); /*Đổ bóng cho menu*/
-    /* position: fixed; Cho menu cố định 1 vị trí với top và left */
-    /* top: 0; Nằm trên cùng
-    left: 0; Nằm sát bên trái */
-    /* Set the navbar to fixed position */
     background-color: #0b0c10;
     border-radius: 30px;
     height: 115px;
-    /* overflow: hidden; */
     width: 100%;
-    /* z-index: 100000;  */
+    position: fixed;
+    z-index: 1000;
 }
-
+.navbar{
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
+    height: 115px;
+    width: 1600px;
+    top: 50%;
+    left: 50%;
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.5); /*Đổ bóng cho menu*/
+    background-color: #0b0c10;
+    border-radius: 30px;
+    transform: translate(-50%, -50%);
+    
+}
+.grid-item1{
+    position: relative;
+     margin-left: 2rem;
+}
+.grid-item2{
+    position: relative;
+     margin-left: 3rem;
+}
 .header-loggin .SN-PHM {
   height: 17px !important;
   left: 15%!important;
@@ -254,7 +307,7 @@
 }
 
 .content {
-    display: inline-block;
+    display: none;
     width: 160%;
     padding: 20px;
     margin-top: 80px;
@@ -263,6 +316,11 @@
     background: #ffffff;
     color:#0b0c10;
 }
+
+.show {
+    display: block;
+}
+
 
 .content .search {
     position: relative;
@@ -485,7 +543,7 @@
     float: left;
     overflow: hidden;
     transition: max-height 0.5s;
-    z-index: 1000;
+    
 }
 .sub-menu-wrap.open-menu{
     max-height: 400px;
