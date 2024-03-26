@@ -114,7 +114,7 @@ setup() {
 }
 .splide__slide img{
     height:500px;
-    object-fit: cover;
+    object-fit:fill;
     display: block;
     width: 100%;
 }
