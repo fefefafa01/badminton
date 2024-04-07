@@ -1,15 +1,15 @@
 /** @format */
 
 import { createRouter, createWebHistory } from "vue-router";
-import Login from "../Views/Login.vue";
-import HomeView from "../Views/HomeView.vue";
-import ForgetPwd from "../Views/ForgetPwd.vue";
-import Register from "../Views/Register.vue";
-import Success from "../Views/Success.vue";
-import ResetPwd from "../Views/ResetPwd.vue";
-import ListOfCourt from "../Views/ListOfCourt.vue";
-import Profile from "../Views/Profile.vue";
-import History from "../Views/History.vue";
+import Login from "/Views/Login.vue";
+import HomeView from "Views/HomeView.vue";
+import ForgetPwd from "Views/ForgetPwd.vue";
+import Register from "Views/Register.vue";
+import Success from "Views/Success.vue";
+import ResetPwd from "Views/ResetPwd.vue";
+import ListOfCourt from "Views/ListOfCourt.vue";
+import Profile from "Views/Profile.vue";
+import History from "Views/History.vue";
 // import ProductDetail from "../Views/ProductDetail.vue";
 
 const routes = [
