@@ -3,7 +3,7 @@
         <div class="slider">
         <Splide :options="options" aria-label="My Favorite Images">
             <SplideSlide v-for="data in notifData" :key="data.notification_id">
-                <img :src=data.href :alt="`Sample ${data.notification_id}`">
+                <img :src=data.linkimg :alt="`Sample ${data.notification_id}`">
             </SplideSlide>
         </Splide>
         </div>
@@ -13,12 +13,12 @@
         <p><strong>Bảng Tin</strong></p>
         <div class="item">
             <ul v-for="(group, index) in slicedBangTinData" :key="index" class="sampleList">
-                <div v-for="id in group" :key="id.bangtin_id" class="sample">
+                <div v-for="id in group" :key="id.news_id" class="sample">
                     <div class="sampleGroup">
                         <div class="sampleText">
                             <p>{{ id.description }}</p>
                         </div>
-                        <img :src="id.path" :alt="`Sample ${id.bantin_id}`" class="sampleImg">
+                        <img :src="id.linkimg" :alt="`Sample ${id.news_id}`" class="sampleImg">
                     </div>
                 </div> 
             </ul>

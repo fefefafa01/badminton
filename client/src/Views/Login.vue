@@ -74,6 +74,9 @@
                 localStorage.setItem('user_data', response.data);
                 window.location.assign("/home");
             }
+            else if(response.data.AdminloggedIn){
+                window.location.assign("/admin");
+            }
             else{
                 this.loggedIn = false;
             }
