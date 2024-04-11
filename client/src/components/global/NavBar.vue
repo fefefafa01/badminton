@@ -36,10 +36,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="frame-2 phuc_nav"  type="button" @click="redirectToListOfCourt">
+            <div class="frame-2 phuc_nav"  type="button">
                 <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
                 <div class="ch-nh-t">
-                Ngày tháng
+                    <div>{{ selectedDayOfWeek }}</div>
+                    <input class="datepick" type="text" v-model="mytime" placeholder="Ngày tháng">
                 </div>
             </div>
             <div class="frame-3 phuc_nav"  type="button" @click="redirectToListOfCourt">
@@ -112,6 +113,8 @@
 </template>
 <script>
     import TinTC from "../items/TinTC.vue";
+    import flatpickr from 'flatpickr';
+    import 'flatpickr/dist/flatpickr.css';
     
     export default {
         name: "HeaderLoggin",
@@ -132,6 +135,8 @@
                 isActive: false,
                 selectedDistrict: '',
                 searchInp: null,
+                mytime: null,
+                selectedDayOfWeek: null,
             }
         },
 
@@ -149,6 +154,15 @@
                 this.searchInp = this.wrapper.querySelector(".input");
             }
 
+            const daysOfWeek = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+
+            flatpickr(".datepick", {
+            dateFormat: "d/m/Y",
+            onChange: (selectedDates) => {
+                const date = selectedDates[0];
+                this.selectedDayOfWeek = daysOfWeek[date.getDay()];
+                }
+            });
             // this.addDistinct();
         },
 
@@ -202,7 +216,7 @@
             logout() {
                 localStorage.removeItem('loggedIn');
                 window.location.href = 'home';
-            }
+            },
         },
     };
 
@@ -404,19 +418,22 @@
 }
 
 .header-loggin .ch-nh-t {
-  margin-left: 42px;
+  margin-left: 30%;
   font-family: "Comfortaa", Helvetica;
   font-size: 20px;
   font-weight: 700;
   top: 50%; /* Đưa về giữa theo chiều dọc */
-  transform: translateY(-50%); /* Dịch chuyển về giữa */
+  transform: translateY(-50%);
   white-space: normal;
   position: absolute;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   width: 100%; /* Đảm bảo chiều rộng 100% để căn giữa */
+  flex-direction: column;
 }
-
+.ch-nh-t div{
+    margin-left: 10%;
+}
 .header-loggin .vector {
   height: 34px;
   left: 4px;
@@ -613,5 +630,27 @@
 .sub-menu-link:hover span.trans{
     background: transparent;
 }
-
+.datepick{
+    background-color: #45a29e;
+    width: 85%;
+    border: none;
+    color: #ffffff;
+    outline: none;
+    font-family: "Comfortaa", Helvetica;
+    font-size: 20px;
+    font-weight: 700;
+}
+.datepick:hover{
+    background-color: #45a29e;
+    color: mistyrose ;
+}
+.datepick::-webkit-calendar-picker-indicator {
+  filter: invert(100%);
+}
+.datepick::placeholder {
+  color: #ffffff;
+}
+.datepick:hover::placeholder {
+  color: mistyrose ;
+}
 </style>
