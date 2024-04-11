@@ -1,7 +1,7 @@
 const pgp = require('pg-promise')(); // Import pg-promise and initialize it
 
 const connection = 
-    "postgresqql://postgres:123456@localhost:5432/postgres";
+    "postgresqql://postgres:123456@localhost:5432/DACN";
 
 const db = pgp(connection); // Creating a database instance
 
