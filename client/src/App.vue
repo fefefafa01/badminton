@@ -1,20 +1,25 @@
 <script setup>
-import NavBar from "./components/global/NavBar.vue";
-import Foot from "./components/global/Footer.vue";
-// import HomeView from "./Views/HomeView.vue";
+import { RouterView } from 'vue-router'
+// import NavBar from '@/components/global/NavBar.vue'
+// import Foot from '@/components/global/FooterBar.vue'
+// import { computed } from 'vue'
 
-// export default {
-//   name: "App",
-//   compatConfig: { MODE: 3 }
-// }
+// const isAdminPage = computed(() => {
+//   const currentHash = window.location.hash;
+//   return currentHash.includes('#/admin');
+// });
 </script>
 
-<template >
-    <div class="back_ground">
-        <NavBar/>
-        <router-view />
-        <Foot/>
-    </div>
+<template>
+  <!-- <div v-if="isAdminPage">
+    <RouterView/>
+  </div>
+  <div v-else class="back_ground">
+    <NavBar />
+    <RouterView />
+    <Foot />
+  </div> -->
+  <RouterView />
 </template>
 
 <style scoped>
@@ -34,9 +39,9 @@ body {
   background-color: aquamarine;
   padding: 60px;
 }
-.back_ground{
-    background-color: #1F2833;
-    display: flex;
-    flex-direction: column;
+.back_ground {
+  background-color: #1f2833;
+  display: flex;
+  flex-direction: column;
 }
 </style>

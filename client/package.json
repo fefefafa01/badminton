@@ -1,19 +1,18 @@
 {
-  "name": "bk_e-commerce",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "BCB",
+  "version": "1.0.0",
   "scripts": {
-    "frontend": "vite",
+    "frontend": "vite --port 5174",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --port 4173",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-brands-svg-icons": "^6.5.1",
-    "@fortawesome/free-regular-svg-icons": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@fortawesome/vue-fontawesome": "^3.0.5",
+    "@mdi/js": "^7.0.96",
+    "chart.js": "^4.4.0",
+    "numeral": "^2.0.6",
+    "pinia": "^2.1.6",
     "@splidejs/vue-splide": "^0.6.12",
     "axios": "^1.6.2",
     "bootstrap": "^5.3.2",
@@ -22,7 +21,18 @@
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@rushstack/eslint-patch": "^1.3.3",
+    "@tailwindcss/forms": "^0.5.6",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "postcss": "^8.4.30",
+    "postcss-import": "^15.1.0",
+    "prettier": "^3.0.3",
+    "sass": "^1.69.5",
+    "tailwindcss": "^3.3.3",
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "autoprefixer": "^10.4.15",
     "vite": "^4.5.1"
   }
 }
