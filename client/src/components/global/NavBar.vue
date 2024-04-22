@@ -124,7 +124,7 @@
         },
         data() {
             return {
-                district: ['Quận 1', 'Quận 3', 'Quận 4', 'Quận 5', 'Quận 6','Quận Tân Phú', 'Quận Tân Bình', 'Quận Bình Thạnh', 'TP Thủ Đức'],
+                district: ['Tất cả','Quận 1', 'Quận 3', 'Quận 4', 'Quận 5', 'Quận 6','Quận Tân Phú', 'Quận Tân Bình', 'Quận Bình Thạnh', 'TP Thủ Đức'],
                 districtTemp: [],
                 isMenuVisible: false, // Trạng thái của drop-down place menu
                 isLoggedIn: false,
@@ -164,7 +164,11 @@
                 }
             });
             // this.addDistinct();
+
+            
         },
+
+        
 
         methods: {
             redirectToLogin() {
@@ -186,18 +190,16 @@
             checkLoginStatus() {
                 const isLoggedIn = localStorage.getItem('loggedIn');
                 this.isLoggedIn = isLoggedIn === 'true';
+                this.selectedDistrict = localStorage.getItem('selectedDistrict');
             },
-            // addDistinct() {
-            //     this.district.forEach(district => {
-            //         let li = `<li @click="updateName(this)">${district}</li>`;
-            //         this.options.insertAdjacentHTML("beforeend", li);
-            //     });
-            // },
             updateName(selectedLi) {
-                // this.wrapper.classList.remove("active");
-                // this.selectBtn.firstElementChild.innerText = selectedLi.innerText; 
-                this.selectedDistrict = selectedLi;
-                this.togglePlaceMenu();
+                // this.selectedDistrict = selectedLi;
+                // this.togglePlaceMenu();
+                localStorage.setItem('selectedDistrict',selectedLi)
+                this.redirectToListOfCourt();
+            },
+            confirmExit(event) {
+                localStorage.removeItem('selectedDistrict');
             },
             togglePlaceMenu() {
                 this.isMenuVisible = !this.isMenuVisible; // Đảo ngược trạng thái của menu}
