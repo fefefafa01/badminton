@@ -5,7 +5,7 @@ const router = express.Router();
 const db = require("../db");
 
 router.get("/", async (req, res) => {
-	const notifData = await db.query(`Select * from bangtin order by bangtin_id asc`);
+	const notifData = await db.query(`Select * from news order by news_id asc`);
 	if (notifData.length > 0) {
 		res.json({ bangTinData: notifData });
 		console.log("Bang Tin found");

@@ -61,6 +61,7 @@ const loginRouter = require("./routes/login.js");
 const registerRouter = require("./routes/register.js");
 const notifRouter = require("./routes/notif.js");
 const bangtinRouter = require("./routes/bangtin.js");
+const listOfCourtRouter = require("./routes/listOfCourt.js");
 
 const app = express();
 app.use(cors());
@@ -72,5 +73,6 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/notif", notifRouter);
 app.use("/bangtin", bangtinRouter);
+app.use("/listOfCourt",listOfCourtRouter);
 
 app.listen(port, () => console.log("listening on port " + port));
