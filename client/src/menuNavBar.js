@@ -40,7 +40,7 @@ export default [
       {
         icon: mdiAccount,
         label: 'My Profile',
-        to: '/profile'
+        to: '/admin/profile'
       },
       {
         icon: mdiCogOutline,
@@ -84,6 +84,7 @@ export default [
     icon: mdiLogout,
     label: 'Log out',
     isDesktopNoLabel: true,
-    isLogout: true
+    isLogout: true,
+    to: '/home'
   }
 ]

@@ -1,177 +1,197 @@
 <template>
-    <div class="header-loggin">
+  <div class="header-loggin">
     <div class="navbar">
-        <div type="button" @click="redirectToHomepage" class="grid-item1">
+      <div type="button" @click="redirectToHomepage" class="grid-item1">
+        <img
+          style="height: 100px"
+          class="img"
+          alt="Img"
+          src="https://c.animaapp.com/UGutMkT8/img/da6c9e2e3c8f4d8abaf5e7e4c325ee24--1--1-1@2x.png"
+        />
+      </div>
+
+      <TinTC
+        type="button"
+        @click="redirectToHomepage"
+        class="grid-item2"
+        divClassName="TIN-t-c-instance phuc_nav"
+        text="Trang chủ"
+      />
+
+      <!-- type="button" @click="redirectToListOfCourt" -->
+      <div class="frame grid-item4" style="z-index: 3">
+        <div class="frame-1">
+          <div class="phuc_nav" type="button" @click="togglePlaceMenu">
             <img
-            style="height: 100px;"
-            class="img"
-            alt="Img"
-            src="https://c.animaapp.com/UGutMkT8/img/da6c9e2e3c8f4d8abaf5e7e4c325ee24--1--1-1@2x.png"
+              class="icon-location"
+              alt="Icon location"
+              src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
             />
+            <div class="text-wrapper-2 select-btn">{{ selectedDistrict || 'Địa điểm' }}</div>
+          </div>
+          <div class="content" :class="{ show: isMenuVisible }">
+            <div class="search">
+              <span class="uil--search-alt"></span>
+              <input type="text" placeholder="Tìm kiếm" @keyup="handleKeyUp" />
+            </div>
+            <ul class="options">
+              <li v-for="(dis, index) in districtTemp" :key="index" @click="updateName(dis)">
+                {{ dis }}
+              </li>
+            </ul>
+          </div>
         </div>
-        
-        
-        <TinTC type="button" @click="redirectToHomepage" class="grid-item2" divClassName="TIN-t-c-instance phuc_nav" text="Trang chủ" />
-        
-        <!-- type="button" @click="redirectToListOfCourt" -->
-        <div class="frame grid-item4" style="z-index: 3;">
-            <div class="frame-1" >
-                <div class="phuc_nav" type="button" @click="togglePlaceMenu">
-                    <img
-                    class="icon-location"
-                    alt="Icon location"
-                    src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
-                    />
-                    <div class="text-wrapper-2 select-btn">{{ selectedDistrict || 'Địa điểm' }}</div>
-                </div>
-                <div class="content" :class="{ 'show': isMenuVisible }">
-                    <div class="search">
-                        <span class="uil--search-alt"></span>
-                        <input type="text" placeholder="Tìm kiếm" @keyup="handleKeyUp">
-                    </div>
-                    <ul class="options">
-                        <li v-for="(dis, index) in districtTemp" :key="index" @click="updateName(dis)">
-                        {{ dis }}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="frame-2 phuc_nav"  type="button">
-                <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
-                <div class="ch-nh-t">
-                    <div>{{ selectedDayOfWeek }}</div>
-                    <input class="datepick" type="text" v-model="mytime" placeholder="Ngày tháng">
-                </div>
-            </div>
-            <div class="frame-3 phuc_nav"  type="button" @click="redirectToListOfCourt">
-                <img
-                class="icon-clock"
-                alt="Icon clock"
-                src="https://c.animaapp.com/UGutMkT8/img/---icon--clock--1@2x.png"
-                />
-                <div class="text-wrapper-3">Thời gian</div>
-            </div>
-            
-            <!-- frame-4 -->
-            <div class="frame-3 phuc_nav"  type="button" @click="redirectToListOfCourt">
-                <img
-                class="icon-clock"
-                alt="Icon clock"
-                src="../../assets/images/icon/icon.png"
-                />
-                <div class="text-wrapper-3">Giá</div>
-            </div>    
+        <div class="frame-2 phuc_nav" type="button">
+          <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
+          <div class="ch-nh-t">
+            <div>{{ selectedDayOfWeek }}</div>
+            <input class="datepick" type="text" v-model="mytime" placeholder="Ngày tháng" />
+          </div>
         </div>
-        <TinTC type="button" class="design-component-instance-node " divClassName="SN-PHM-2 phuc_nav" text="Tham gia vào sân cầu lông" />
-        <div class="group-wrapper">
-            <div class="group">
-                <div v-if="isLoggedIn" class="overlap-group nav-link phuc_nav" divClassName="phuc_nav" type="button" @click="toggleMenu">
-                    <div class="log_icon"><img src="../../assets/images/TAI KHOAN.png" alt="this is logo"  ></div>
-                    <div class="ng-xu-t"> 
-                        Cá <br/>nhân
-                    </div>  
-                    <!-- dropdown -->
-                    <div :class="['sub-menu-wrap', { 'open-menu': isSubMenuOpen }]">
-                        <div class="sub-menu">
-                            <div class="user-info">
-                                <img src="../../assets/images/TAI KHOAN.png" alt="this is logo" >
-                                <h3>Khoa</h3>
-                            </div>
-                            <hr>
+        <div class="frame-3 phuc_nav" type="button" @click="redirectToListOfCourt">
+          <img
+            class="icon-clock"
+            alt="Icon clock"
+            src="https://c.animaapp.com/UGutMkT8/img/---icon--clock--1@2x.png"
+          />
+          <div class="text-wrapper-3">Thời gian</div>
+        </div>
 
-                            <a href="#" class="sub-menu-link" @click="redirectToProfile">
-                                <img src="../../assets/images/Profile.png" alt="">
-                                <span class="p">Trang cá nhân</span>
-                                <span class="trans">></span>
-                            </a>
-                            <a href="#" class="sub-menu-link" @click="redirectToHistory">
-                                <img src="../../assets/images/history.png" alt="">
-                                <span class="p">Lịch sử đặt sân</span>
-                                <span class="trans">></span>
-                            </a>
-                            <a href="#" class="sub-menu-link" @click="logout">
-                                <img src="../../assets/images/Logout.png" alt="">
-                                <span class="p">Logout</span>
-                                <span class="trans">></span>
-                            </a>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div v-else class="overlap-group phuc_nav nav-link " type="button " @click="redirectToLogin">
-                    <div class="log_icon"><img src="../../assets/images/TAI KHOAN.png" alt="this is logo" ></div>
-                    <div class="ng-xu-t "> 
-                        Đăng <br/>nhập
-                    </div>
-                </div>
-            </div>
+        <!-- frame-4 -->
+        <div class="frame-3 phuc_nav" type="button" @click="redirectToListOfCourt">
+          <img class="icon-clock" alt="Icon clock" src="../../assets/images/icon/icon.png" />
+          <div class="text-wrapper-3">Giá</div>
         </div>
-    </div>
-    </div>
+      </div>
+      <TinTC
+        type="button"
+        class="design-component-instance-node"
+        divClassName="SN-PHM-2 phuc_nav"
+        text="Tham gia vào sân cầu lông"
+      />
+      <div class="group-wrapper">
+        <div class="group">
+          <div
+            v-if="isLoggedIn"
+            class="overlap-group nav-link phuc_nav"
+            divClassName="phuc_nav"
+            type="button"
+            @click="toggleMenu"
+          >
+            <div class="log_icon">
+              <img src="../../assets/images/TAI KHOAN.png" alt="this is logo" />
+            </div>
+            <div class="ng-xu-t">Cá <br />nhân</div>
+            <!-- dropdown -->
+            <div :class="['sub-menu-wrap', { 'open-menu': isSubMenuOpen }]">
+              <div class="sub-menu">
+                <div class="user-info">
+                  <img src="../../assets/images/TAI KHOAN.png" alt="this is logo" />
+                  <h3>Khoa</h3>
+                </div>
+                <hr />
 
-    
+                <a href="#" class="sub-menu-link" @click="redirectToProfile">
+                  <img src="../../assets/images/Profile.png" alt="" />
+                  <span class="p">Trang cá nhân</span>
+                  <span class="trans">></span>
+                </a>
+                <a href="#" class="sub-menu-link" @click="redirectToHistory">
+                  <img src="../../assets/images/history.png" alt="" />
+                  <span class="p">Lịch sử đặt sân</span>
+                  <span class="trans">></span>
+                </a>
+                <a href="#" class="sub-menu-link" @click="logout">
+                  <img src="../../assets/images/Logout.png" alt="" />
+                  <span class="p">Logout</span>
+                  <span class="trans">></span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            v-else
+            class="overlap-group phuc_nav nav-link"
+            type="button "
+            @click="redirectToLogin"
+          >
+            <div class="log_icon">
+              <img src="../../assets/images/TAI KHOAN.png" alt="this is logo" />
+            </div>
+            <div class="ng-xu-t">Đăng <br />nhập</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
-    import TinTC from "../items/TinTC.vue";
-    import flatpickr from 'flatpickr';
-    import 'flatpickr/dist/flatpickr.css';
-    
-    export default {
-        name: "HeaderLoggin",
-        name: 'UilSearchAlt',
-        components: {
-            TinTC,
-        },
-        data() {
-            return {
-                district: ['Tất cả','Quận 1', 'Quận 3', 'Quận 4', 'Quận 5', 'Quận 6','Quận Tân Phú', 'Quận Tân Bình', 'Quận Bình Thạnh', 'TP Thủ Đức'],
-                districtTemp: [],
-                isMenuVisible: false, // Trạng thái của drop-down place menu
-                isLoggedIn: false,
-                isSubMenuOpen: false,
-                wrapper: null,
-                options: null,
-                selectBtn: null,
-                isActive: false,
-                selectedDistrict: '',
-                searchInp: null,
-                mytime: null,
-                selectedDayOfWeek: null,
-            }
-        },
+import TinTC from '../items/TinTC.vue'
+import flatpickr from 'flatpickr'
+import 'flatpickr/dist/flatpickr.css'
 
+export default {
+  name: 'HeaderLoggin',
+  name: 'UilSearchAlt',
+  components: {
+    TinTC
+  },
+  data() {
+    return {
+      district: [
+        'Tất cả',
+        'Quận 1',
+        'Quận 3',
+        'Quận 4',
+        'Quận 5',
+        'Quận 6',
+        'Quận Tân Phú',
+        'Quận Tân Bình',
+        'Quận Bình Thạnh',
+        'TP Thủ Đức'
+      ],
+      districtTemp: [],
+      isMenuVisible: false, // Trạng thái của drop-down place menu
+      isLoggedIn: false,
+      isSubMenuOpen: false,
+      wrapper: null,
+      options: null,
+      selectBtn: null,
+      isActive: false,
+      selectedDistrict: '',
+      searchInp: null,
+      mytime: null,
+      selectedDayOfWeek: null
+    }
+  },
 
   created() {
     this.checkLoginStatus()
   },
-        mounted() {
-            this.wrapper = document.querySelector(".wrapper"); 
-            this.options = document.querySelector(".options");
-            this.districtTemp = this.district;
+  mounted() {
+    this.wrapper = document.querySelector('.wrapper')
+    this.options = document.querySelector('.options')
+    this.districtTemp = this.district
 
-            if (this.wrapper) {
-                this.selectBtn = this.wrapper.querySelector(".select-btn");
-                this.searchInp = this.wrapper.querySelector(".input");
-            }
+    if (this.wrapper) {
+      this.selectBtn = this.wrapper.querySelector('.select-btn')
+      this.searchInp = this.wrapper.querySelector('.input')
+    }
 
-            const daysOfWeek = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+    const daysOfWeek = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy']
 
-            flatpickr(".datepick", {
-            dateFormat: "d/m/Y",
-            onChange: (selectedDates) => {
-                const date = selectedDates[0];
-                this.selectedDayOfWeek = daysOfWeek[date.getDay()];
-                }
-            });
-            // this.addDistinct();
+    flatpickr('.datepick', {
+      dateFormat: 'd/m/Y',
+      onChange: (selectedDates) => {
+        const date = selectedDates[0]
+        this.selectedDayOfWeek = daysOfWeek[date.getDay()]
+      }
+    })
+    // this.addDistinct();
+  },
 
-            
-        },
-
-        
-
-        methods: {
-            redirectToLogin() {
+  methods: {
+    redirectToLogin() {
       // Chuyển hướng đến trang Login
       window.location.href = '#/Login'
     },
@@ -191,67 +211,67 @@
       const isLoggedIn = localStorage.getItem('loggedIn')
       this.isLoggedIn = isLoggedIn === 'true'
     },
-            updateName(selectedLi) {
-                // this.selectedDistrict = selectedLi;
-                // this.togglePlaceMenu();
-                localStorage.setItem('selectedDistrict',selectedLi)
-                this.redirectToListOfCourt();
-            },
-            confirmExit(event) {
-                localStorage.removeItem('selectedDistrict');
-            },
-            togglePlaceMenu() {
-                this.isMenuVisible = !this.isMenuVisible; // Đảo ngược trạng thái của menu}
-            },
-            handleKeyUp(event) {
-                let arr = []; // creating empty array
-                let searchedVal = event.target.value.toLowerCase();
-                arr = this.district.filter( data => {
-                    return data.toLowerCase().includes(searchedVal);
-                })
-                this.districtTemp = arr;
-            },
-            toggleMenu() {
+    updateName(selectedLi) {
+      // this.selectedDistrict = selectedLi;
+      // this.togglePlaceMenu();
+      localStorage.setItem('selectedDistrict', selectedLi)
+      this.redirectToListOfCourt()
+    },
+    confirmExit(event) {
+      localStorage.removeItem('selectedDistrict')
+    },
+    togglePlaceMenu() {
+      this.isMenuVisible = !this.isMenuVisible // Đảo ngược trạng thái của menu}
+    },
+    handleKeyUp(event) {
+      let arr = [] // creating empty array
+      let searchedVal = event.target.value.toLowerCase()
+      arr = this.district.filter((data) => {
+        return data.toLowerCase().includes(searchedVal)
+      })
+      this.districtTemp = arr
+    },
+    toggleMenu() {
       this.isSubMenuOpen = !this.isSubMenuOpen
     },
     logout() {
       localStorage.removeItem('loggedIn')
       window.location.href = '#/home'
     }
-        },
-    };
+  }
+}
 </script>
 
 <style>
-.header-loggin {/* Position the navbar at the top of the page */
-    margin-top: 5px;
-    box-shadow: 0px 2px 2px rgba(0,0,0,0.5); /*Đổ bóng cho menu*/
-    background-color: #0b0c10;
-    border-radius: 30px;
-    height: 115px;
-    width: 100%;
-    z-index: 1000;
+.header-loggin {
+  /* Position the navbar at the top of the page */
+  margin-top: 5px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5); /*Đổ bóng cho menu*/
+  background-color: #0b0c10;
+  border-radius: 30px;
+  height: 115px;
+  width: 100%;
+  z-index: 1000;
 }
-.navbar{
-    display: grid;
-    grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
-    height: 115px;
-    width: 1600px;
-    top: 50%;
-    left: 50%;
-    box-shadow: 0px 2px 2px rgba(0,0,0,0.5); /*Đổ bóng cho menu*/
-    background-color: #0b0c10;
-    border-radius: 30px;
-    transform: translate(-50%, -50%);
-    
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
+  height: 115px;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5); /*Đổ bóng cho menu*/
+  background-color: #0b0c10;
+  border-radius: 30px;
+  transform: translate(-50%, -50%);
 }
-.grid-item1{
-    position: relative;
-     margin-left: 2rem;
+.grid-item1 {
+  position: relative;
+  margin-left: 2rem;
 }
-.grid-item2{
-    position: relative;
-     margin-left: 3rem;
+.grid-item2 {
+  position: relative;
+  margin-left: 3rem;
 }
 .header-loggin .SN-PHM {
   height: 17px !important;
@@ -266,7 +286,7 @@
   display: flex;
   justify-content: center; /* Căn giữa theo chiều ngang */
   align-items: center;
-  color: #ffffffcc ;
+  color: #ffffffcc;
   font-size: 22px !important;
   font-weight: 700 !important;
   width: 120px !important;
@@ -275,6 +295,7 @@
 
 .header-loggin .design-component-instance-node {
   text-align: center;
+  display: flex;
   align-items: center;
   height: 50px !important;
   position: relative;
@@ -284,7 +305,8 @@
 }
 
 .header-loggin .SN-PHM-2 {
-  color: #ffffffcc ;
+  position: relative;
+  color: #ffffffcc;
   font-size: 20px !important;
   font-weight: 700 !important;
   text-align: center !important;
@@ -297,18 +319,18 @@
 }
 
 .header-loggin .frame {
-    background-color: #45a29e;
-    position: relative;
-    border-radius: 40px;
-    height: 97px;
-    width: 800px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+  background-color: #45a29e;
+  position: relative;
+  border-radius: 40px;
+  height: 97px;
+  width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .uil--search-alt {
-    color: #999;
+  color: #999;
   margin: 13px;
   position: absolute;
   display: inline-block;
@@ -320,63 +342,61 @@
 }
 
 .content {
-    display: none;
-    width: 160%;
-    padding: 20px;
-    margin-top: 80px;
-    margin-left: -10px;
-    border-radius: 7px;
-    background: #ffffff;
-    color:#0b0c10;
+  display: none;
+  width: 160%;
+  padding: 20px;
+  margin-top: 80px;
+  margin-left: -10px;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #0b0c10;
 }
 
 .show {
-    display: block;
+  display: block;
 }
 
-
 .content .search {
-    position: relative;
-    display: flex;
+  position: relative;
+  display: flex;
 }
 
 .search input {
-    width: 100%;
-    height: 50px;
-    font-size: 18px;
-    padding-left: 40px;
-   
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  padding-left: 40px;
 }
 
-.content .options{
-    margin-top: 10px;
-    padding-left: 0px;
-    max-height: 250px;
-    overflow-y: auto;
+.content .options {
+  margin-top: 10px;
+  padding-left: 0px;
+  max-height: 250px;
+  overflow-y: auto;
 }
 
-.options li{
-    font-size: 21px;
-    height: 50px;
-    border-radius: 5px;
-    display: flex;
-    cursor: pointer;
-    align-items: center;
+.options li {
+  font-size: 21px;
+  height: 50px;
+  border-radius: 5px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
 }
 
-.options::-webkit-scrollbar{
-    width: 7px;
+.options::-webkit-scrollbar {
+  width: 7px;
 }
-.options::-webkit-scrollbar-track{
-    background: #f1f1f1;
-    border-radius: 25px;
+.options::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 25px;
 }
-.options::-webkit-scrollbar-thumb{
-    background: #ccc;
-    border-radius: 25px;
+.options::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 25px;
 }
-.options li:hover{
-    background: #f2f2f2;
+.options li:hover {
+  background: #f2f2f2;
 }
 
 .header-loggin .frame-1 {
@@ -389,7 +409,7 @@
 
 .header-loggin .text-wrapper-2 {
   margin-left: 40px;
-  font-family: "Comfortaa", Helvetica;
+  font-family: 'Comfortaa', Helvetica;
   font-size: 20px;
   font-weight: 700;
   top: 50%; /* Đưa về giữa theo chiều dọc */
@@ -415,11 +435,12 @@
   position: relative;
   width: 165px;
   display: flex;
+  align-items: center;
 }
 
 .header-loggin .ch-nh-t {
   margin-left: 30%;
-  font-family: "Comfortaa", Helvetica;
+  font-family: 'Comfortaa', Helvetica;
   font-size: 20px;
   font-weight: 700;
   top: 50%; /* Đưa về giữa theo chiều dọc */
@@ -431,14 +452,13 @@
   width: 100%; /* Đảm bảo chiều rộng 100% để căn giữa */
   flex-direction: column;
 }
-.ch-nh-t div{
-    margin-left: 10%;
+.ch-nh-t div {
+  margin-left: 10%;
 }
 .header-loggin .vector {
   height: 34px;
   left: 4px;
   position: relative;
-  top: 14px;
   width: 30px;
 }
 
@@ -460,7 +480,7 @@
 }
 
 .header-loggin .text-wrapper-3 {
-  font-family: "Comfortaa", Helvetica;
+  font-family: 'Comfortaa', Helvetica;
   font-size: 20px;
   font-weight: 700;
   left: 10px;
@@ -489,19 +509,19 @@
 }
 
 .header-loggin .overlap-group {
-    color: #ffffffcc;
-    display: flex;
-    padding-left: 30px;
-    align-items: center;
-    border-radius: 18px;
-    height: 84px;
-    position: relative;
-    width: 100%;
-    cursor: pointer;
+  color: #ffffffcc;
+  display: flex;
+  padding-left: 30px;
+  align-items: center;
+  border-radius: 18px;
+  height: 84px;
+  position: relative;
+  width: 100%;
+  cursor: pointer;
 }
 
 .header-loggin .ng-xu-t {
-  font-family: "Comfortaa", Helvetica;
+  font-family: 'Comfortaa', Helvetica;
   font-size: 20px;
   font-weight: 700;
   left: 10px;
@@ -545,20 +565,19 @@
 
 .phuc_nav:hover {
   background-color: #45a29e;
-  color: mistyrose ;
+  color: mistyrose;
 }
 
 /* Info */
-.sub-menu-wrap{
-    position: absolute;
-    top: 100%;
-    right: 0px;
-    width: 300px;  
-    max-height: 0px;
-    float: left;
-    overflow: hidden;
-    transition: max-height 0.5s;
-    
+.sub-menu-wrap {
+  position: absolute;
+  top: 100%;
+  right: 0px;
+  width: 300px;
+  max-height: 0px;
+  float: left;
+  overflow: hidden;
+  transition: max-height 0.5s;
 }
 .sub-menu-wrap.open-menu {
   max-height: 400px;
@@ -628,19 +647,19 @@
 .sub-menu-link:hover span.trans {
   background: transparent;
 }
-.datepick{
-    background-color: #45a29e;
-    width: 85%;
-    border: none;
-    color: #ffffff;
-    outline: none;
-    font-family: "Comfortaa", Helvetica;
-    font-size: 20px;
-    font-weight: 700;
+.datepick {
+  background-color: #45a29e !important;
+  width: 85%;
+  border: none;
+  color: #ffffff;
+  outline: none;
+  font-family: 'Comfortaa', Helvetica;
+  font-size: 20px !important;
+  font-weight: 700;
 }
-.datepick:hover{
-    background-color: #45a29e;
-    color: mistyrose ;
+.datepick:hover {
+  background-color: #45a29e;
+  color: mistyrose;
 }
 .datepick::-webkit-calendar-picker-indicator {
   filter: invert(100%);
@@ -649,6 +668,6 @@
   color: #ffffff;
 }
 .datepick:hover::placeholder {
-  color: mistyrose ;
+  color: mistyrose;
 }
 </style>

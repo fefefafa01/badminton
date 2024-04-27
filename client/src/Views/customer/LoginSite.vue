@@ -1,77 +1,3 @@
-<script setup>
-import { useDarkModeStore } from '@/stores/darkMode'
-import axios from 'axios'
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
-import NavBar from '@/components/global/NavBar.vue'
-import FooterBar from '@/components/global/FooterBar.vue'
-
-const style = ['white', 'black']
-
-// const options = {
-//     rewind: true,
-//     gap: '1rem'
-// };
-
-const darkModeStore = useDarkModeStore()
-darkModeStore.set(false)
-
-// Router instance
-const router = useRouter()
-
-// Khai báo dữ liệu
-const email = ref('')
-const password = ref('')
-const loggedIn = ref(true)
-
-// Khai báo phương thức handleStyleChange
-const handleStyleChange = (slug) => {
-  document.documentElement.classList.forEach((token) => {
-    if (token.indexOf('style') === 0) {
-      document.documentElement.classList.replace(token, `style-${slug}`)
-    }
-  })
-
-  router.push('/admin/dashboard')
-}
-
-// Khai báo phương thức login
-const login = async () => {
-  try {
-    const response = await axios.post('http://localhost:5000/login', {
-      email: email.value,
-      password: password.value
-    })
-
-    // Xử lý dữ liệu phản hồi khi cần
-    console.log(response.data)
-    if (response.data.loggedIn) {
-      localStorage.setItem('loggedIn', true)
-      localStorage.setItem('user_data', response.data)
-      window.location.assign('/home')
-    } else {
-      loggedIn.value = false
-    }
-  } catch (error) {
-    // Xử lý lỗi
-    console.error(error)
-  }
-}
-
-// Khai báo các phương thức điều hướng
-const redirectToForgetPwd = () => {
-  window.location.href = '#/ForgetPwd'
-}
-
-const redirectToRegister = () => {
-  window.location.href = '#/Register'
-}
-
-const redirectToAdmin = () => {
-  handleStyleChange(style)
-}
-</script>
-
 <template>
   <div class="back_ground">
     <NavBar />
@@ -84,13 +10,13 @@ const redirectToAdmin = () => {
           <form @submit.prevent="login">
             <div class="form-group">
               <div class="input">
-                <input v-model="email" type="email" placeholder="Số điện thoại/Email" required />
+                <input type="email" placeholder="Số điện thoại/Email" v-model="email" required />
                 <div v-if="loggedIn === false" class="error">
                   <p>Tên đăng nhập hoặc mật khẩu sai</p>
                 </div>
               </div>
               <div class="input">
-                <input v-model="password" type="password" placeholder="Mật khẩu" required />
+                <input type="password" placeholder="Mật khẩu" v-model="password" required />
                 <div v-if="loggedIn === false" class="error">
                   <p>Tên đăng nhập hoặc mật khẩu sai</p>
                 </div>
@@ -101,17 +27,122 @@ const redirectToAdmin = () => {
           </form>
           <br />
           <br />
-          <a @click="redirectToAdmin">Admin</a>
-          <br />
-          <br />
           <span>BẠN CHƯA CÓ TÀI KHOẢN?</span>
           <a @click="redirectToRegister">ĐĂNG KÝ</a>
+          <br />
+          <br />
+          <a @click="redirectToAdmin">Admin</a>
         </div>
       </div>
     </div>
     <FooterBar />
   </div>
 </template>
+
+<!-- <script setup>
+
+const style = ['white', 'black']
+
+const darkModeStore = useDarkModeStore()
+darkModeStore.set(false)
+
+// Khai báo phương thức handleStyleChange
+const handleStyleChange = (slug) => {
+  document.documentElement.classList.forEach((token) => {
+    if (token.indexOf('style') === 0) {
+      document.documentElement.classList.replace(token, `style-${slug}`)
+    }
+  })
+
+  router.push('/admin/dashboard')
+}
+</script> -->
+
+<script>
+import { defineComponent } from 'vue'
+import axios from 'axios'
+import { useDarkModeStore } from '@/stores/darkMode'
+import { useRouter } from 'vue-router'
+import NavBar from '@/components/global/NavBar.vue'
+import FooterBar from '@/components/global/FooterBar.vue'
+
+export default defineComponent({
+  components: {
+    NavBar,
+    FooterBar
+  },
+
+  setup() {
+    const options = {
+      rewind: true,
+      gap: '1rem'
+    }
+    const style = ['white', 'black']
+    const darkModeStore = useDarkModeStore()
+    darkModeStore.set(false)
+
+    // Router instance
+    const router = useRouter()
+
+    // Define a function to handle style change
+    const handleStyleChange = (slug) => {
+      document.documentElement.classList.forEach((token) => {
+        if (token.indexOf('style') === 0) {
+          document.documentElement.classList.replace(token, `style-${slug}`)
+        }
+      })
+
+      router.push('/admin/dashboard')
+    }
+
+    return { options, style, handleStyleChange }
+  },
+
+  data() {
+    return {
+      email: '',
+      password: '',
+      loggedIn: true
+    }
+  },
+
+  methods: {
+    async login() {
+      try {
+        const response = await axios.post('http://localhost:5000/login', {
+          email: this.email,
+          password: this.password
+        })
+
+        // Handle response data as needed
+        console.log(response.data)
+        if (response.data.loggedIn) {
+          localStorage.setItem('loggedIn', true)
+          localStorage.setItem('user_data', response.data)
+          window.location.assign('/home')
+        } else if (response.data.AdminloggedIn) {
+          window.location.assign('/admin')
+        } else {
+          this.loggedIn = false
+        }
+      } catch (error) {
+        // Handle error
+        console.error(error)
+      }
+    },
+    redirectToForgetPwd() {
+      window.location.href = 'ForgetPwd'
+    },
+    redirectToRegister() {
+      window.location.href = 'Register'
+    },
+    
+    redirectToAdmin() {
+      this.handleStyleChange(this.style)
+    },
+  }
+})
+</script>
 
 <style lang="scss" scoped>
 .container {

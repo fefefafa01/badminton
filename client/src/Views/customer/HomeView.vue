@@ -6,7 +6,7 @@
         <div class="slider">
           <Splide :options="options" aria-label="My Favorite Images">
             <SplideSlide v-for="data in notifData" :key="data.notification_id">
-              <img :src="data.href" :alt="`Sample ${data.notification_id}`" />
+              <img :src="data.linkimg" :alt="`Sample ${data.notification_id}`" />
             </SplideSlide>
           </Splide>
         </div>
@@ -20,7 +20,7 @@
                 <div class="sampleText">
                   <p>{{ id.description }}</p>
                 </div>
-                <img :src="id.path" :alt="`Sample ${id.bantin_id}`" class="sampleImg" />
+                <img :src="id.linkimg" :alt="`Sample ${id.bantin_id}`" class="sampleImg" />
               </div>
             </div>
           </ul>
@@ -47,15 +47,19 @@
   </div>
 </template>
 
-<!-- <script>
+<script>
 import { Splide, SplideSlide } from '@splidejs/vue-splide'
 import { defineComponent, ref, onMounted } from 'vue'
+import NavBar from '@/components/global/NavBar.vue'
+import FooterBar from '@/components/global/FooterBar.vue'
 import axios from 'axios'
 
 export default defineComponent({
   components: {
     Splide,
-    SplideSlide
+    SplideSlide,
+    NavBar,
+    FooterBar
   },
 
   setup() {
@@ -88,47 +92,6 @@ export default defineComponent({
     })
 
     return { options, notifData, slicedBangTinData }
-  }
-})
-</script> -->
-
-<script setup>
-import { Splide, SplideSlide } from '@splidejs/vue-splide'
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import NavBar from '@/components/global/NavBar.vue'
-import FooterBar from '@/components/global/FooterBar.vue'
-
-// Khai báo các tùy chọn cho Splide
-const options = {
-  rewind: true,
-  gap: '1rem'
-}
-
-// Khai báo các biến dữ liệu sử dụng `ref` để tạo biến phản ứng
-const notifData = ref([])
-const bangTinData = ref([])
-const slicedBangTinData = ref([])
-
-// Hàm lấy dữ liệu và cập nhật biến khi component được gắn vào DOM
-onMounted(async () => {
-  try {
-    const notif = await axios.get('http://localhost:5000/notif')
-    notifData.value = notif.data.notifData
-
-    const bangTin = await axios.get('http://localhost:5000/bangtin')
-    bangTinData.value = bangTin.data.bangTinData
-    console.log(bangTinData)
-
-    // Cắt dữ liệu bangTinData thành các mảng nhỏ hơn để hiển thị
-    const slicedData = []
-    for (let i = 0; i < bangTinData.value.length; i += 3) {
-      slicedData.push(bangTinData.value.slice(i, i + 3))
-    }
-    slicedBangTinData.value = slicedData
-    console.log(slicedBangTinData)
-  } catch (error) {
-    console.error(error)
   }
 })
 </script>

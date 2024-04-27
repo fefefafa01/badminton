@@ -15,27 +15,27 @@ import {
 
 export default [
   {
-    to: '/dashboard',
+    to: '/admin/dashboard',
     icon: mdiMonitor,
     label: 'Dashboard'
   },
   {
-    to: '/tables',
+    to: '/admin/tables',
     label: 'Tables',
     icon: mdiTable
   },
   {
-    to: '/forms',
+    to: '/admin/forms',
     label: 'Forms',
     icon: mdiSquareEditOutline
   },
   {
-    to: '/ui',
+    to: '/admin/ui',
     label: 'UI',
     icon: mdiTelevisionGuide
   },
   {
-    to: '/responsive',
+    to: '/admin/responsive',
     label: 'Responsive',
     icon: mdiResponsive
   },
@@ -45,17 +45,17 @@ export default [
     icon: mdiPalette
   },
   {
-    to: '/profile',
+    to: '/admin/profile',
     label: 'Profile',
     icon: mdiAccountCircle
   },
   {
-    to: '/login',
+    to: '/admin/login',
     label: 'Login',
     icon: mdiLock
   },
   {
-    to: '/error',
+    to: '/admin/error',
     label: 'Error',
     icon: mdiAlertCircle
   },
