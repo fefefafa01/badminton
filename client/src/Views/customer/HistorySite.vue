@@ -65,16 +65,18 @@
   </div>
 </template>
 
-<!-- <script>
+<script>
 // import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import { defineComponent, ref, onMounted } from 'vue'
 import axios from 'axios'
+import NavBar from '@/components/global/NavBar.vue'
+import FooterBar from '@/components/global/FooterBar.vue'
 
 export default defineComponent({
-  // components: {
-  //     Splide,
-  //     SplideSlide,
-  // },
+  components: {
+      NavBar, 
+      FooterBar,
+  },
 
   setup() {
     const options = {
@@ -165,94 +167,6 @@ export default defineComponent({
     }
   }
 })
-</script> -->
-
-<script setup>
-import FooterBar from '@/components/global/FooterBar.vue'
-import NavBar from '@/components/global/NavBar.vue'
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-
-// Khai báo các biến sử dụng ref để tạo ra các biến phản ứng
-const notifData = ref([])
-const bangTinData = ref([])
-const slicedBangTinData = ref([])
-
-// Khai báo dữ liệu của component
-const isMenuOpen = ref(false)
-const items = [
-  {
-    imageSrc:
-      'https://sonsanepoxy.vn/wp-content/uploads/2023/07/lap-dat-he-thong-den-chieu-san-cau-long.jpg',
-    courtName: 'Sân cầu lông Thiên Vân',
-    address: '57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh',
-    phoneNumber: '0913 404 924'
-  },
-  {
-    imageSrc: 'https://limosa.vn/wp-content/uploads/2023/08/san-cau-long-cay-keo.jpg',
-    courtName: 'Sân cầu lông ABC',
-    address: '710/53/2, Lũy Bán Bích, Tân Thành, Tân Phú, Thành phố Hồ Chí Minh',
-    phoneNumber: '0983 916 646'
-  },
-  {
-    imageSrc:
-      'https://sieuthicaulong.vn/images/badminton-yard/1688728199_gallery_san-cau-long-tan-phuc-1.jpg',
-    courtName: 'Sân cầu lông Tấn Phúc',
-    address: '36/48 Huỳnh Thiện Lộc, Hoà Thanh, Tân Phú, Thành phố Hồ Chí Minh',
-    phoneNumber: '0903 938 919'
-  },
-  {
-    imageSrc:
-      'https://badmintonw.com/uploads/images/gioi-thieu-san-cau-long-tao-dan-diem-den-li-tuong-cho-long-thu-quan-1-10.png',
-    courtName: 'Sân cầu lông Viettel',
-    address: '57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh',
-    phoneNumber: '0913 404 924'
-  },
-  {
-    imageSrc: 'https://sieuthicaulong.vn/images/badminton-yard/1688381528_gallery_22.PNG',
-    courtName: 'Sân cầu lông Lam Sơn',
-    address: '320/1 Đ. Trần Bình Trọng, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
-    phoneNumber: '0909 222 958'
-  }
-]
-
-// Hàm async trong onMounted để lấy dữ liệu từ API
-onMounted(async () => {
-  try {
-    const notif = await axios.get('http://localhost:5000/notif')
-    notifData.value = notif.data.notifData
-
-    const bangTin = await axios.get('http://localhost:5000/bangtin')
-    bangTinData.value = bangTin.data.bangTinData
-
-    const slicedData = []
-    for (let i = 0; i < bangTinData.value.length; i += 3) {
-      slicedData.push(bangTinData.value.slice(i, i + 3))
-    }
-    slicedBangTinData.value = slicedData
-    console.log(slicedBangTinData)
-  } catch (error) {
-    console.error(error)
-  }
-})
-
-// Phương thức cho việc điều khiển và tương tác
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
-
-const logout = () => {
-  localStorage.removeItem('loggedIn')
-  window.location.href = '#/home'
-}
-
-const redirectToProfile = () => {
-  window.location.href = '#/Profile'
-}
-
-const redirectToHistory = () => {
-  window.location.href = '#/History'
-}
 </script>
 
 <style lang="scss" scoped>

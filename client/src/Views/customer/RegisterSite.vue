@@ -42,11 +42,17 @@
   </div>
 </template>
 
-<!-- <script>
+<script>
 import { defineComponent } from 'vue'
 import axios from 'axios'
+import NavBar from '@/components/global/NavBar.vue'
+import FooterBar from '@/components/global/FooterBar.vue'
 
 export default defineComponent({
+  components: {
+    NavBar,
+    FooterBar,
+  },
   setup() {
     const options = {
       rewind: true,
@@ -73,7 +79,7 @@ export default defineComponent({
         })
         console.log(response.data)
         if (response.data.registered) {
-          window.location.assign('/Success')
+          window.location.assign('#/Success')
         }
       } catch (error) {
         console.error(error)
@@ -87,48 +93,6 @@ export default defineComponent({
     }
   }
 })
-</script> -->
-
-<script setup>
-import { ref } from 'vue'
-import axios from 'axios'
-import NavBar from '@/components/global/NavBar.vue'
-import FooterBar from '@/components/global/FooterBar.vue'
-
-// Khai báo các biến phản ứng bằng `ref`
-const name = ref('')
-const email = ref('')
-const password = ref('')
-
-// Hàm `register` để thực hiện đăng ký người dùng
-const register = async () => {
-  try {
-    // Gửi yêu cầu POST tới API đăng ký
-    const response = await axios.post('http://localhost:5000/register', {
-      name: name.value,
-      email: email.value,
-      password: password.value
-    })
-    console.log(response.data)
-
-    // Kiểm tra kết quả đăng ký và điều hướng đến trang thành công nếu cần
-    if (response.data.registered) {
-      window.location.assign('/Success')
-    }
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-// Hàm điều hướng đến trang đăng nhập
-const redirectToLogin = () => {
-  window.location.href = '#/Login'
-}
-
-// Hàm điều hướng đến trang thành công
-// const redirectToSuccess = () => {
-//     window.location.href = '#/Success';
-// };
 </script>
 
 <style lang="scss" scoped>

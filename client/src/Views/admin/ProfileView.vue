@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue'
-import { useMainStore } from '@/stores/main'
+// import { useMainStore } from '@/stores/main'
 import { mdiAccount, mdiMail, mdiAsterisk, mdiFormTextboxPassword, mdiGithub } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
@@ -13,12 +13,13 @@ import BaseButtons from '@/components/BaseButtons.vue'
 import UserCard from '@/components/UserCard.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
+import axios from 'axios'
 
-const mainStore = useMainStore()
+// const mainStore = useMainStore()
 
 const profileForm = reactive({
-  name: mainStore.userName,
-  email: mainStore.userEmail
+  name: localStorage.getItem("user_name"),
+  email: localStorage.getItem("user_email"),
 })
 
 const passwordForm = reactive({
@@ -27,13 +28,33 @@ const passwordForm = reactive({
   password_confirmation: ''
 })
 
-const submitProfile = () => {
-  mainStore.setUser(profileForm)
+const submitProfile = async() => {
+  const response = await axios.post('http://localhost:5000/changeAdminInfo/info', {
+    curName: localStorage.getItem('user_name'),
+    curEmail: localStorage.getItem('user_email'),
+    name: profileForm.name,
+    email: profileForm.email,
+  })
+  if (response.data.changed) {
+    localStorage.setItem('user_name', response.data.name)
+    localStorage.setItem('user_email', response.data.email)
+    profileForm.name = response.data.name
+    profileForm.email = response.data.email
+  }
+
+  window.location.reload()
 }
 
-const submitPass = () => {
-  //
+const submitPass = async() => {
+  await axios.post('http://localhost:5000/changeAdminInfo/password', {
+    curPass: passwordForm.password_current,
+    password: passwordForm.password,
+    email: localStorage.getItem('user_email'),
+    name: localStorage.getItem('user_name'),
+  })  
+  window.location.reload()
 }
+
 </script>
 
 <template>
@@ -41,7 +62,7 @@ const submitPass = () => {
     <SectionMain>
       <SectionTitleLineWithButton :icon="mdiAccount" title="Profile" main>
         <BaseButton
-          href="https://github.com/justboil/admin-one-vue-tailwind"
+          href="#"
           target="_blank"
           :icon="mdiGithub"
           label="Star on GitHub"
@@ -66,6 +87,7 @@ const submitPass = () => {
               name="username"
               required
               autocomplete="username"
+              style = "padding-left: 2.5rem !important;"
             />
           </FormField>
           <FormField label="E-mail" help="Required. Your e-mail">
@@ -76,13 +98,13 @@ const submitPass = () => {
               name="email"
               required
               autocomplete="email"
+              style = "padding-left: 2.5rem !important;"
             />
           </FormField>
 
           <template #footer>
             <BaseButtons>
-              <BaseButton color="info" type="submit" label="Submit" />
-              <BaseButton color="info" label="Options" outline />
+              <BaseButton color="info" type="submit" label="Change"/>
             </BaseButtons>
           </template>
         </CardBox>
@@ -96,6 +118,7 @@ const submitPass = () => {
               type="password"
               required
               autocomplete="current-password"
+              style = "padding-left: 2.5rem !important;"
             />
           </FormField>
 
@@ -109,6 +132,7 @@ const submitPass = () => {
               type="password"
               required
               autocomplete="new-password"
+              style = "padding-left: 2.5rem !important;"
             />
           </FormField>
 
@@ -120,13 +144,13 @@ const submitPass = () => {
               type="password"
               required
               autocomplete="new-password"
+              style = "padding-left: 2.5rem !important;"
             />
           </FormField>
 
           <template #footer>
             <BaseButtons>
-              <BaseButton type="submit" color="info" label="Submit" />
-              <BaseButton color="info" label="Options" outline />
+              <BaseButton type="submit" color="info" label="Change" />
             </BaseButtons>
           </template>
         </CardBox>

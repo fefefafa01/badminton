@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted, reactive } from 'vue'
 import { useMainStore } from '@/stores/main'
 import { mdiEye, mdiTrashCan } from '@mdi/js'
 import CardBoxModal from '@/components/CardBoxModal.vue'
@@ -8,14 +8,30 @@ import BaseLevel from '@/components/BaseLevel.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
+import axios from 'axios'
 
 defineProps({
   checkable: Boolean
 })
 
+const table = reactive({
+  clientData: []
+})
+
+const tableClient = async() => {
+  const response = await axios.post('http://localhost:5000/overView/table')
+  console.log(response.data.table)
+  table.clientData = response.data.table
+  console.log("table.clientData", table.clientData[0])
+  console.log("table.clientData[0].customer_id", table.clientData[0].customer_id)
+}
+onMounted(() => {
+  tableClient()
+})
+
 const mainStore = useMainStore()
 
-const items = computed(() => mainStore.clients)
+const items = computed(() => table.clientData)
 
 const isModalActive = ref(false)
 
@@ -83,10 +99,10 @@ const checked = (isChecked, client) => {
         <th v-if="checkable" />
         <th />
         <th>Name</th>
-        <th>Company</th>
-        <th>City</th>
-        <th>Progress</th>
-        <th>Created</th>
+        <th>Email</th>
+        <!-- <th>City</th>
+        <th>Progress</th> -->
+        <th>Created Date</th>
         <th />
       </tr>
     </thead>
@@ -99,20 +115,20 @@ const checked = (isChecked, client) => {
         <td data-label="Name">
           {{ client.name }}
         </td>
-        <td data-label="Company">
-          {{ client.company }}
+        <td data-label="Email">
+          {{ client.email }}
         </td>
-        <td data-label="City">
+        <!-- <td data-label="City">
           {{ client.city }}
-        </td>
-        <td data-label="Progress" class="lg:w-32">
+        </td> -->
+        <!-- <td data-label="Progress" class="lg:w-32">
           <progress class="flex w-2/5 self-center lg:w-full" max="100" :value="client.progress">
             {{ client.progress }}
           </progress>
-        </td>
-        <td data-label="Created" class="lg:w-1 whitespace-nowrap">
+        </td> -->
+        <td data-label="Created Date" class="lg:w-1 whitespace-nowrap">
           <small class="text-gray-500 dark:text-slate-400" :title="client.created">{{
-            client.created
+            client.created_date
           }}</small>
         </td>
         <td class="before:hidden lg:w-1 whitespace-nowrap">

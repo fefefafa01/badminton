@@ -4,8 +4,8 @@
     <div class="back_ground flex min-h-screen items-center justify-center">
       <div class="container">
         <div class="login">
-          <h2>CHÀO MỪNG ĐẾN VỚI BK-</h2>
-          <h2>ECOMERCIAL!</h2>
+          <h2>CHÀO MỪNG ĐẾN VỚI BK-ECOMERCIAL!</h2>
+          <!-- <h2>ECOMERCIAL!</h2> -->
           <br />
           <span>Tài khoản của bạn đã được đăng ký thành công</span>
           <br />
@@ -71,8 +71,6 @@ const redirectToLogin = () => {
 .container {
   width: 100%;
   height: auto;
-  padding-top: 250px;
-  padding-bottom: 70px;
   font-family: 'Comfortaa', Helvetica;
 }
 
@@ -81,13 +79,10 @@ const redirectToLogin = () => {
 }
 
 .login {
-  width: 100%;
-  height: 100%;
   color: white;
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-size: 15px;
   span {
     font-size: 130%;
   }
@@ -99,6 +94,7 @@ const redirectToLogin = () => {
 
 .login h2 {
   color: #45a29e;
+  font-size: 2em;
 }
 
 .login button {
@@ -106,6 +102,7 @@ const redirectToLogin = () => {
   color: white;
   border: solid 1px #45a29e;
   border-radius: 50px;
-  font-size: 100%;
+  width: 150px;
+  height: 50px;  
 }
 </style>

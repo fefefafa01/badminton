@@ -42,14 +42,14 @@ const routes = [
     name: 'forms',
     component: () => import('@/Views/admin/FormsView.vue')
   },
-  // {
-  //   meta: {
-  //     title: 'Profile'
-  //   },
-  //   path: '/profile',
-  //   name: 'profile',
-  //   component: () => import('@/Views/ProfileView.vue')
-  // },
+  {
+    meta: {
+      title: 'Profile'
+    },
+    path: '/admin/profile',
+    name: 'profile',
+    component: () => import('@/Views/admin/ProfileView.vue')
+  },
   {
     meta: {
       title: 'Ui'

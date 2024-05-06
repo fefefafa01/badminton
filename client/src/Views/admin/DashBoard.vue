@@ -23,15 +23,31 @@ import CardBoxClient from '@/components/CardBoxClient.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import SectionBannerStarOnGitHub from '@/components/SectionBannerStarOnGitHub.vue'
+import axios from 'axios'
+import { reactive } from 'vue'
 
 const chartData = ref(null)
+
+const overviewData = reactive({
+  client: 0,
+  admin: 0,
+  court: 0,
+})
 
 const fillChartData = () => {
   chartData.value = chartConfig.sampleChartData()
 }
 
+const countData = async() => {
+  const response = await axios.post('http://localhost:5000/overView/count')
+    overviewData.client = response.data.client
+    overviewData.admin = response.data.admin
+    overviewData.court = response.data.court
+}
+
 onMounted(() => {
   fillChartData()
+  countData()
 })
 
 const mainStore = useMainStore()
@@ -62,30 +78,28 @@ const transactionBarItems = computed(() => mainStore.history)
           trend-type="up"
           color="text-emerald-500"
           :icon="mdiAccountMultiple"
-          :number="512"
-          label="Clients"
+          :number="overviewData.client"
+          label="Customers"
         />
         <CardBoxWidget
           trend="12%"
           trend-type="down"
           color="text-blue-500"
           :icon="mdiCartOutline"
-          :number="7770"
-          prefix="$"
-          label="Sales"
+          :number="overviewData.admin"
+          label="Admins"
         />
         <CardBoxWidget
           trend="Overflow"
           trend-type="alert"
           color="text-red-500"
           :icon="mdiChartTimelineVariant"
-          :number="256"
-          suffix="%"
-          label="Performance"
+          :number="overviewData.court"  
+          label="Courts"
         />
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <!-- <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div class="flex flex-col justify-between">
           <CardBoxTransaction
             v-for="(transaction, index) in transactionBarItems"
@@ -108,11 +122,9 @@ const transactionBarItems = computed(() => mainStore.history)
             :progress="client.progress"
           />
         </div>
-      </div>
-
-      <SectionBannerStarOnGitHub class="mt-6 mb-6" />
-
-      <SectionTitleLineWithButton :icon="mdiChartPie" title="Trends overview">
+      </div> -->
+      
+      <!-- <SectionTitleLineWithButton :icon="mdiChartPie" title="Trends overview">
         <BaseButton :icon="mdiReload" color="whiteDark" @click="fillChartData" />
       </SectionTitleLineWithButton>
 
@@ -120,12 +132,12 @@ const transactionBarItems = computed(() => mainStore.history)
         <div v-if="chartData">
           <line-chart :data="chartData" class="h-96" />
         </div>
-      </CardBox>
+      </CardBox> -->
 
-      <SectionTitleLineWithButton :icon="mdiAccountMultiple" title="Clients" />
+      <SectionTitleLineWithButton :icon="mdiAccountMultiple" title="Customers" />
 
       <NotificationBar color="info" :icon="mdiMonitorCellphone">
-        <b>Responsive table.</b> Collapses on mobile
+        <b>Notification.</b> Collapses on mobile
       </NotificationBar>
 
       <CardBox has-table>

@@ -39,25 +39,6 @@
   </div>
 </template>
 
-<!-- <script setup>
-
-const style = ['white', 'black']
-
-const darkModeStore = useDarkModeStore()
-darkModeStore.set(false)
-
-// Khai báo phương thức handleStyleChange
-const handleStyleChange = (slug) => {
-  document.documentElement.classList.forEach((token) => {
-    if (token.indexOf('style') === 0) {
-      document.documentElement.classList.replace(token, `style-${slug}`)
-    }
-  })
-
-  router.push('/admin/dashboard')
-}
-</script> -->
-
 <script>
 import { defineComponent } from 'vue'
 import axios from 'axios'
@@ -118,10 +99,16 @@ export default defineComponent({
         console.log(response.data)
         if (response.data.loggedIn) {
           localStorage.setItem('loggedIn', true)
-          localStorage.setItem('user_data', response.data)
-          window.location.assign('/home')
+          localStorage.setItem('role', "customer")
+          localStorage.setItem('user_name', response.data.name)
+          localStorage.setItem('user_email', response.data.email)
+          window.location.assign('#/home')
         } else if (response.data.AdminloggedIn) {
-          window.location.assign('/admin')
+          localStorage.setItem('AdminloggedIn', true)
+          localStorage.setItem('role', 'admin')
+          localStorage.setItem('user_name', response.data.name)
+          localStorage.setItem('user_email', response.data.email)
+          window.location.assign('#/admin/dashboard')
         } else {
           this.loggedIn = false
         }
@@ -131,10 +118,10 @@ export default defineComponent({
       }
     },
     redirectToForgetPwd() {
-      window.location.href = 'ForgetPwd'
+      window.location.href = '#/ForgetPwd'
     },
     redirectToRegister() {
-      window.location.href = 'Register'
+      window.location.href = '#/Register'
     },
     
     redirectToAdmin() {

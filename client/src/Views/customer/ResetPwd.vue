@@ -23,18 +23,20 @@
   </div>
 </template>
 
-<!-- 
+
 <script>
 // import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import { defineComponent } from 'vue'
 // import TinTC from "../components/items/TinTC.vue";
+import NavBar from '@/components/global/NavBar.vue'
+import FooterBar from '@/components/global/FooterBar.vue'
 
 export default defineComponent({
   name: 'HeaderLoggin',
-  // components: {
-  //   Splide,
-  //   SplideSlide,
-  // },
+  components: {
+    NavBar,
+    FooterBar,
+  },
   // components: {
   //   TinTC,
   // },
@@ -60,15 +62,6 @@ export default defineComponent({
     }
   }
 })
-</script> -->
-
-<script setup>
-import NavBar from '@/components/global/NavBar.vue'
-import FooterBar from '@/components/global/FooterBar.vue'
-// Phương thức chuyển hướng tới trang Login
-const redirectToLogin = () => {
-  window.location.href = '#/Login'
-}
 </script>
 
 <style lang="scss" scoped>

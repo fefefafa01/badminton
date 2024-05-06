@@ -74,9 +74,8 @@ const menuClick = (event, item) => {
       />
       <slot />
       <FooterBar>
-        Get more with
-        <a href="https://tailwind-vue.justboil.me/" target="_blank" class="text-blue-600"
-          >Premium version</a
+        <a href="http://localhost:5174/BCB/#/home" target="_blank" class="text-blue-600"
+          >BADMINTON COURT BOOKING</a
         >
       </FooterBar>
     </div>

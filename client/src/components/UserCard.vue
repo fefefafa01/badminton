@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useMainStore } from '@/stores/main'
 import { mdiCheckDecagram } from '@mdi/js'
 import BaseLevel from '@/components/BaseLevel.vue'
@@ -10,8 +10,9 @@ import PillTag from '@/components/PillTag.vue'
 
 const mainStore = useMainStore()
 
-const userName = computed(() => mainStore.userName)
-
+const userName = reactive({
+  name: localStorage.getItem('user_name')
+})
 const userSwitchVal = ref(false)
 </script>
 
@@ -30,10 +31,9 @@ const userSwitchVal = ref(false)
           />
         </div>
         <h1 class="text-2xl">
-          Howdy, <b>{{ userName }}</b
+          Hello, <b>{{ userName.name }}</b
           >!
         </h1>
-        <p>Last login <b>12 mins ago</b> from <b>127.0.0.1</b></p>
         <div class="flex justify-center md:block">
           <PillTag label="Verified" color="info" :icon="mdiCheckDecagram" />
         </div>
