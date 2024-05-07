@@ -12,13 +12,13 @@
               <div class="input">
                 <input type="email" placeholder="Số điện thoại/Email" v-model="email" required />
                 <div v-if="loggedIn === false" class="error">
-                  <p>Tên đăng nhập hoặc mật khẩu sai</p>
+                  <p>{{ status }}</p>
                 </div>
               </div>
               <div class="input">
                 <input type="password" placeholder="Mật khẩu" v-model="password" required />
                 <div v-if="loggedIn === false" class="error">
-                  <p>Tên đăng nhập hoặc mật khẩu sai</p>
+                  <p>{{ status }}</p>
                 </div>
                 <span @click="redirectToForgetPwd">Bạn quên mật khẩu?</span>
               </div>
@@ -83,7 +83,8 @@ export default defineComponent({
     return {
       email: '',
       password: '',
-      loggedIn: true
+      loggedIn: true,
+      status: '',
     }
   },
 
@@ -102,15 +103,18 @@ export default defineComponent({
           localStorage.setItem('role', "customer")
           localStorage.setItem('user_name', response.data.name)
           localStorage.setItem('user_email', response.data.email)
+          this.status = response.data.status
           window.location.assign('#/home')
         } else if (response.data.AdminloggedIn) {
           localStorage.setItem('AdminloggedIn', true)
           localStorage.setItem('role', 'admin')
           localStorage.setItem('user_name', response.data.name)
           localStorage.setItem('user_email', response.data.email)
+          this.status = response.data.status
           window.location.assign('#/admin/dashboard')
         } else {
           this.loggedIn = false
+          this.status = response.data.status
         }
       } catch (error) {
         // Handle error
@@ -132,6 +136,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
 .container {
   width: 100%;
   height: auto;
@@ -175,6 +180,8 @@ form {
 .input {
   position: relative;
   margin-bottom: 30px;
+  padding-left: 0;
+
 }
 
 .input input {
@@ -187,6 +194,21 @@ form {
   width: 100%;
   color: white;
   font-size: 1.25em;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border-bottom: solid 1px white;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #1f2833 inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .input input::placeholder {

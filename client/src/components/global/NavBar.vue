@@ -271,7 +271,6 @@ export default {
 }
 .grid-item2 {
   position: relative;
-  margin-left: 3rem;
 }
 .header-loggin .SN-PHM {
   height: 17px !important;

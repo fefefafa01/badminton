@@ -154,20 +154,24 @@ export default {
 
 .item1 {
   background: rgba(69, 162, 158, 0.6);
+  transition: transform 0.5s
 }
 
 .item1:hover {
   z-index: 1;
-  transform: scaleX(1.02); /* Màu nền khi hover */
+  transform: scale(1.05); /* Màu nền khi hover */
+  transition: transform 0.5s;
 }
 
 .item2 {
   background-color: #45a29e;
+  transition: transform 0.5s;
 }
 
 .item2:hover {
   z-index: 1;
-  transform: scaleX(1.02); /* Màu nền khi hover */
+  transform: scale(1.05); /* Màu nền khi hover */
+  transition: transform 0.5s;
 }
 
 .left-part {

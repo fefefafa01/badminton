@@ -1,13 +1,13 @@
 <script setup>
 import { mdiMonitorCellphone, mdiTableBorder, mdiTableOff, mdiGithub } from '@mdi/js'
-import SectionMain from '@/components/SectionMain.vue'
-import NotificationBar from '@/components/NotificationBar.vue'
-import TableSampleClients from '@/components/TableSampleClients.vue'
-import CardBox from '@/components/CardBox.vue'
+import SectionMain from '@/components/admin/SectionMain.vue'
+import NotificationBar from '@/components/admin/NotificationBar.vue'
+import TableSampleClients from '@/components/admin/TableSampleClients.vue'
+import CardBox from '@/components/admin/CardBox.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
-import BaseButton from '@/components/BaseButton.vue'
-import CardBoxComponentEmpty from '@/components/CardBoxComponentEmpty.vue'
+import SectionTitleLineWithButton from '@/components/admin/SectionTitleLineWithButton.vue'
+import BaseButton from '@/components/admin/BaseButton.vue'
+import CardBoxComponentEmpty from '@/components/admin/CardBoxComponentEmpty.vue'
 </script>
 
 <template>

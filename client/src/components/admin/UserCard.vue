@@ -2,11 +2,11 @@
 import { computed, reactive, ref } from 'vue'
 import { useMainStore } from '@/stores/main'
 import { mdiCheckDecagram } from '@mdi/js'
-import BaseLevel from '@/components/BaseLevel.vue'
-import UserAvatarCurrentUser from '@/components/UserAvatarCurrentUser.vue'
-import CardBox from '@/components/CardBox.vue'
-import FormCheckRadio from '@/components/FormCheckRadio.vue'
-import PillTag from '@/components/PillTag.vue'
+import BaseLevel from '@/components/admin/BaseLevel.vue'
+import UserAvatarCurrentUser from '@/components/admin/UserAvatarCurrentUser.vue'
+import CardBox from '@/components/admin/CardBox.vue'
+import FormCheckRadio from '@/components/admin/FormCheckRadio.vue'
+import PillTag from '@/components/admin/PillTag.vue'
 
 const mainStore = useMainStore()
 

@@ -2,12 +2,12 @@
 import { computed, ref, onMounted, reactive } from 'vue'
 import { useMainStore } from '@/stores/main'
 import { mdiEye, mdiTrashCan } from '@mdi/js'
-import CardBoxModal from '@/components/CardBoxModal.vue'
-import TableCheckboxCell from '@/components/TableCheckboxCell.vue'
-import BaseLevel from '@/components/BaseLevel.vue'
-import BaseButtons from '@/components/BaseButtons.vue'
-import BaseButton from '@/components/BaseButton.vue'
-import UserAvatar from '@/components/UserAvatar.vue'
+import CardBoxModal from '@/components/admin/CardBoxModal.vue'
+import TableCheckboxCell from '@/components/admin/TableCheckboxCell.vue'
+import BaseLevel from '@/components/admin/BaseLevel.vue'
+import BaseButtons from '@/components/admin/BaseButtons.vue'
+import BaseButton from '@/components/admin/BaseButton.vue'
+import UserAvatar from '@/components/admin/UserAvatar.vue'
 import axios from 'axios'
 
 defineProps({

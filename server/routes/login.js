@@ -25,6 +25,10 @@ router.post('/', async(req, res) => {
                     res.json({ AdminloggedIn: true, status: "Successful", name: loginInfo[0].name, email: req.body.email});
                     console.log("Successful")
                 }
+                else {
+                    res.json({ AdminloggedIn: false, status: "Wrong Password"});
+                    console.log("Wrong Password:", req.body.password);
+                }
             }
             else {
                 res.json({ loggedIn: false, status: "Wrong Email"});
