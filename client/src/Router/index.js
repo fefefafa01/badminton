@@ -164,6 +164,14 @@ const routes = [
     component: () => import('@/Views/customer/HistorySite.vue')
   },
   {
+    meta: {
+      title: 'About Us'
+    },
+    path: '/aboutUs',
+    name: 'About Us',
+    component: () => import('@/Views/customer/AboutUsSite.vue')
+  },
+  {
     path: '/',
     redirect: '/home'
   }
