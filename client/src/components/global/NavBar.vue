@@ -198,9 +198,6 @@
                 localStorage.setItem('selectedDistrict',selectedLi)
                 this.redirectToListOfCourt();
             },
-            confirmExit(event) {
-                localStorage.removeItem('selectedDistrict');
-            },
             togglePlaceMenu() {
                 this.isMenuVisible = !this.isMenuVisible; // Đảo ngược trạng thái của menu}
             },

@@ -16,6 +16,7 @@ import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 library.add(faUserSecret);
 
 import "./style.css";
+import './controller/localStorageCleanup';
 import App from "./App.vue";
 
 //Vue splide (for slide show)

@@ -3,10 +3,6 @@ import NavBar from "./components/global/NavBar.vue";
 import Foot from "./components/global/Footer.vue";
 // import HomeView from "./Views/HomeView.vue";
 
-// export default {
-//   name: "App",
-//   compatConfig: { MODE: 3 }
-// }
 </script>
 
 <template >

@@ -10,6 +10,7 @@ import ResetPwd from "../Views/ResetPwd.vue";
 import ListOfCourt from "../Views/ListOfCourt.vue";
 import Profile from "../Views/Profile.vue";
 import History from "../Views/History.vue";
+import CourtDetail from "../Views/CourtDetail.vue";
 // import ProductDetail from "../Views/ProductDetail.vue";
 
 const routes = [
@@ -68,6 +69,11 @@ const routes = [
 		path: "/",
 		redirect: "/home",
 	},
+	{
+		path: "/CourtDetail",
+		name: "CourtDetail",
+		component: CourtDetail,
+	}
 ];
 
 const router = createRouter({

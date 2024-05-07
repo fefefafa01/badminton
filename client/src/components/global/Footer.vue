@@ -55,10 +55,6 @@
 </template>
 
 <script>
-  export default {
-    name: "Appfooter",
-    
-  }
 </script>
 
 <style lang="scss" scoped>

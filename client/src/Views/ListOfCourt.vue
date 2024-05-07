@@ -4,7 +4,7 @@
             <span style="font-size: 40px;">Danh sách sân cầu lông</span>    
         </div>
         <div class="container">
-            <div v-for="(item, index) in place" :key="index" :class="{ 'item1': index % 2 === 0, 'item2': index % 2 !== 0 }" @click = "redirectToCourt()" >
+            <div v-for="(item, index) in place" :key="index" :class="{ 'item1': index % 2 === 0, 'item2': index % 2 !== 0 }" @click = "redirectToCourt(item)" >
                 <div class="left-part">
                     <div class="image-container">
                         <img :src= "item.linkimg" alt="CourtBadminton">
@@ -61,11 +61,12 @@
                 // Handle error
                 console.error(error);
                 }
-            },
-            
-            redirectToCourt() {
-                window.location.href = 'pro';
+            },            
+            redirectToCourt(item) {
+                localStorage.setItem('yardDetails', JSON.stringify(item));
+                window.location.href = 'CourtDetail';
             }
+
         }
     };
 </script>
@@ -107,6 +108,7 @@
     display: flex;
     height: 180px;
     width: 1200px;
+    transition: transform 0.15s ease;
 }
 
 .item1 {
