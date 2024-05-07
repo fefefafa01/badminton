@@ -63,6 +63,8 @@ const notifRouter = require("./routes/notif.js");
 const bangtinRouter = require("./routes/bangtin.js");
 const listOfCourtRouter = require("./routes/listOfCourt.js");
 const CourtDetail = require("./routes/CourtDetail.js");
+const changeAdminInfo = require("./routes/changeAdminInfo.js")
+const overView = require("./routes/overView.js")
 
 const app = express();
 app.use(cors());
@@ -76,5 +78,7 @@ app.use("/notif", notifRouter);
 app.use("/bangtin", bangtinRouter);
 app.use("/listOfCourt",listOfCourtRouter);
 app.use("/CourtDetail",CourtDetail)
+app.use("/changeAdminInfo", changeAdminInfo);
+app.use("/overView", overView)
 
 app.listen(port, () => console.log("listening on port " + port));

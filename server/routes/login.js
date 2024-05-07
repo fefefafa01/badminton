@@ -9,7 +9,7 @@ router.post('/', async(req, res) => {
             [req.body.email]);
         if (loginInfo.length > 0) {
             if (req.body.password === loginInfo[0].password) {
-                res.json({ loggedIn: true, status: "Successful"});
+                res.json({ loggedIn: true, status: "Successful", name: loginInfo[0].name, email: req.body.email});
             }
             else {
                 res.json({ loggedIn: false, status: "Wrong Password"});
@@ -22,7 +22,12 @@ router.post('/', async(req, res) => {
                 [req.body.email]);
             if (loginInfo.length > 0) {
                 if (req.body.password === loginInfo[0].password) {
-                    res.json({ AdminloggedIn: true, status: "Successful"});
+                    res.json({ AdminloggedIn: true, status: "Successful", name: loginInfo[0].name, email: req.body.email});
+                    console.log("Successful")
+                }
+                else {
+                    res.json({ AdminloggedIn: false, status: "Wrong Password"});
+                    console.log("Wrong Password:", req.body.password);
                 }
             }
             else {

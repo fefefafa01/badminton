@@ -91,8 +91,8 @@ router.post('/', async(req, res) => {
 
 
         const createNewCustomer = await db.query(
-            `insert into customer (name, customer_id, email, password)
-            values ($1, $2, $3, $4)`,
+            `insert into customer (name, customer_id, email, password, created_date)
+            values ($1, $2, $3, $4, CURRENT_DATE)`,
             [req.body.name, checkid, req.body.email, req.body.password]
         );
         res.json({ registered: true, status: "Successful"});
