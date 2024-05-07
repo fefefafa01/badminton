@@ -11,8 +11,8 @@
           <p>Hướng dẫn sử dụng</p>
           <p>Chính sách bảo mật thông tin</p>
         </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-          <h5 text-uppercase mb-4 font-weight-bold text-warning>VỀ CHÚNG TÔI</h5>
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3" onclick="">
+          <h5 clatext-uppercase mb-4 font-weight-bold text-warning >VỀ CHÚNG TÔI</h5>
           <p>Sản phẩm</p>
           <p>Tin tức</p>
           <p>Hợp tác</p>

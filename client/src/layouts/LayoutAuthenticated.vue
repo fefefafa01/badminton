@@ -9,7 +9,7 @@ import BaseIcon from '@/components/admin/BaseIcon.vue'
 import FormControl from '@/components/admin/FormControl.vue'
 import NavBar from '@/components/admin/NavBar.vue'
 import NavBarItemPlain from '@/components/admin/NavBarItemPlain.vue'
-import AsideMenu from '@/components/admin/admin/AsideMenu.vue'
+import AsideMenu from '@/components/admin/AsideMenu.vue'
 import FooterBar from '@/components/admin/FooterBar.vue'
 
 const layoutAsidePadding = 'xl:pl-60'
