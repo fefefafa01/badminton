@@ -12,7 +12,7 @@ import BaseButton from '@/components/admin/BaseButton.vue'
 import BaseButtons from '@/components/admin/BaseButtons.vue'
 import UserCard from '@/components/admin/UserCard.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
+import SectionTitleLineWithButton from '@/components/admin/SectionTitleLineWithButton.vue'
 import axios from 'axios'
 
 // const mainStore = useMainStore()
