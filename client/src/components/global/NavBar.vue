@@ -199,7 +199,15 @@ export default {
       window.location.href = '#/home'
     },
     redirectToListOfCourt() {
-      window.location.href = '#/ListOfCourt'
+      const currentPath = window.location.hash; // Lấy đường dẫn hiện tại
+      const desiredPath = '#/ListOfCourt'; // Đường dẫn bạn muốn chuyển hướng đến
+
+      // Nếu đường dẫn hiện tại không phải là đường dẫn mà bạn muốn
+      if (currentPath !== desiredPath) {
+        window.location.href = desiredPath; // Chuyển hướng đến đường dẫn mong muốn
+      } else {
+        window.location.reload(); // Tải lại trang nếu đường dẫn hiện tại là đường dẫn bạn muốn
+      }
     },
     redirectToProfile() {
       window.location.href = '#/profile'
@@ -212,8 +220,6 @@ export default {
       this.isLoggedIn = isLoggedIn === 'true'
     },
     updateName(selectedLi) {
-      // this.selectedDistrict = selectedLi;
-      // this.togglePlaceMenu();
       localStorage.setItem('selectedDistrict', selectedLi)
       this.redirectToListOfCourt()
     },

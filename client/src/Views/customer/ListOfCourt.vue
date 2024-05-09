@@ -47,42 +47,6 @@ export default {
   data() {
     return {
       place: [],
-      items: [
-        {
-          imageSrc:
-            'https://sonsanepoxy.vn/wp-content/uploads/2023/07/lap-dat-he-thong-den-chieu-san-cau-long.jpg',
-          courtName: 'Sân cầu lông Thiên Vân',
-          address: '57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh',
-          phoneNumber: '0913 404 924'
-        },
-        {
-          imageSrc: 'https://limosa.vn/wp-content/uploads/2023/08/san-cau-long-cay-keo.jpg',
-          courtName: 'Sân cầu lông ABC',
-          address: '710/53/2, Lũy Bán Bích, Tân Thành, Tân Phú, Thành phố Hồ Chí Minh',
-          phoneNumber: '0983 916 646'
-        },
-        {
-          imageSrc:
-            'https://sieuthicaulong.vn/images/badminton-yard/1688728199_gallery_san-cau-long-tan-phuc-1.jpg',
-          courtName: 'Sân cầu lông Tấn Phúc',
-          address: '36/48 Huỳnh Thiện Lộc, Hoà Thanh, Tân Phú, Thành phố Hồ Chí Minh',
-          phoneNumber: '0903 938 919'
-        },
-        {
-          imageSrc:
-            'https://badmintonw.com/uploads/images/gioi-thieu-san-cau-long-tao-dan-diem-den-li-tuong-cho-long-thu-quan-1-10.png',
-          courtName: 'Sân cầu lông Viettel',
-          address: '57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh',
-          phoneNumber: '0913404924'
-        },
-        {
-          imageSrc: 'https://sieuthicaulong.vn/images/badminton-yard/1688381528_gallery_22.PNG',
-          courtName: 'Sân cầu lông Lam Sơn',
-          address: '320/1 Đ. Trần Bình Trọng, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
-          phoneNumber: '0909 222 958'
-        }
-        // Add more items as needed
-      ]
     }
   },
 
@@ -159,7 +123,7 @@ export default {
 
 .item1:hover {
   z-index: 1;
-  transform: scale(1.05); /* Màu nền khi hover */
+  transform: scaleX(1.02);
   transition: transform 0.5s;
 }
 
@@ -170,7 +134,7 @@ export default {
 
 .item2:hover {
   z-index: 1;
-  transform: scale(1.05); /* Màu nền khi hover */
+  transform: scaleX(1.02);
   transition: transform 0.5s;
 }
 
