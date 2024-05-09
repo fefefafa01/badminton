@@ -3,22 +3,22 @@
     <div class="container text-md-left">
       <div class="row text-md-left">
         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-          <h5 text-uppercase mb-4 font-weight-bold text-warning>Saigon Software</h5>
+          <h5 class="text-uppercase font-weight-bold">Saigon Software</h5>
           <img src="@/assets/images/BCB logo.png" alt="this is logo" height="150" width="150" />
         </div>
         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-          <h5 text-uppercase mb-4 font-weight-bold text-warning>HỖ TRỢ KHÁCH HÀNG</h5>
-          <p>Hướng dẫn sử dụng</p>
-          <p>Chính sách bảo mật thông tin</p>
+          <h5 class="text-uppercase mb-4 font-weight-bold">HỖ TRỢ KHÁCH HÀNG</h5>
+          <p class="footer-item">Hướng dẫn sử dụng</p>
+          <p class="footer-item">Chính sách bảo mật thông tin</p>
         </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3" onclick="">
-          <h5 clatext-uppercase mb-4 font-weight-bold text-warning >VỀ CHÚNG TÔI</h5>
-          <p>Sản phẩm</p>
-          <p>Tin tức</p>
-          <p>Hợp tác</p>
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 ">
+          <h5 class="mb-4 font-weight-bold pe-auto footer-item" @click="redirectToAboutUs">VỀ CHÚNG TÔI</h5>
+          <p class="footer-item">Sản phẩm</p>
+          <p class="footer-item">Tin tức</p>
+          <p class="footer-item">Hợp tác</p>
         </div>
-        <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mt-3">
-          <h5 text-uppercase mb-4 font-weight-bold text-warning>LIÊN HỆ</h5>
+        <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mt-3 ">
+          <h5 class="text-uppercase mb-4 font-weight-bold">LIÊN HỆ</h5>
           <p class="fas fa-home mr-3">268 Lý Thường Kiệt, Phường 14, Quận 10, TP. HCM, Việt Nam</p>
           <p class="fas fa-phone mr-3">02838328228</p>
           <p class="fas fa-envelope mr-3">pthanhtung412@gmail.com</p>
@@ -56,12 +56,29 @@
   </footer>
 </template>
 
+<script>
+  import { defineComponent } from 'vue'
+  export default defineComponent({
+    methods: {
+      redirectToAboutUs() {
+        window.location.href = '#/aboutUs'
+      }
+    }
+  })
+</script>
+
 <style lang="scss" scoped>
 footer {
   background-color: #0b0c10;
   color: #ffffff;
 }
 .copyright {
+  color: #45a29e;
+}
+.footer-item{
+  cursor: pointer;
+}
+.footer-item:hover{
   color: #45a29e;
 }
 </style>

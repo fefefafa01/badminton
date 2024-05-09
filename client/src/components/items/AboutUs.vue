@@ -1,56 +1,23 @@
 <template>
-  <div class="container1">
-    <div class="slider">
-      <Splide :options="options" aria-label="My Favorite Images">
-        <SplideSlide v-for="data in notifData" :key="data.notification_id">
-          <img :src="data.linkimg" :alt="`Sample ${data.notification_id}`" />
-        </SplideSlide>
-      </Splide>
+  <div class="min-h-screen" style="display: flex;">
+      <div class="col-5 d-flex justify-content-center align-items-center txt">
+        <img src="@/assets/images/BCB logo.png" class="img" alt="this is logo" />
+      </div>
+      <div class="col-7 d-flex align-items-baseline aboutUs justify-content-center">
+        <h1 class="txt mb-4">About Us</h1>
+        <p class="txt mb-5">BCB không chỉ là một ứng dụng đơn giản để đặt sân cầu lông, mà còn là một cộng đồng nơi những người yêu thể thao này có thể kết nối, chia sẻ và tạo ra những trải nghiệm độc đáo. Được xây dựng trên nền tảng của sự thuận tiện và tính linh hoạt, BCB giúp người chơi dễ dàng tìm kiếm và đặt sân theo ý muốn, đồng thời cung cấp một môi trường sôi động để trao đổi, học hỏi và phát triển. Với sứ mệnh tạo ra một cộng đồng cầu lông mạnh mẽ và hứa hẹn, BCB không chỉ là một ứng dụng, mà là một phần của cuộc cách mạng thể thao di động.</p>
+        <h2 class="txt mb-2"><b>Phone:</b> 02838328228</h2>
+        <h2 class="txt mb-2"><b>Location:</b> 268 Lý Thường Kiệt, Phường 14, Quận 10, TP. HCM, Việt Nam</h2>
+        <h2 class="txt mb-2"><b>Email:</b> pthanhtung412@gmail.com</h2>
+      </div>
     </div>
-  </div>
-  <div class="BangTin">
-    <p><strong>Bảng Tin</strong></p>
-    <div class="item">
-      <ul v-for="(group, index) in slicedBangTinData" :key="index" class="sampleList">
-        <div v-for="id in group" :key="id.news_id" class="sample">
-          <div class="sampleGroup">
-            <div class="sampleText">
-              <p>{{ id.description }}</p>
-            </div>
-            <img :src="id.linkimg" :alt="`Sample ${id.news_id}`" class="sampleImg" />
-          </div>
-        </div>
-      </ul>
-    </div>
-  </div>
-
-  <div class="ChuThich">
-    <p>Cập nhập thông tin về các sân cầu lông, các khuyến mãi và những sự kiện nổi bật</p>
-  </div>
-  <!-- Danh sach quang cao -->
-  <div class="container">
-    <div class="row">
-      <div class="col">1 of 2</div>
-      <div class="col">2 of 2</div>
-    </div>
-    <div class="row">
-      <div class="col">1 of 3</div>
-      <div class="col">2 of 3</div>
-      <div class="col">3 of 3</div>
-    </div>
-  </div>
 </template>
 
 <script>
-import { Splide, SplideSlide } from '@splidejs/vue-splide'
 import { defineComponent, ref, onMounted } from 'vue'
 import axios from 'axios'
 
 export default defineComponent({
-  components: {
-    Splide,
-    SplideSlide
-  },
 
   setup() {
     const options = {
@@ -87,108 +54,43 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.container1 {
-  width: 100%;
-  height: auto;
-  padding-top: 50px;
-  padding-bottom: 20px;
-}
-.slider {
-  width: 100%;
-  height: 500px;
-}
-.splide__slide img {
-  height: 500px;
-  object-fit: fill;
-  display: block;
-  width: 100%;
-}
-.newProduct {
-  width: 130px;
-  background-color: rgb(2, 154, 2);
-  color: white;
-  border-radius: 10px;
-  text-align: center;
-  font-weight: bold;
-}
-.nameOfProduct {
-  font-weight: bold;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-.accessoryOfProduct {
-  background-color: rgb(166, 166, 166);
-}
-.priceOfProduct {
-  color: red;
-  font-size: larger;
-  font-weight: bold;
-}
-.BangTin {
-  display: flex;
-  color: white;
-  width: 100%;
-  height: auto;
-  font-size: xx-large;
-  justify-content: center;
+.aboutUs{
   flex-direction: column;
-  align-items: center;
-  ul {
-    padding-left: 0;
+  padding-right: 15vw;
+}
+.txt{
+  font-family: 'Comfortaa', Helvetica;
+  color: white;
+}
+h1{
+  font-size: 2em;
+  animation: fadeInUp 1.5s ease-in-out forwards;
+}
+h2{
+  font-size: 1.2em;
+  animation: fadeInUp 1.5s ease-in-out forwards;
+  b{
+    color: #45a29e;
   }
-  .item {
-    width: 100%;
-  }
-  ul.sampleList {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: space-around;
-    .sample {
-      position: relative;
-      height: 320px;
-      width: 260px;
-      text-align: center;
-      .sampleGroup {
-        display: flex;
-        height: 80%;
-        width: 100%;
-        flex-direction: column-reverse;
-        flex-wrap: nowrap;
-        align-items: center;
-        .sampleText {
-          display: flex;
-          flex-direction: column-reverse;
-          flex-wrap: nowrap;
-          justify-content: flex-start;
-          background-color: #e2e2e2;
-          height: 80%;
-          width: 100%;
-          color: #000;
-          font-size: 1.2rem;
-          font-family: 'Comfortaa';
-          position: relative;
-          z-index: 0;
-        }
-      }
-      .sampleImg {
-        scale: 90%;
-        position: absolute;
-        z-index: 1;
-        top: 0;
-      }
-    }
-  }
+}
+p{
+  font-size: 1.2em;
+  animation: fadeInUp 1.5s ease-in-out forwards;
+}
+.img{
+  scale: 200%;
+  border-radius: 50%;
+  animation: fadeInUp 1.5s ease-in-out forwards;
 }
 
-.ChuThich {
-  display: flex;
-  color: white;
-  width: 100%;
-  height: auto;
-  font-size: large;
-  justify-content: center;
-  font-style: italic;
+@keyframes fadeInUp {
+  0% {
+    opacity: 0; /* Bắt đầu với opacity là 0 để ẩn đi */
+    transform: translateY(20px); /* Di chuyển lên trên 20px */
+  }
+  100% {
+    opacity: 1; /* Kết thúc với opacity là 1 để hiển thị */
+    transform: translateY(0); /* Di chuyển về vị trí ban đầu */
+  }
 }
 </style>
