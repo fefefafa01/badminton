@@ -3,8 +3,8 @@ import { computed, ref, onMounted } from 'vue'
 import { useMainStore } from '@/stores/main'
 import {
   mdiAccountMultiple,
-  mdiCartOutline,
-  mdiChartTimelineVariant,
+  mdiCreditCardOutline,
+  mdiBadminton,
   mdiMonitorCellphone,
   mdiReload,
   mdiGithub,
@@ -16,6 +16,8 @@ import SectionMain from '@/components/admin/SectionMain.vue'
 import CardBoxWidget from '@/components/admin/CardBoxWidget.vue'
 import CardBox from '@/components/admin/CardBox.vue'
 import TableSampleClients from '@/components/admin/TableSampleClients.vue'
+import TableCourts from '@/components/admin/TableCourts.vue'
+import TablePayments from '@/components/admin/TablePayments.vue'
 import NotificationBar from '@/components/admin/NotificationBar.vue'
 import BaseButton from '@/components/admin/BaseButton.vue'
 import CardBoxTransaction from '@/components/admin/CardBoxTransaction.vue'
@@ -30,7 +32,7 @@ const chartData = ref(null)
 
 const overviewData = reactive({
   client: 0,
-  admin: 0,
+  payment: 0,
   court: 0,
 })
 
@@ -41,7 +43,7 @@ const fillChartData = () => {
 const countData = async() => {
   const response = await axios.post('http://localhost:5000/overView/count')
     overviewData.client = response.data.client
-    overviewData.admin = response.data.admin
+    overviewData.payment = response.data.payment
     overviewData.court = response.data.court
 }
 
@@ -82,20 +84,20 @@ const transactionBarItems = computed(() => mainStore.history)
           label="Customers"
         />
         <CardBoxWidget
-          trend="12%"
-          trend-type="down"
-          color="text-blue-500"
-          :icon="mdiCartOutline"
-          :number="overviewData.admin"
-          label="Admins"
-        />
-        <CardBoxWidget
           trend="Overflow"
           trend-type="alert"
           color="text-red-500"
-          :icon="mdiChartTimelineVariant"
+          :icon="mdiBadminton"
           :number="overviewData.court"  
-          label="Courts"
+          label="Badminton Yards"
+        />
+        <CardBoxWidget
+          trend="12%"
+          trend-type="down"
+          color="text-blue-500"
+          :icon="mdiCreditCardOutline"
+          :number="overviewData.payment"
+          label="Payments"
         />
       </div>
 
@@ -137,12 +139,25 @@ const transactionBarItems = computed(() => mainStore.history)
       <SectionTitleLineWithButton :icon="mdiAccountMultiple" title="Customers" />
 
       <NotificationBar color="info" :icon="mdiMonitorCellphone">
-        <b>Notification.</b> Collapses on mobile
+        <b>Notification.</b>
       </NotificationBar>
 
       <CardBox has-table>
         <TableSampleClients />
       </CardBox>
+
+      <SectionTitleLineWithButton :icon="mdiBadminton" title="Badminton Yards" />
+
+      <CardBox has-table>
+        <TableCourts />
+      </CardBox>
+
+    <SectionTitleLineWithButton :icon="mdiCreditCardOutline" title="Payments" />
+
+      <CardBox has-table>
+        <TablePayments />
+      </CardBox>
     </SectionMain>
+
   </LayoutAuthenticated>
 </template>
