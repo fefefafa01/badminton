@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, onMounted, reactive } from 'vue'
 import { useMainStore } from '@/stores/main'
-import { mdiEye, mdiTrashCan } from '@mdi/js'
+import { mdiEye, mdiTrashCan, mdiAccountEdit } from '@mdi/js'
 import CardBoxModal from '@/components/admin/CardBoxModal.vue'
 import TableCheckboxCell from '@/components/admin/TableCheckboxCell.vue'
 import BaseLevel from '@/components/admin/BaseLevel.vue'
@@ -83,9 +83,8 @@ const checked = (isChecked, client) => {
 </script>
 
 <template>
-  <CardBoxModal v-model="isModalActive" title="Sample modal">
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
+  <CardBoxModal v-model="isModalActive" title="Customer Information">
+    <input type="text">
   </CardBoxModal>
 
   <CardBoxModal v-model="isModalDangerActive" title="Please confirm" button="danger" has-cancel>
@@ -133,7 +132,7 @@ const checked = (isChecked, client) => {
         </td>
         <td class="before:hidden lg:w-1 whitespace-nowrap">
           <BaseButtons type="justify-start lg:justify-end" no-wrap>
-            <BaseButton color="info" :icon="mdiEye" small @click="isModalActive = true" />
+            <BaseButton color="info" :icon="mdiAccountEdit" small @click="isModalActive = true" />
             <BaseButton
               color="danger"
               :icon="mdiTrashCan"

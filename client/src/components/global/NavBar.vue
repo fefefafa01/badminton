@@ -166,6 +166,7 @@ export default {
   },
 
   created() {
+    this.setupAdminLogin()
     this.checkLoginStatus()
   },
   mounted() {
@@ -191,6 +192,12 @@ export default {
   },
 
   methods: {
+    setupAdminLogin() {
+      const loginAdmin = localStorage.getItem('loginAdmin');
+      if (loginAdmin) {
+        localStorage.setItem('loggedIn', true);
+      }
+    },
     redirectToLogin() {
       // Chuyển hướng đến trang Login
       window.location.href = '#/Login'

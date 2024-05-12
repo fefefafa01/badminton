@@ -10,8 +10,11 @@ import {
   mdiTelevisionGuide,
   mdiResponsive,
   mdiPalette,
-  mdiReact
+  mdiReact,
+  mdiHomeExportOutline 
 } from '@mdi/js'
+
+import logo from '@/assets/images/BCB logo.png'
 
 export default [
   {
@@ -48,6 +51,11 @@ export default [
     to: '/admin/profile',
     label: 'Profile',
     icon: mdiAccountCircle
+  },
+  {
+    to: '/home',
+    icon: mdiHomeExportOutline,
+    label: 'Home',
   },
   // {
   //   to: '/admin/login',
