@@ -101,6 +101,14 @@ const routes = [
   },
   {
     meta: {
+      title: 'CourtDetail'
+    },
+    path: '/CourtDetail',
+    name: 'CourtDetail',
+    component: () => import('@/Views/customer/CourtDetail.vue')
+  },
+  {
+    meta: {
       title: 'Login Page'
     },
     path: '/Login',

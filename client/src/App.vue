@@ -7,7 +7,7 @@ import { RouterView } from 'vue-router'
 // const isAdminPage = computed(() => {
 //   const currentHash = window.location.hash;
 //   return currentHash.includes('#/admin');
-// });z
+// });
 </script>
 
 <template>
