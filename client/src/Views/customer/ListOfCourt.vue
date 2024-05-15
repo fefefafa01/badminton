@@ -11,7 +11,7 @@
           :key="index"
           :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
           class = "w-100"
-          @click="redirectToCourt()"
+          @click="redirectToCourt(item)"
         >
           <div class="left-part">
             <div class="image-container">
@@ -70,8 +70,9 @@ export default {
       }
     },
 
-    redirectToCourt() {
-      window.location.href = 'pro'
+    redirectToCourt(item) {
+      localStorage.setItem('yardDetails', JSON.stringify(item));
+      window.location.href = '#/CourtDetail';
     }
   }
 }
