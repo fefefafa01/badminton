@@ -18,12 +18,12 @@ const table = reactive({
   clientData: []
 })
 
-const tableClient = async() => {
+const tableClient = async () => {
   const response = await axios.post('http://localhost:5000/overView/table')
   console.log(response.data.table)
   table.clientData = response.data.table
-  console.log("table.clientData", table.clientData[0])
-  console.log("table.clientData[0].customer_id", table.clientData[0].customer_id)
+  console.log('table.clientData', table.clientData[0])
+  console.log('table.clientData[0].customer_id', table.clientData[0].customer_id)
 }
 onMounted(() => {
   tableClient()
@@ -84,7 +84,7 @@ const checked = (isChecked, client) => {
 
 <template>
   <CardBoxModal v-model="isModalActive" title="Customer Information">
-    <input type="text">
+    <input type="text" />
   </CardBoxModal>
 
   <CardBoxModal v-model="isModalDangerActive" title="Please confirm" button="danger" has-cancel>

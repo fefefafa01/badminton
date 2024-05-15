@@ -11,7 +11,7 @@ import {
   mdiResponsive,
   mdiPalette,
   mdiReact,
-  mdiHomeExportOutline 
+  mdiHomeExportOutline
 } from '@mdi/js'
 
 import logo from '@/assets/images/BCB logo.png'
@@ -55,8 +55,8 @@ export default [
   {
     to: '/home',
     icon: mdiHomeExportOutline,
-    label: 'Home',
-  },
+    label: 'Home'
+  }
   // {
   //   to: '/admin/login',
   //   label: 'Login',

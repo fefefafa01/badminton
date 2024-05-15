@@ -10,13 +10,13 @@
           <form @submit.prevent="login">
             <div class="form-group">
               <div class="input">
-                <input type="email" placeholder="Số điện thoại/Email" v-model="email" required />
+                <input v-model="email" type="email" placeholder="Số điện thoại/Email" required />
                 <div v-if="loggedIn === false" class="error">
                   <p>{{ status }}</p>
                 </div>
               </div>
               <div class="input">
-                <input type="password" placeholder="Mật khẩu" v-model="password" required />
+                <input v-model="password" type="password" placeholder="Mật khẩu" required />
                 <div v-if="loggedIn === false" class="error">
                   <p>{{ status }}</p>
                 </div>
@@ -84,7 +84,7 @@ export default defineComponent({
       email: '',
       password: '',
       loggedIn: true,
-      status: '',
+      status: ''
     }
   },
 
@@ -100,7 +100,7 @@ export default defineComponent({
         console.log(response.data)
         if (response.data.loggedIn) {
           localStorage.setItem('loggedIn', true)
-          localStorage.setItem('role', "customer")
+          localStorage.setItem('role', 'customer')
           localStorage.setItem('user_name', response.data.name)
           localStorage.setItem('user_email', response.data.email)
           this.status = response.data.status
@@ -127,16 +127,15 @@ export default defineComponent({
     redirectToRegister() {
       window.location.href = '#/Register'
     },
-    
+
     redirectToAdmin() {
       this.handleStyleChange(this.style)
-    },
+    }
   }
 })
 </script>
 
 <style lang="scss" scoped>
-
 .container {
   width: 100%;
   height: auto;
@@ -181,7 +180,6 @@ form {
   position: relative;
   margin-bottom: 30px;
   padding-left: 0;
-
 }
 
 .input input {
@@ -197,7 +195,7 @@ form {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,

@@ -33,18 +33,18 @@ const chartData = ref(null)
 const overviewData = reactive({
   client: 0,
   payment: 0,
-  court: 0,
+  court: 0
 })
 
 const fillChartData = () => {
   chartData.value = chartConfig.sampleChartData()
 }
 
-const countData = async() => {
+const countData = async () => {
   const response = await axios.post('http://localhost:5000/overView/count')
-    overviewData.client = response.data.client
-    overviewData.payment = response.data.payment
-    overviewData.court = response.data.court
+  overviewData.client = response.data.client
+  overviewData.payment = response.data.payment
+  overviewData.court = response.data.court
 }
 
 onMounted(() => {
@@ -88,7 +88,7 @@ const transactionBarItems = computed(() => mainStore.history)
           trend-type="alert"
           color="text-red-500"
           :icon="mdiBadminton"
-          :number="overviewData.court"  
+          :number="overviewData.court"
           label="Badminton Yards"
         />
         <CardBoxWidget
@@ -125,7 +125,7 @@ const transactionBarItems = computed(() => mainStore.history)
           />
         </div>
       </div> -->
-      
+
       <!-- <SectionTitleLineWithButton :icon="mdiChartPie" title="Trends overview">
         <BaseButton :icon="mdiReload" color="whiteDark" @click="fillChartData" />
       </SectionTitleLineWithButton>
@@ -152,12 +152,11 @@ const transactionBarItems = computed(() => mainStore.history)
         <TableCourts />
       </CardBox>
 
-    <SectionTitleLineWithButton :icon="mdiCreditCardOutline" title="Payments" />
+      <SectionTitleLineWithButton :icon="mdiCreditCardOutline" title="Payments" />
 
       <CardBox has-table>
         <TablePayments />
       </CardBox>
     </SectionMain>
-
   </LayoutAuthenticated>
 </template>

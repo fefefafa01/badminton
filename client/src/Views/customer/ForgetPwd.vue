@@ -64,7 +64,7 @@ export default defineComponent({
   name: 'HeaderLoggin',
   components: {
     NavBar,
-    FooterBar,
+    FooterBar
   },
   // components: {
   //   TinTC,
@@ -92,7 +92,6 @@ export default defineComponent({
   }
 })
 </script>
-
 
 <style lang="scss" scoped>
 .container {

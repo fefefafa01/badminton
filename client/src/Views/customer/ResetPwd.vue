@@ -23,7 +23,6 @@
   </div>
 </template>
 
-
 <script>
 // import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import { defineComponent } from 'vue'
@@ -35,7 +34,7 @@ export default defineComponent({
   name: 'HeaderLoggin',
   components: {
     NavBar,
-    FooterBar,
+    FooterBar
   },
   // components: {
   //   TinTC,

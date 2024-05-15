@@ -11,13 +11,15 @@
           <p class="footer-item">Hướng dẫn sử dụng</p>
           <p class="footer-item">Chính sách bảo mật thông tin</p>
         </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 ">
-          <h5 class="mb-4 font-weight-bold pe-auto footer-item" @click="redirectToAboutUs">VỀ CHÚNG TÔI</h5>
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="mb-4 font-weight-bold pe-auto footer-item" @click="redirectToAboutUs">
+            VỀ CHÚNG TÔI
+          </h5>
           <p class="footer-item">Sản phẩm</p>
           <p class="footer-item">Tin tức</p>
           <p class="footer-item">Hợp tác</p>
         </div>
-        <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mt-3 ">
+        <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mt-3">
           <h5 class="text-uppercase mb-4 font-weight-bold">LIÊN HỆ</h5>
           <p class="fas fa-home mr-3">268 Lý Thường Kiệt, Phường 14, Quận 10, TP. HCM, Việt Nam</p>
           <p class="fas fa-phone mr-3">02838328228</p>
@@ -57,14 +59,14 @@
 </template>
 
 <script>
-  import { defineComponent } from 'vue'
-  export default defineComponent({
-    methods: {
-      redirectToAboutUs() {
-        window.location.href = '#/aboutUs'
-      }
+import { defineComponent } from 'vue'
+export default defineComponent({
+  methods: {
+    redirectToAboutUs() {
+      window.location.href = '#/aboutUs'
     }
-  })
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -75,10 +77,10 @@ footer {
 .copyright {
   color: #45a29e;
 }
-.footer-item{
+.footer-item {
   cursor: pointer;
 }
-.footer-item:hover{
+.footer-item:hover {
   color: #45a29e;
 }
 </style>

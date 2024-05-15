@@ -18,12 +18,12 @@ const table = reactive({
   clientData: []
 })
 
-const tableClient = async() => {
+const tableClient = async () => {
   const response = await axios.post('http://localhost:5000/overView/tablePayments')
   console.log(response.data.table)
   table.clientData = response.data.table
-  console.log("table.clientData", table.clientData[0])
-  console.log("table.clientData[0].yard_id", table.clientData[0].yard_id)
+  console.log('table.clientData', table.clientData[0])
+  console.log('table.clientData[0].yard_id', table.clientData[0].yard_id)
 }
 onMounted(() => {
   tableClient()
@@ -117,7 +117,7 @@ const checked = (isChecked, client) => {
           {{ client.owner_name }}
         </td>
         <td data-label="Payment">
-          {{ client.total_cost}}
+          {{ client.total_cost }}
         </td>
         <td class="before:hidden lg:w-1 whitespace-nowrap">
           <BaseButtons type="justify-start lg:justify-end" no-wrap>

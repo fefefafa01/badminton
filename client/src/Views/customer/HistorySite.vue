@@ -40,7 +40,8 @@
         <div
           v-for="(item, index) in items"
           :key="index"
-          :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
+          :class="{ item1: index % 2 === 0, item2: index % 2 !== 0}"
+          class = "w-100"
         >
           <div class="left-part">
             <div class="image-container">
@@ -74,8 +75,8 @@ import FooterBar from '@/components/global/FooterBar.vue'
 
 export default defineComponent({
   components: {
-      NavBar, 
-      FooterBar,
+    NavBar,
+    FooterBar
   },
 
   setup() {
@@ -319,7 +320,14 @@ export default defineComponent({
 .item2 {
   display: flex;
   height: 180px;
-  width: 1200px;
+  max-width: 1200px;
+  transition: transform 0.5s;
+}
+
+.item1:hover,
+.item2:hover {
+  transform: scaleX(1.02);
+  transition: transform 0.5s;
 }
 
 .item1 {

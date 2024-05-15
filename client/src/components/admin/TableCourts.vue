@@ -18,12 +18,12 @@ const table = reactive({
   clientData: []
 })
 
-const tableClient = async() => {
+const tableClient = async () => {
   const response = await axios.post('http://localhost:5000/overView/tableYards')
   console.log(response.data.table)
   table.clientData = response.data.table
-  console.log("table.clientData", table.clientData[0])
-  console.log("table.clientData[0].yard_id", table.clientData[0].yard_id)
+  console.log('table.clientData', table.clientData[0])
+  console.log('table.clientData[0].yard_id', table.clientData[0].yard_id)
 }
 onMounted(() => {
   tableClient()
@@ -118,14 +118,19 @@ const checked = (isChecked, client) => {
           {{ client.address }}
         </td>
         <td data-label="Phone">
-          {{ client.phone_num}}
+          {{ client.phone_num }}
         </td>
         <td data-label="Owner">
           {{ client.owner_name }}
         </td>
         <td class="before:hidden lg:w-1 whitespace-nowrap">
           <BaseButtons type="justify-start lg:justify-end" no-wrap>
-            <BaseButton color="info" :icon="mdiCircleEditOutline" small @click="isModalActive = true" />
+            <BaseButton
+              color="info"
+              :icon="mdiCircleEditOutline"
+              small
+              @click="isModalActive = true"
+            />
             <BaseButton
               color="danger"
               :icon="mdiTrashCan"

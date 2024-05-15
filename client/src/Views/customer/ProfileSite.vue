@@ -10,25 +10,25 @@
             <h3>Khoa</h3>
           </div>
           <div :class="['profile-bar', { 'open-menu': isMenuOpen }]">
-            <a href="#" @click="redirectToProfile">
+            <div @click="redirectToProfile">
               <img src="@/assets/images/Profile.png" alt="user-img" />
               <span>Thông tin chung</span>
-            </a>
+            </div>
             <hr />
-            <a href="#" @click="redirectToHistory">
+            <div @click="redirectToHistory">
               <img src="@/assets/images/history.png" alt="user-img" />
               <span>Lịch sử đặt sân</span>
-            </a>
+            </div>
             <hr />
-            <a href="#">
+            <div>
               <img src="@/assets/images/Change_password.png" alt="user-img" />
               <span>Đổi mật khẩu</span>
-            </a>
+            </div>
             <hr />
-            <a href="#" @click="logout">
+            <div @click="logout">
               <img src="@/assets/images/Logout.png" alt="user-img" />
               <span>Thoát</span>
-            </a>
+            </div>
           </div>
         </div>
       </div>

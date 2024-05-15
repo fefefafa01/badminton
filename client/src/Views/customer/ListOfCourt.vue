@@ -10,6 +10,7 @@
           v-for="(item, index) in place"
           :key="index"
           :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
+          class = "w-100"
           @click="redirectToCourt()"
         >
           <div class="left-part">
@@ -46,7 +47,7 @@ export default {
   },
   data() {
     return {
-      place: [],
+      place: []
     }
   },
 
@@ -113,12 +114,12 @@ export default {
   z-index: 0;
   display: flex;
   height: 180px;
-  width: 1200px;
+  max-width: 1200px;
 }
 
 .item1 {
   background: rgba(69, 162, 158, 0.6);
-  transition: transform 0.5s
+  transition: transform 0.5s;
 }
 
 .item1:hover {

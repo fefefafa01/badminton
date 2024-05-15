@@ -51,7 +51,7 @@ import FooterBar from '@/components/global/FooterBar.vue'
 export default defineComponent({
   components: {
     NavBar,
-    FooterBar,
+    FooterBar
   },
   setup() {
     const options = {

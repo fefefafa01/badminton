@@ -1,7 +1,7 @@
 <template>
   <div class="header-loggin">
     <div class="navbar">
-      <div type="button" @click="redirectToHomepage" class="grid-item1">
+      <div type="button" class="grid-item1" @click="redirectToHomepage">
         <img
           style="height: 100px"
           class="img"
@@ -12,10 +12,10 @@
 
       <TinTC
         type="button"
-        @click="redirectToHomepage"
         class="grid-item2"
-        divClassName="TIN-t-c-instance phuc_nav"
+        div-class-name="TIN-t-c-instance phuc_nav"
         text="Trang chủ"
+        @click="redirectToHomepage"
       />
 
       <!-- type="button" @click="redirectToListOfCourt" -->
@@ -45,7 +45,7 @@
           <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
           <div class="ch-nh-t">
             <div>{{ selectedDayOfWeek }}</div>
-            <input class="datepick" type="text" v-model="mytime" placeholder="Ngày tháng" />
+            <input v-model="mytime" class="datepick" type="text" placeholder="Ngày tháng" />
           </div>
         </div>
         <div class="frame-3 phuc_nav" type="button" @click="redirectToListOfCourt">
@@ -66,7 +66,7 @@
       <TinTC
         type="button"
         class="design-component-instance-node"
-        divClassName="SN-PHM-2 phuc_nav"
+        div-class-name="SN-PHM-2 phuc_nav"
         text="Tham gia vào sân cầu lông"
       />
       <div class="group-wrapper">
@@ -87,25 +87,25 @@
               <div class="sub-menu">
                 <div class="user-info">
                   <img src="../../assets/images/TAI KHOAN.png" alt="this is logo" />
-                  <h3>Khoa</h3>
+                  <h3>{{ userName }}</h3>
                 </div>
                 <hr />
 
-                <a href="#" class="sub-menu-link" @click="redirectToProfile">
+                <div class="sub-menu-link" @click="redirectToProfile">
                   <img src="../../assets/images/Profile.png" alt="" />
                   <span class="p">Trang cá nhân</span>
                   <span class="trans">></span>
-                </a>
-                <a href="#" class="sub-menu-link" @click="redirectToHistory">
+                </div>
+                <div class="sub-menu-link" @click="redirectToHistory">
                   <img src="../../assets/images/history.png" alt="" />
                   <span class="p">Lịch sử đặt sân</span>
                   <span class="trans">></span>
-                </a>
-                <a href="#" class="sub-menu-link" @click="logout">
+                </div>
+                <div class="sub-menu-link" @click="logout">
                   <img src="../../assets/images/Logout.png" alt="" />
                   <span class="p">Logout</span>
                   <span class="trans">></span>
-                </a>
+                </div>
               </div>
             </div>
           </div>
@@ -161,12 +161,12 @@ export default {
       selectedDistrict: '',
       searchInp: null,
       mytime: null,
-      selectedDayOfWeek: null
+      selectedDayOfWeek: null,
+      userName: localStorage.getItem('user_name'),
     }
   },
 
   created() {
-    this.setupAdminLogin()
     this.checkLoginStatus()
   },
   mounted() {
@@ -192,12 +192,6 @@ export default {
   },
 
   methods: {
-    setupAdminLogin() {
-      const loginAdmin = localStorage.getItem('loginAdmin');
-      if (loginAdmin) {
-        localStorage.setItem('loggedIn', true);
-      }
-    },
     redirectToLogin() {
       // Chuyển hướng đến trang Login
       window.location.href = '#/Login'
@@ -206,25 +200,43 @@ export default {
       window.location.href = '#/home'
     },
     redirectToListOfCourt() {
-      const currentPath = window.location.hash; // Lấy đường dẫn hiện tại
-      const desiredPath = '#/ListOfCourt'; // Đường dẫn bạn muốn chuyển hướng đến
+      const currentPath = window.location.hash // Lấy đường dẫn hiện tại
+      const desiredPath = '#/ListOfCourt' // Đường dẫn bạn muốn chuyển hướng đến
 
       // Nếu đường dẫn hiện tại không phải là đường dẫn mà bạn muốn
       if (currentPath !== desiredPath) {
-        window.location.href = desiredPath; // Chuyển hướng đến đường dẫn mong muốn
+        window.location.href = desiredPath // Chuyển hướng đến đường dẫn mong muốn
       } else {
-        window.location.reload(); // Tải lại trang nếu đường dẫn hiện tại là đường dẫn bạn muốn
+        window.location.reload() // Tải lại trang nếu đường dẫn hiện tại là đường dẫn bạn muốn
       }
     },
     redirectToProfile() {
-      window.location.href = '#/profile'
+      // window.location.href = '#/profile'
+      const currentPath = window.location.hash;
+      const desiredPath = '#/profile';
+
+      if(currentPath !== desiredPath) {
+        window.location.href = desiredPath;
+      } 
+      else {
+        window.location.reload();
+      }
     },
     redirectToHistory() {
       window.location.href = '#/History'
     },
     checkLoginStatus() {
       const isLoggedIn = localStorage.getItem('loggedIn')
-      this.isLoggedIn = isLoggedIn === 'true'
+      const isAdminLoggedIn = localStorage.getItem('AdminloggedIn')
+      if (isLoggedIn !== null){
+        this.isLoggedIn = isLoggedIn
+      }
+      else if (isAdminLoggedIn !== null){
+        this.isLoggedIn = isAdminLoggedIn
+      }
+      else {
+        this.isLoggedIn = false
+      }
     },
     updateName(selectedLi) {
       localStorage.setItem('selectedDistrict', selectedLi)
@@ -249,6 +261,7 @@ export default {
     },
     logout() {
       localStorage.removeItem('loggedIn')
+      localStorage.removeItem('AdminloggedIn ')
       window.location.href = '#/home'
     }
   }

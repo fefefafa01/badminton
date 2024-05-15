@@ -31,7 +31,7 @@ const asideLgCloseClick = (event) => {
 }
 
 const handleLogout = () => {
-  localStorage.removeItem('AdminloggedIn');
+  localStorage.removeItem('AdminloggedIn')
 }
 </script>
 
@@ -56,8 +56,8 @@ const handleLogout = () => {
       </div>
 
       <ul>
-        <AsideMenuItem :item="logoutItem" @menu-click="menuClick" @click="handleLogout"/>
-      </ul> 
+        <AsideMenuItem :item="logoutItem" @menu-click="menuClick" @click="handleLogout" />
+      </ul>
     </div>
   </aside>
 </template>
