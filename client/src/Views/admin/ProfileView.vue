@@ -18,8 +18,8 @@ import axios from 'axios'
 // const mainStore = useMainStore()
 
 const profileForm = reactive({
-  name: localStorage.getItem("user_name"),
-  email: localStorage.getItem("user_email"),
+  name: localStorage.getItem('user_name'),
+  email: localStorage.getItem('user_email')
 })
 
 const passwordForm = reactive({
@@ -28,12 +28,12 @@ const passwordForm = reactive({
   password_confirmation: ''
 })
 
-const submitProfile = async() => {
+const submitProfile = async () => {
   const response = await axios.post('http://localhost:5000/changeAdminInfo/info', {
     curName: localStorage.getItem('user_name'),
     curEmail: localStorage.getItem('user_email'),
     name: profileForm.name,
-    email: profileForm.email,
+    email: profileForm.email
   })
   if (response.data.changed) {
     localStorage.setItem('user_name', response.data.name)
@@ -45,16 +45,15 @@ const submitProfile = async() => {
   window.location.reload()
 }
 
-const submitPass = async() => {
+const submitPass = async () => {
   await axios.post('http://localhost:5000/changeAdminInfo/password', {
     curPass: passwordForm.password_current,
     password: passwordForm.password,
     email: localStorage.getItem('user_email'),
-    name: localStorage.getItem('user_name'),
-  })  
+    name: localStorage.getItem('user_name')
+  })
   window.location.reload()
 }
-
 </script>
 
 <template>
@@ -87,7 +86,7 @@ const submitPass = async() => {
               name="username"
               required
               autocomplete="username"
-              style = "padding-left: 2.5rem !important;"
+              style="padding-left: 2.5rem !important"
             />
           </FormField>
           <FormField label="E-mail" help="Required. Your e-mail">
@@ -98,13 +97,13 @@ const submitPass = async() => {
               name="email"
               required
               autocomplete="email"
-              style = "padding-left: 2.5rem !important;"
+              style="padding-left: 2.5rem !important"
             />
           </FormField>
 
           <template #footer>
             <BaseButtons>
-              <BaseButton color="info" type="submit" label="Change"/>
+              <BaseButton color="info" type="submit" label="Change" />
             </BaseButtons>
           </template>
         </CardBox>
@@ -118,7 +117,7 @@ const submitPass = async() => {
               type="password"
               required
               autocomplete="current-password"
-              style = "padding-left: 2.5rem !important;"
+              style="padding-left: 2.5rem !important"
             />
           </FormField>
 
@@ -132,7 +131,7 @@ const submitPass = async() => {
               type="password"
               required
               autocomplete="new-password"
-              style = "padding-left: 2.5rem !important;"
+              style="padding-left: 2.5rem !important"
             />
           </FormField>
 
@@ -144,7 +143,7 @@ const submitPass = async() => {
               type="password"
               required
               autocomplete="new-password"
-              style = "padding-left: 2.5rem !important;"
+              style="padding-left: 2.5rem !important"
             />
           </FormField>
 

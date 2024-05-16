@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, onMounted, reactive } from 'vue'
 import { useMainStore } from '@/stores/main'
-import { mdiEye, mdiTrashCan, mdiAccountEdit } from '@mdi/js'
+import { mdiEye, mdiTrashCan, mdiCheckOutline } from '@mdi/js'
 import CardBoxModal from '@/components/admin/CardBoxModal.vue'
 import TableCheckboxCell from '@/components/admin/TableCheckboxCell.vue'
 import BaseLevel from '@/components/admin/BaseLevel.vue'
@@ -19,11 +19,11 @@ const table = reactive({
 })
 
 const tableClient = async () => {
-  const response = await axios.post('http://localhost:5000/overView/table')
+  const response = await axios.post('http://localhost:5000/overView/tablePayments')
   console.log(response.data.table)
   table.clientData = response.data.table
   console.log('table.clientData', table.clientData[0])
-  console.log('table.clientData[0].customer_id', table.clientData[0].customer_id)
+  console.log('table.clientData[0].yard_id', table.clientData[0].yard_id)
 }
 onMounted(() => {
   tableClient()
@@ -83,8 +83,9 @@ const checked = (isChecked, client) => {
 </script>
 
 <template>
-  <CardBoxModal v-model="isModalActive" title="Customer Information">
-    <input type="text" />
+  <CardBoxModal v-model="isModalActive" title="Payment Information">
+    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
+    <p>This is sample modal</p>
   </CardBoxModal>
 
   <CardBoxModal v-model="isModalDangerActive" title="Please confirm" button="danger" has-cancel>
@@ -97,11 +98,9 @@ const checked = (isChecked, client) => {
       <tr>
         <th v-if="checkable" />
         <th />
-        <th>Name</th>
-        <th>Email</th>
-        <!-- <th>City</th>
-        <th>Progress</th> -->
-        <th>Created Date</th>
+        <th>Customer</th>
+        <th>Owner</th>
+        <th>Payment</th>
         <th />
       </tr>
     </thead>
@@ -111,28 +110,17 @@ const checked = (isChecked, client) => {
         <td class="border-b-0 lg:w-6 before:hidden">
           <UserAvatar :username="client.name" class="w-24 h-24 mx-auto lg:w-6 lg:h-6" />
         </td>
-        <td data-label="Name">
+        <td data-label="Customer">
           {{ client.name }}
         </td>
-        <td data-label="Email">
-          {{ client.email }}
+        <td data-label="Owner">
+          {{ client.owner_name }}
         </td>
-        <!-- <td data-label="City">
-          {{ client.city }}
-        </td> -->
-        <!-- <td data-label="Progress" class="lg:w-32">
-          <progress class="flex w-2/5 self-center lg:w-full" max="100" :value="client.progress">
-            {{ client.progress }}
-          </progress>
-        </td> -->
-        <td data-label="Created Date" class="lg:w-1 whitespace-nowrap">
-          <small class="text-gray-500 dark:text-slate-400" :title="client.created">{{
-            client.created_date
-          }}</small>
+        <td data-label="Payment">
+          {{ client.total_cost }}
         </td>
         <td class="before:hidden lg:w-1 whitespace-nowrap">
           <BaseButtons type="justify-start lg:justify-end" no-wrap>
-            <BaseButton color="info" :icon="mdiAccountEdit" small @click="isModalActive = true" />
             <BaseButton
               color="danger"
               :icon="mdiTrashCan"

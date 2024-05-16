@@ -29,6 +29,10 @@ const menuClick = (event, item) => {
 const asideLgCloseClick = (event) => {
   emit('aside-lg-close-click', event)
 }
+
+const handleLogout = () => {
+  localStorage.removeItem('AdminloggedIn')
+}
 </script>
 
 <template>
@@ -39,7 +43,7 @@ const asideLgCloseClick = (event) => {
     <div class="aside lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900">
       <div class="aside-brand flex flex-row h-14 items-center justify-between dark:bg-slate-900">
         <div class="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0">
-          <b class="font-black">One</b>
+          <b class="font-black">BCB</b>
         </div>
         <button class="hidden lg:inline-block xl:hidden p-3" @click.prevent="asideLgCloseClick">
           <BaseIcon :path="mdiClose" />
@@ -52,7 +56,7 @@ const asideLgCloseClick = (event) => {
       </div>
 
       <ul>
-        <AsideMenuItem :item="logoutItem" @menu-click="menuClick" />
+        <AsideMenuItem :item="logoutItem" @menu-click="menuClick" @click="handleLogout" />
       </ul>
     </div>
   </aside>

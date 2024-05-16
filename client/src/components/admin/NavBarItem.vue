@@ -48,6 +48,8 @@ const itemLabel = computed(() =>
   props.item.isCurrentUser ? useMainStore().userName : props.item.label
 )
 
+const userName = localStorage.getItem('user_name')
+
 const isDropdownActive = ref(false)
 
 const menuClick = (event) => {
@@ -108,7 +110,7 @@ onBeforeUnmount(() => {
       <span
         class="px-2 transition-colors"
         :class="{ 'lg:hidden': item.isDesktopNoLabel && item.icon }"
-        >{{ itemLabel }}</span
+        >{{ userName }}</span
       >
       <BaseIcon
         v-if="item.menu"

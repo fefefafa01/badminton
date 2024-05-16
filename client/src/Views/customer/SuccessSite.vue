@@ -103,6 +103,6 @@ const redirectToLogin = () => {
   border: solid 1px #45a29e;
   border-radius: 50px;
   width: 150px;
-  height: 50px;  
+  height: 50px;
 }
 </style>

@@ -10,7 +10,8 @@
           v-for="(item, index) in place"
           :key="index"
           :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
-          @click="redirectToCourt()"
+          class = "w-100"
+          @click="redirectToCourt(item)"
         >
           <div class="left-part">
             <div class="image-container">
@@ -46,7 +47,7 @@ export default {
   },
   data() {
     return {
-      place: [],
+      place: []
     }
   },
 
@@ -69,8 +70,9 @@ export default {
       }
     },
 
-    redirectToCourt() {
-      window.location.href = 'pro'
+    redirectToCourt(item) {
+      localStorage.setItem('yardDetails', JSON.stringify(item));
+      window.location.href = '#/CourtDetail';
     }
   }
 }
@@ -113,12 +115,12 @@ export default {
   z-index: 0;
   display: flex;
   height: 180px;
-  width: 1200px;
+  max-width: 1200px;
 }
 
 .item1 {
   background: rgba(69, 162, 158, 0.6);
-  transition: transform 0.5s
+  transition: transform 0.5s;
 }
 
 .item1:hover {
