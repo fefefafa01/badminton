@@ -103,7 +103,7 @@
                 </div>
                 <div class="sub-menu-link" @click="logout">
                   <img src="../../assets/images/Logout.png" alt="" />
-                  <span class="p">Logout</span>
+                  <span class="p">Đăng xuất</span>
                   <span class="trans">></span>
                 </div>
               </div>
@@ -260,10 +260,25 @@ export default {
       this.isSubMenuOpen = !this.isSubMenuOpen
     },
     logout() {
-      localStorage.removeItem('loggedIn')
-      localStorage.removeItem('AdminloggedIn ')
-      window.location.href = '#/home'
-    }
+      const currentPath = window.location.hash
+      const desiredPath = '#/home' 
+      const isLoggedIn = localStorage.getItem('loggedIn')
+      const isAdminLoggedIn = localStorage.getItem('AdminloggedIn')
+      if (isLoggedIn !== null){
+        localStorage.removeItem('loggedIn')
+      }
+      else if (isAdminLoggedIn !== null){
+        localStorage.removeItem('AdminloggedIn')
+      }
+      this.isLoggedIn = false
+
+      if (currentPath !== desiredPath) {
+        window.location.href = desiredPath
+      }
+      else {
+        window.location.reload()
+      }
+    } 
   }
 }
 </script>

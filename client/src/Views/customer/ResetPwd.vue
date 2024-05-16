@@ -5,15 +5,22 @@
       <div class="container">
         <div class="login">
           <h2>ĐẶT LẠI MẬT KHẨU</h2>
-          <form>
+          <form @submit.prevent="login">
             <div class="form-group">
-              <input v-model="email" type="email" placeholder="・・・・・" required />
-              <span>Mật khẩu tối thiểu 8 ký tự bao gồm cả chữ và số</span>
-              <br />
-              <input v-model="email" type="email" placeholder="・・・・・" required />
-              <br />
-              <br />
-              <button @click="redirectToLogin">HOÀN THÀNH</button>
+              <div class="input">
+                <input v-model="email" type="email" placeholder="Số điện thoại/Email" required />
+                <div v-if="loggedIn === false" class="error">
+                  <p>{{ status }}</p>
+                </div>
+              </div>
+              <div class="input">
+                <input v-model="password" type="password" placeholder="Mật khẩu" required />
+                <div v-if="loggedIn === false" class="error">
+                  <p>{{ status }}</p>
+                </div>
+                <span @click="redirectToForgetPwd">Bạn quên mật khẩu?</span>
+              </div>
+              <button type="submit">ĐĂNG NHẬP</button>
             </div>
           </form>
         </div>
@@ -94,37 +101,78 @@ export default defineComponent({
   color: #45a29e;
 }
 
+form {
+  width: 500px;
+}
 .form-group {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 15%;
+  padding-top: 20px;
 }
 
-.form-group input {
+.input {
+  position: relative;
+  margin-bottom: 30px;
+  padding-left: 0;
+}
+
+.input input {
+  position: relative;
   align-self: center;
   background-color: #1f2833;
   border: none;
+  outline: none;
   border-bottom: solid 1px white;
-  width: 150%;
+  width: 100%;
+  color: white;
+  font-size: 1.25em;
 }
 
-.form-group input::placeholder {
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border-bottom: solid 1px white;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #1f2833 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.input input::placeholder {
   color: white;
 }
 
-.form-group span {
-  width: 125%;
-  display: flex;
-  justify-content: flex-end;
-  color: white;
+.input span {
+  top: 100%;
+  position: absolute;
+  right: 0;
+  color: #45a29e;
   cursor: pointer;
+  font-size: 1.25em;
+}
+
+.error {
+  font-family: 'Comfortaa', Helvetica;
+  position: absolute;
+  top: 100%;
+  color: red;
+  font-size: 1.1em;
 }
 
 .form-group button {
+  margin-top: 30px;
   background-color: #1f2833;
   color: white;
   border: solid 1px #45a29e;
   border-radius: 50px;
+  height: 50px;
+  font-size: 1.25em;
 }
+
 </style>
