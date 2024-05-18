@@ -10,22 +10,22 @@
             <h3>Khoa</h3>
           </div>
           <div :class="['profile-bar', { 'open-menu': isMenuOpen }]">
-            <div @click="redirectToProfile">
+            <div class="item" @click="redirectToProfile">
               <img src="@/assets/images/Profile.png" alt="user-img" />
               <span>Thông tin chung</span>
             </div>
             <hr />
-            <div @click="redirectToHistory">
+            <div class="item" @click="redirectToHistory">
               <img src="@/assets/images/history.png" alt="user-img" />
               <span>Lịch sử đặt sân</span>
             </div>
             <hr />
-            <div>
+            <div class="item">
               <img src="@/assets/images/Change_password.png" alt="user-img" />
               <span>Đổi mật khẩu</span>
             </div>
             <hr />
-            <div @click="logout">
+            <div class="item" @click="logout">
               <img src="@/assets/images/Logout.png" alt="user-img" />
               <span>Thoát</span>
             </div>
@@ -63,7 +63,7 @@
 
         <div class="title">
           <h2>LỊCH SỬ ĐẶT SÂN</h2>
-          <a href="#" @click="redirectToHistory">Xem tất cả</a>
+          <a href="#/History" >Xem tất cả</a>
         </div>
         <div
           v-for="(item, index) in items"
@@ -300,7 +300,7 @@ const logout = () => {
   transition: max-height 0.5s;
   z-index: 1000;
 
-  a {
+  .item {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -395,8 +395,18 @@ const logout = () => {
 .item1,
 .item2 {
   display: flex;
-  height: 180px;
+  height: 130px;
   width: 100%;
+  cursor: pointer;
+  transition: transform 0.5s;
+
+}
+
+.item1:hover, 
+.item2:hover {
+    z-index: 1;
+    transform: scaleX(1.02);
+    transition: transform 0.5s;
 }
 
 .item1 {
@@ -416,11 +426,11 @@ const logout = () => {
   flex: 82%; /* Chiếm 80% */
   font-family: 'Comfortaa';
   color: #ffffff;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .court-name {
-  font-size: xx-large;
+  font-size: x-large;
 }
 .item2 {
   background-color: #45a29e;

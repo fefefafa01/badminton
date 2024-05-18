@@ -22,6 +22,12 @@
                 required
               />
               <br />
+              <div v-if="registerIn === false" class="error">
+                  <p>{{ status }}</p>
+                </div>
+                <div v-else class="infor-required">
+                  <p>Information required</p>
+                </div>
               <button type="submit">ĐĂNG KÝ</button>
             </div>
           </form>
@@ -65,13 +71,21 @@ export default defineComponent({
     return {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      con_password: '',
+      status: '',
+      registerIn: true,
     }
   },
 
   methods: {
     async register() {
-      try {
+      if (this.password !== this.con_password) {
+        this.status = 'Mật khẩu không trùng khớp'
+        this.registerIn = false
+      }
+      else {
+        try {
         const response = await axios.post('http://localhost:5000/register', {
           name: this.name,
           email: this.email,
@@ -83,6 +97,7 @@ export default defineComponent({
         }
       } catch (error) {
         console.error(error)
+      }
       }
     },
     redirectToLogin() {
@@ -138,6 +153,7 @@ export default defineComponent({
 
 .login h2 {
   color: #45a29e;
+  font-size: 1.5em;
 }
 
 .form-group {
@@ -158,6 +174,21 @@ export default defineComponent({
   color: white;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border-bottom: solid 1px white;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #1f2833 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .form-group input::placeholder {
   color: white;
 }
@@ -168,6 +199,22 @@ export default defineComponent({
   justify-content: flex-end;
   color: #45a29e;
   cursor: pointer;
+}
+
+.error {
+  font-family: 'Comfortaa', Helvetica;
+  top: 100%;
+  color: red;
+  font-size: 1.1em;
+  align-self: center;
+}
+
+.infor-required {
+  font-family: 'Comfortaa', Helvetica;
+  top: 100%;
+  color: white;
+  font-size: 1.1em;
+  align-self: center;
 }
 
 .form-group button {

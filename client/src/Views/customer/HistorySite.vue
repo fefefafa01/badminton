@@ -10,38 +10,37 @@
             <h3>Khoa</h3>
           </div>
           <div :class="['profile-bar', { 'open-menu': isMenuOpen }]">
-            <a href="#" @click="redirectToProfile">
+            <div class="item" @click="redirectToProfile">
               <img src="@/assets/images/Profile.png" alt="user-img" />
               <span>Thông tin chung</span>
-            </a>
+            </div>
             <hr />
-            <a href="#" @click="redirectToHistory">
+            <div class="item" @click="redirectToHistory">
               <img src="@/assets/images/history.png" alt="user-img" />
               <span>Lịch sử đặt sân</span>
-            </a>
+            </div>
             <hr />
-            <a href="#">
+            <div class="item">
               <img src="@/assets/images/Change_password.png" alt="user-img" />
               <span>Đổi mật khẩu</span>
-            </a>
+            </div>
             <hr />
-            <a href="#" @click="logout">
+            <div class="item" @click="logout">
               <img src="@/assets/images/Logout.png" alt="user-img" />
               <span>Thoát</span>
-            </a>
+            </div>
           </div>
         </div>
       </div>
       <div class="dashboard">
         <div class="title">
           <h2>LỊCH SỬ ĐẶT SÂN</h2>
-          <a href="">Xem tất cả</a>
         </div>
         <div
           v-for="(item, index) in items"
           :key="index"
-          :class="{ item1: index % 2 === 0, item2: index % 2 !== 0}"
-          class = "w-100"
+          :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
+          class="w-100"
         >
           <div class="left-part">
             <div class="image-container">
@@ -224,7 +223,7 @@ export default defineComponent({
   transition: max-height 0.5s;
   z-index: 1000;
 
-  a {
+  .item{
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -322,6 +321,7 @@ export default defineComponent({
   height: 180px;
   max-width: 1200px;
   transition: transform 0.5s;
+  cursor: pointer;
 }
 
 .item1:hover,

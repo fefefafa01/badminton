@@ -6,14 +6,7 @@
       <div class="container">
         <div class="forgetpwd">
           <h2>BẠN QUÊN MẬT KHẨU?</h2>
-          <a>*Lựa chọn phương thức xác minh</a>
-          <form>
-            <span>
-              <input id="sdt" type="radio" name="check" value="sđt" />
-              <label for="sdt">Số điện thoại</label> <br />
-              <input id="mail" type="radio" name="check" value="mail" />
-              <label for="mail">Email</label> <br />
-            </span>
+          <form @submit.prevent="resetPwd">
             <div class="form-group">
               <div class="input">
                 <input
@@ -23,19 +16,17 @@
                   required
                 />
               </div>
-              <br />
               <div class="input">
                 <input
-                  v-model="email"
+                  v-model="newPassword"
                   type="password"
                   placeholder="Vui lòng nhập mật khẩu mới"
                   required
                 />
               </div>
-              <br />
               <div class="input">
                 <input
-                  v-model="email"
+                  v-model="confirmPassword"
                   type="password"
                   placeholder="Vui lòng nhập lại mật khẩu mới"
                   required
@@ -43,7 +34,13 @@
               </div>
               <br />
               <br />
-              <button @click="redirectToResetPwd">TIẾP TỤC</button>
+              <div v-if="loggedIn === false" class="error">
+                  <p>{{ status }}</p>
+                </div>
+                <div v-else class="infor-required">
+                  <p>Information required</p>
+                </div>
+              <button type="submit">TIẾP TỤC</button>
             </div>
           </form>
         </div>
@@ -80,14 +77,26 @@ export default defineComponent({
 
   data() {
     return {
-      product: 'PC GVN Gaming AMD R5-5600X/ VGA RTX 3050',
-      accessory: 'RTX 4090 32GB Z790 1TB i9 14900K',
-      price: '19.190.000₫'
+      email: '',
+      status: '',
+      newPassword: '',
+      confirmPassword: '',
+      loggedIn: true,
     }
   },
   methods: {
     redirectToResetPwd() {
       window.location.href = '#/ResetPwd'
+    },
+    async resetPwd() {
+      console.log(this.newPassword)
+      console.log(this.confirmPassword)
+      if (this.newPassword !== this.confirmPassword) {
+        this.loggedIn = false
+        this.status = 'Mật khẩu không trùng khớp'
+        console.log(this.status)
+      }
+      
     }
   }
 })
@@ -102,10 +111,8 @@ export default defineComponent({
   font-family: 'Comfortaa', Helvetica;
   a {
     color: #45a29e;
+    cursor: pointer;
   }
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
 }
 
 .back_ground {
@@ -113,84 +120,90 @@ export default defineComponent({
 }
 
 .forgetpwd {
-  width: max-content;
+  width: 100%;
   height: 100%;
   color: white;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
-  align-self: center;
-  margin-left: -5%;
-  h2 {
-    color: #45a29e;
-  }
-  a {
-    color: white;
-    font-size: 1.25em;
-  }
-  span {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-top: 20px;
-    color: #45a29e;
-    font-size: 1.25em;
-  }
+  font-size: 15px;
 }
 
+.forgetpwd h2 {
+  color: #45a29e;
+  font-size: 1.5em;
+}
+
+form {
+  width: 500px;
+}
 .form-group {
-  width: 200%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding-top: 20px;
-  align-content: center;
 }
 
-.form-group div {
-  display: flex;
-  flex-direction: row;
-  input {
-    color: white;
-    background-color: #1f2833;
-    border: none;
-    border-bottom: solid 1px white;
-    outline: none;
-    width: 60%;
-    font-size: 1.25em;
-  }
-
-  p {
-    width: 20%;
-    margin-bottom: -0px;
-    border-bottom: solid 1px white;
-    display: flex;
-    justify-content: flex-end;
-    color: #45a29e;
-    cursor: pointer;
-    font-size: 1.25em;
-  }
-  p:hover {
-    text-decoration: underline;
-  }
-  .input {
-    width: 100%;
-  }
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
+.input {
+  position: relative;
+  margin-bottom: 30px;
+  padding-left: 0;
 }
 
-.form-group input::placeholder {
+.input input {
+  position: relative;
+  align-self: center;
+  background-color: #1f2833;
+  border: none;
+  outline: none;
+  border-bottom: solid 1px white;
+  width: 100%;
+  color: white;
+  font-size: 1.25em;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border-bottom: solid 1px white;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #1f2833 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.input input::placeholder {
   color: white;
 }
 
-.form-group span {
-  width: 150%;
-  display: flex;
-  justify-content: flex-end;
+.input span {
+  top: 100%;
+  position: absolute;
+  right: 0;
   color: #45a29e;
+  cursor: pointer;
+  font-size: 1.25em;
+}
+
+.error {
+  font-family: 'Comfortaa', Helvetica;
+  top: 100%;
+  color: red;
+  font-size: 1.1em;
+  align-self: center;
+}
+
+.infor-required {
+  font-family: 'Comfortaa', Helvetica;
+  top: 100%;
+  color: white;
+  font-size: 1.1em;
+  align-self: center;
 }
 
 .form-group button {
@@ -198,9 +211,6 @@ export default defineComponent({
   color: white;
   border: solid 1px #45a29e;
   border-radius: 50px;
-  width: 50%;
-  align-self: center;
-  margin-left: -20%;
   height: 50px;
   font-size: 1.25em;
 }

@@ -121,14 +121,6 @@ const routes = [
     },
     path: '/ForgetPwd',
     name: 'ForgetPwd',
-    component: () => import('@/Views/customer/ResetPwd.vue')
-  },
-  {
-    meta: {
-      title: 'forget'
-    },
-    path: '/forget',
-    name: 'forget',
     component: () => import('@/Views/customer/ForgetPwd.vue')
   },
   {
@@ -147,14 +139,14 @@ const routes = [
     name: 'Success',
     component: () => import('@/Views/customer/SuccessSite.vue')
   },
-  {
-    meta: {
-      title: 'Reset Password'
-    },
-    path: '/ResetPwd',
-    name: 'ResetPwd',
-    component: () => import('@/Views/customer/ResetPwd.vue')
-  },
+  // {
+  //   meta: {
+  //     title: 'Reset Password'
+  //   },
+  //   path: '/ResetPwd',
+  //   name: 'ResetPwd',
+  //   component: () => import('@/Views/customer/ResetPwd.vue')
+  // },
   {
     meta: {
       title: 'Cus Profile'
@@ -178,6 +170,14 @@ const routes = [
     path: '/aboutUs',
     name: 'About Us',
     component: () => import('@/Views/customer/AboutUsSite.vue')
+  },
+  {
+    meta: {
+      title: 'Join Yard'
+    },
+    path: '/joinYard',
+    name: 'Join Yard',
+    component: () => import('@/Views/customer/JoinYardSite.vue')
   },
   {
     path: '/',

@@ -10,7 +10,7 @@
           v-for="(item, index) in place"
           :key="index"
           :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
-          class = "w-100"
+          class="w-100"
           @click="redirectToCourt(item)"
         >
           <div class="left-part">
@@ -71,8 +71,8 @@ export default {
     },
 
     redirectToCourt(item) {
-      localStorage.setItem('yardDetails', JSON.stringify(item));
-      window.location.href = '#/CourtDetail';
+      localStorage.setItem('yardDetails', JSON.stringify(item))
+      window.location.href = '#/CourtDetail'
     }
   }
 }
@@ -116,6 +116,7 @@ export default {
   display: flex;
   height: 180px;
   max-width: 1200px;
+  cursor: pointer;
 }
 
 .item1 {

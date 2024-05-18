@@ -174,5 +174,4 @@ select:-webkit-autofill:focus {
   height: 50px;
   font-size: 1.25em;
 }
-
 </style>

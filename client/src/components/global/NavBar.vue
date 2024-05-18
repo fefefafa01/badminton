@@ -19,7 +19,7 @@
       />
 
       <!-- type="button" @click="redirectToListOfCourt" -->
-      <div class="frame grid-item4" style="z-index: 3">
+      <div class="frame grid-item4 px-2.5" style="z-index: 3">
         <div class="frame-1">
           <div class="phuc_nav" type="button" @click="togglePlaceMenu">
             <img
@@ -41,11 +41,11 @@
             </ul>
           </div>
         </div>
-        <div class="frame-2 phuc_nav" type="button">
+        <div class="frame-2 " type="button">
           <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
-          <div class="ch-nh-t">
-            <div>{{ selectedDayOfWeek }}</div>
-            <input v-model="mytime" class="datepick" type="text" placeholder="Ngày tháng" />
+          <div class="max-w-fit">
+            <div class="datepick pl-3">{{ selectedDayOfWeek }}</div>
+            <input v-model="mytime" class="datepick pl-3 pr-0" type="text" placeholder="Ngày tháng" />
           </div>
         </div>
         <div class="frame-3 phuc_nav" type="button" @click="redirectToListOfCourt">
@@ -68,6 +68,7 @@
         class="design-component-instance-node"
         div-class-name="SN-PHM-2 phuc_nav"
         text="Tham gia vào sân cầu lông"
+        @click="redirecttoJoinYard"
       />
       <div class="group-wrapper">
         <div class="group">
@@ -162,7 +163,7 @@ export default {
       searchInp: null,
       mytime: null,
       selectedDayOfWeek: null,
-      userName: localStorage.getItem('user_name'),
+      userName: localStorage.getItem('user_name')
     }
   },
 
@@ -210,16 +211,25 @@ export default {
         window.location.reload() // Tải lại trang nếu đường dẫn hiện tại là đường dẫn bạn muốn
       }
     },
+    redirecttoJoinYard() {
+      const currentPath = window.location.hash
+      const desiredPath = '#/joinYard'
+
+      if (currentPath !== desiredPath) {
+        window.location.href = desiredPath
+      } else {
+        window.location.reload()
+      }
+    },
     redirectToProfile() {
       // window.location.href = '#/profile'
-      const currentPath = window.location.hash;
-      const desiredPath = '#/profile';
+      const currentPath = window.location.hash
+      const desiredPath = '#/profile'
 
-      if(currentPath !== desiredPath) {
-        window.location.href = desiredPath;
-      } 
-      else {
-        window.location.reload();
+      if (currentPath !== desiredPath) {
+        window.location.href = desiredPath
+      } else {
+        window.location.reload()
       }
     },
     redirectToHistory() {
@@ -228,13 +238,11 @@ export default {
     checkLoginStatus() {
       const isLoggedIn = localStorage.getItem('loggedIn')
       const isAdminLoggedIn = localStorage.getItem('AdminloggedIn')
-      if (isLoggedIn !== null){
+      if (isLoggedIn !== null) {
         this.isLoggedIn = isLoggedIn
-      }
-      else if (isAdminLoggedIn !== null){
+      } else if (isAdminLoggedIn !== null) {
         this.isLoggedIn = isAdminLoggedIn
-      }
-      else {
+      } else {
         this.isLoggedIn = false
       }
     },
@@ -261,24 +269,22 @@ export default {
     },
     logout() {
       const currentPath = window.location.hash
-      const desiredPath = '#/home' 
+      const desiredPath = '#/home'
       const isLoggedIn = localStorage.getItem('loggedIn')
       const isAdminLoggedIn = localStorage.getItem('AdminloggedIn')
-      if (isLoggedIn !== null){
+      if (isLoggedIn !== null) {
         localStorage.removeItem('loggedIn')
-      }
-      else if (isAdminLoggedIn !== null){
+      } else if (isAdminLoggedIn !== null) {
         localStorage.removeItem('AdminloggedIn')
       }
       this.isLoggedIn = false
 
       if (currentPath !== desiredPath) {
         window.location.href = desiredPath
-      }
-      else {
+      } else {
         window.location.reload()
       }
-    } 
+    }
   }
 }
 </script>
@@ -363,7 +369,7 @@ export default {
   position: relative;
   border-radius: 40px;
   height: 97px;
-  width: 800px;
+  width: fit-content;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -689,7 +695,7 @@ export default {
 }
 .datepick {
   background-color: #45a29e !important;
-  width: 85%;
+  width: 100%;
   border: none;
   color: #ffffff;
   outline: none;

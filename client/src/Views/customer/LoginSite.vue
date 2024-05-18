@@ -11,17 +11,19 @@
             <div class="form-group">
               <div class="input">
                 <input v-model="email" type="email" placeholder="Số điện thoại/Email" required />
-                <div v-if="loggedIn === false" class="error">
-                  <p>{{ status }}</p>
-                </div>
+                
               </div>
               <div class="input">
                 <input v-model="password" type="password" placeholder="Mật khẩu" required />
-                <div v-if="loggedIn === false" class="error">
-                  <p>{{ status }}</p>
-                </div>
                 <span @click="redirectToForgetPwd">Bạn quên mật khẩu?</span>
               </div>
+                <br>
+              <div v-if="loggedIn === false" class="error">
+                  <p>{{ status }}</p>
+                </div>
+                <div v-else class="infor-required">
+                  <p>Information required</p>
+                </div>
               <button type="submit">ĐĂNG NHẬP</button>
             </div>
           </form>
@@ -29,9 +31,6 @@
           <br />
           <span>BẠN CHƯA CÓ TÀI KHOẢN?</span>
           <a @click="redirectToRegister">ĐĂNG KÝ</a>
-          <br />
-          <br />
-          <a @click="redirectToAdmin">Admin</a>
         </div>
       </div>
     </div>
@@ -104,6 +103,7 @@ export default defineComponent({
           localStorage.setItem('user_name', response.data.name)
           localStorage.setItem('user_email', response.data.email)
           this.status = response.data.status
+          console.log(this.status)
           window.location.assign('#/home')
         } else if (response.data.AdminloggedIn) {
           localStorage.setItem('AdminloggedIn', true)
@@ -164,6 +164,7 @@ export default defineComponent({
 
 .login h2 {
   color: #45a29e;
+  font-size: 1.5em;
 }
 
 form {
@@ -224,14 +225,21 @@ select:-webkit-autofill:focus {
 
 .error {
   font-family: 'Comfortaa', Helvetica;
-  position: absolute;
   top: 100%;
   color: red;
   font-size: 1.1em;
+  align-self: center;
+}
+
+.infor-required {
+  font-family: 'Comfortaa', Helvetica;
+  top: 100%;
+  color: white;
+  font-size: 1.1em;
+  align-self: center;
 }
 
 .form-group button {
-  margin-top: 30px;
   background-color: #1f2833;
   color: white;
   border: solid 1px #45a29e;
