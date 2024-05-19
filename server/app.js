@@ -65,6 +65,7 @@ const listOfCourtRouter = require("./routes/listOfCourt.js");
 const changeAdminInfo = require("./routes/changeAdminInfo.js")
 const overView = require("./routes/overView.js")
 const CourtDetail = require("./routes/CourtDetail")
+const joinYard = require("./routes/joinYard.js")
 
 const app = express();
 app.use(cors());
@@ -80,5 +81,6 @@ app.use("/listOfCourt",listOfCourtRouter);
 app.use("/changeAdminInfo", changeAdminInfo);
 app.use("/overView", overView)
 app.use("/CourtDetail", CourtDetail)
+app.use("/joinYard", joinYard)
 
 app.listen(port, () => console.log("listening on port " + port));
