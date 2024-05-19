@@ -44,6 +44,7 @@
                 <label for="Yards" class="font-bold mr-5 text-lg">Quận: </label>
                 <select name="" id="" class="col rounded-2xl cursor-pointer">
                   <option value="">Chọn Quận</option>
+                  <option value="">{{ selectedDistrict }}</option>
                 </select>
               </div>
               <div class="flex justify-center items-center mb-4 w-100">
@@ -103,7 +104,19 @@ export default {
   },
   data() {
     return {
-      place: []
+      place: [],
+      district: [
+        'Tất cả',
+        'Quận 1',
+        'Quận 3',
+        'Quận 4',
+        'Quận 5',
+        'Quận 6',
+        'Quận Tân Phú',
+        'Quận Tân Bình',
+        'Quận Bình Thạnh',
+        'TP Thủ Đức'
+      ],
     }
   },
 
@@ -126,10 +139,19 @@ export default {
       }
     },
 
+    async GetItem() {
+      try {
+        const response = await axios.post('http://localhost:5000/joinYard/selectItem', {
+
+        })
+      }
+    },
+
     redirectToCourt(item) {
       localStorage.setItem('yardDetails', JSON.stringify(item))
       window.location.href = '#/CourtDetail'
-    }
+    },
+
   }
 }
 </script>
