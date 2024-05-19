@@ -11,19 +11,18 @@
             <div class="form-group">
               <div class="input">
                 <input v-model="email" type="email" placeholder="Số điện thoại/Email" required />
-                
               </div>
               <div class="input">
                 <input v-model="password" type="password" placeholder="Mật khẩu" required />
                 <span @click="redirectToForgetPwd">Bạn quên mật khẩu?</span>
               </div>
-                <br>
+              <br />
               <div v-if="loggedIn === false" class="error">
-                  <p>{{ status }}</p>
-                </div>
-                <div v-else class="infor-required">
-                  <p>Information required</p>
-                </div>
+                <p>{{ status }}</p>
+              </div>
+              <div v-else class="infor-required">
+                <p>Information required</p>
+              </div>
               <button type="submit">ĐĂNG NHẬP</button>
             </div>
           </form>

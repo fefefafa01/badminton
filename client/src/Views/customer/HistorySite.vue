@@ -223,7 +223,7 @@ export default defineComponent({
   transition: max-height 0.5s;
   z-index: 1000;
 
-  .item{
+  .item {
     display: flex;
     align-items: center;
     text-decoration: none;

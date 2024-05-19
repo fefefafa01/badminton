@@ -35,11 +35,11 @@
               <br />
               <br />
               <div v-if="loggedIn === false" class="error">
-                  <p>{{ status }}</p>
-                </div>
-                <div v-else class="infor-required">
-                  <p>Information required</p>
-                </div>
+                <p>{{ status }}</p>
+              </div>
+              <div v-else class="infor-required">
+                <p>Information required</p>
+              </div>
               <button type="submit">TIẾP TỤC</button>
             </div>
           </form>
@@ -81,7 +81,7 @@ export default defineComponent({
       status: '',
       newPassword: '',
       confirmPassword: '',
-      loggedIn: true,
+      loggedIn: true
     }
   },
   methods: {
@@ -96,7 +96,6 @@ export default defineComponent({
         this.status = 'Mật khẩu không trùng khớp'
         console.log(this.status)
       }
-      
     }
   }
 })

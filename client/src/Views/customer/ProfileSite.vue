@@ -63,7 +63,7 @@
 
         <div class="title">
           <h2>LỊCH SỬ ĐẶT SÂN</h2>
-          <a href="#/History" >Xem tất cả</a>
+          <a href="#/History">Xem tất cả</a>
         </div>
         <div
           v-for="(item, index) in items"
@@ -399,14 +399,13 @@ const logout = () => {
   width: 100%;
   cursor: pointer;
   transition: transform 0.5s;
-
 }
 
-.item1:hover, 
+.item1:hover,
 .item2:hover {
-    z-index: 1;
-    transform: scaleX(1.02);
-    transition: transform 0.5s;
+  z-index: 1;
+  transform: scaleX(1.02);
+  transition: transform 0.5s;
 }
 
 .item1 {

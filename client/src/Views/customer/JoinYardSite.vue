@@ -8,27 +8,34 @@
         </div>
         <div class="container">
           <div
-            v-for="(item, index) in place"
+            v-for="(item, index) in news"
             :key="index"
             :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
             class="w-100"
-            @click="redirectToCourt(item)"
           >
             <div class="left-part">
               <div class="image-container">
                 <img :src="item.linkimg" alt="CourtBadminton" />
               </div>
             </div>
-            <div class="right-part">
-              <div class="court-name">{{ item.name }}</div>
-              <p>
-                <i class="fas fa-home text-white" style="font-size: 23px; margin-right: 5px"></i>
-                {{ item.address }}
-              </p>
-              <p>
-                <i class="fas fa-phone text-white" style="font-size: 23px; margin-right: 5px"></i>
-                {{ item.phone_num }}
-              </p>
+            <div class="right-part flex">
+              <div class="col-8 pr-10">
+                <div class="court-name">{{ item.name }}</div>
+                <p>
+                  <i class="fas fa-home text-white" style="font-size: 23px;"></i>
+                  {{ item.address }}
+                </p>  
+              </div>
+              <div class="col">
+                <p>
+                  <i class="fas fa-home text-white" style="font-size: 23px;"></i>
+                  price: {{ item.price }}vnd
+                </p>
+                <p>
+                  <i class="fas fa-home text-white" style="font-size: 23px;"></i>
+                  date: {{ item.date }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -39,47 +46,48 @@
         </div>
         <div class="h-2/4 w-3/4 py-10">
           <div class="item max-h-fit p-5">
-            <form action="" class="flex flex-col items-center">
+            <form @submit.prevent="Submit" class="flex flex-col items-center">
               <div class="flex justify-center items-center mb-4 w-100">
-                <label for="Yards" class="font-bold mr-5 text-lg">Quận: </label>
-                <select name="" id="" class="col rounded-2xl cursor-pointer">
-                  <option value="">Chọn Quận</option>
-                  <option value="">{{ selectedDistrict }}</option>
+                <label for="Yards" class="font-bold mr-5 text-lg">*Quận: </label>
+                <select name="" id="district" v-model="selectedDistrict" @change="filterCourts" class="col rounded-2xl cursor-pointer">
+                  <option v-for="district in district" :key="district" :value="district">{{ district }}</option>
                 </select>
               </div>
               <div class="flex justify-center items-center mb-4 w-100">
-                <label for="Yards" class="font-bold mr-5 text-lg">Sân: </label>
-                <select name="" id="" class="col rounded-2xl cursor-pointer">
-                  <option value="">Chọn Sân</option>
+                <label for="yards" class="font-bold mr-5 text-lg">*Sân: </label>
+                <select id="yards" v-model="selectedName" class="col rounded-2xl cursor-pointer">
+                  <option v-for="item in filteredNames" :key="item.id" :value="item.name">{{ item.name }}</option>
                 </select>
               </div>
               <div class="flex justify-center items-center mb-4 w-100">
-                <label for="Yards" class="font-bold mr-5 text-lg">Thứ: </label>
-                <select name="" id="" class="col rounded-2xl cursor-pointer">
-                  <option value="">Chọn Thứ</option>
+                <label for="yards" class="font-bold mr-5 text-lg">*Địa chỉ: </label>
+                <select id="yards" v-model="selectedAddress" class="col rounded-2xl cursor-pointer">
+                  <option v-for="item in filteredAddress" :key="item.id" :value="item.address">{{ item.address }}</option>
                 </select>
               </div>
               <div class="flex justify-center items-center mb-4 w-100">
-                <label for="Yards" class="font-bold mr-5 text-lg">Giờ: </label>
-                <select name="" id="" class="col rounded-2xl cursor-pointer">
-                  <option value="">Chọn Giờ</option>
+                <label for="Yards" class="font-bold mr-5 text-lg">*Thứ: </label>
+                <select name="" id="date" v-model="selectedDate" class="col rounded-2xl cursor-pointer">
+                  <option v-for="date in date" :key="date" :value="date">{{ date }}</option>
                 </select>
               </div>
               <div class="flex justify-center items-center mb-4 w-100">
-                <label for="Yards" class="font-bold mr-5 text-lg">Giá: </label>
-                <select name="" id="" class="col rounded-2xl cursor-pointer">
-                  <option value="">Chọn Giá</option>
+                <label for="Yards" class="font-bold mr-5 text-lg">*Giá: </label>
+                <select name="" id="price" v-model="selectedPrice" class="col rounded-2xl cursor-pointer">
+                  <option v-for="item in filteredPrices" :key="item.id" :value="item.average_price">{{ item.average_price }}</option>
                 </select>
               </div>
-              <div class="flex justify-center items-center mb-4 w-100">
-                <label for="Yards" class="font-bold mr-5 text-lg">Giờ: </label>
-                <select name="" id="" class="col rounded-2xl cursor-pointer">
-                  <option value="">Chọn Giờ</option>
-                </select>
-              </div>
+              
               <div class="mb-4 w-100">
                 <label for="Yards" class="block font-bold mr-5 text-lg">Mô tả </label>
-                <textarea name="" id="" cols="40" rows="5" class="w-100"></textarea>
+                <textarea name="des" v-model="selectedDes" id="" cols="40" rows="5" class="w-100 rounded-lg"></textarea>
+              </div>
+              
+              <div v-if="fillData === false" class="error">
+                <p>{{ status }}</p>
+              </div>
+              <div v-else class="infor-required">
+                <p>Information * required</p>
               </div>
               <button type="submit" class="rounded-full text-xl shadow-xl h-12 w-50">
                 Đăng ký
@@ -97,6 +105,7 @@
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 import axios from 'axios'
+
 export default {
   components: {
     NavBar,
@@ -104,7 +113,7 @@ export default {
   },
   data() {
     return {
-      place: [],
+      fillData: true,
       district: [
         'Tất cả',
         'Quận 1',
@@ -117,44 +126,162 @@ export default {
         'Quận Bình Thạnh',
         'TP Thủ Đức'
       ],
+      date: [
+        'Thứ Hai',
+        'Thứ Ba',
+        'Thứ Tư',
+        'Thứ Năm',
+        'Thứ Sáu',
+        'Thứ Bảy',
+        'Chủ Nhật',
+      ],
+      data: [],
+      selectedDistrict: '',
+      selectedName: '',
+      selectedAddress: '',
+      selectedDate: '',
+      selectedPrice: '',
+      selectedDes: '',
+      selectedImg: '',
+      status: '',
+      news: [],
     }
   },
-
-  created() {
-    this.ListOfCourtStatus()
+  computed: {
+    filteredData() {
+      if (!this.selectedDistrict || this.selectedDistrict === 'Tất cả') {
+        return this.data;
+      }
+      return this.data.filter(item => item.address.includes(this.selectedDistrict));
+    },
+    filteredNames() {
+      if (this.selectedDistrict === 'Tất cả') {
+        return this.data;
+      }
+      return this.data.filter(item => {
+        return (item.address.includes(this.selectedDistrict)) &&
+               (!this.selectedPrice || item.average_price === this.selectedPrice);
+      });
+    },
+    filteredAddress() {
+      if (this.selectedDistrict === 'Tất cả') {
+        if (!this.selectedName) {
+          return this.data;
+        }
+        else {
+          return this.data.filter(item => item.name === this.selectedName)
+        }
+      } else {
+        return this.data.filter(item => {
+            const isDistMatch = item.address.includes(this.selectedDistrict);
+            const isNameMatch = !this.selectedName || item.name === this.selectedName;
+            return isDistMatch && isNameMatch
+          }
+        )
+      }
+    },
+    filteredPrices() {
+      if (this.selectedDistrict === 'Tất cả') {
+        if (!this.selectedName) {
+          return this.data;
+        }
+        else {
+          return this.data.filter(item => item.name === this.selectedName)
+        }
+      } else {
+        return this.data.filter(item => {
+            const isDistMatch = item.address.includes(this.selectedDistrict);
+            const isNameMatch = !this.selectedName || item.name === this.selectedName;
+            return isDistMatch && isNameMatch
+          }
+        )
+      }
+    }
   },
-
+  watch: {
+    selectedName(newVal) {
+      const selectedItem = this.data.find(item => item.name === newVal);
+      if (selectedItem) {
+        this.selectedImg = selectedItem.linkimg;
+      }
+    }
+  },
+  created() {
+    this.ListOfNews();
+    this.GetItem(); 
+  },
   methods: {
-    async ListOfCourtStatus() {
+    async ListOfNews() {
       try {
-        const response = await axios.post('http://localhost:5000/listOfCourt', {
-          district: localStorage.getItem('selectedDistrict')
-        })
+        const response = await axios.post('http://localhost:5000/joinYard/takeNews')
 
         console.log(response.data.data)
-        this.place = response.data.data
+        this.news = response.data.data
       } catch (error) {
-        // Handle error
+        console.error(error)
+      }
+    },
+    async GetItem() {
+      try {
+        const response = await axios.post('http://localhost:5000/joinYard/selectItem')
+        console.log(response.data.data)
+        this.data = response.data.data 
+        
+      } catch (error) {
         console.error(error)
       }
     },
 
-    async GetItem() {
-      try {
-        const response = await axios.post('http://localhost:5000/joinYard/selectItem', {
-
-        })
+    async Submit() {
+      console.log("name:", this.selectedName,
+            "address:", this.selectedAddress,
+            "date:", this.selectedDate,
+            "price:", this.selectedPrice,
+            "linkImg:", this.selectedImg,
+            "desc:", this.selectedDes)
+      if (this.selectedAddress == '' || this.selectedDate == '' || this.selectedDistrict == '' || this.selectedName == '' || this.selectedPrice == ''){
+        this.fillData = false;
+        this.status = 'Fill all * information'
       }
+      else {
+        try {
+          const response = await axios.post('http://localhost:5000/joinYard/submit', {
+            name: this.selectedName,
+            address: this.selectedAddress,
+            date: this.selectedDate,
+            price: this.selectedPrice,
+            linkImg: this.selectedImg,
+            desc: this.selectedDes
+          })
+          this.reloadPage()
+          
+        }
+        
+        catch (error) {
+          console.error(error)
+        }
+      }
+      
     },
-
     redirectToCourt(item) {
       localStorage.setItem('yardDetails', JSON.stringify(item))
       window.location.href = '#/CourtDetail'
     },
+    reloadPage() {
+      const currentPath = window.location.hash
 
-  }
+      const desiredPath = '#/joinYard'
+
+      if (currentPath !== desiredPath) {
+        window.location.href = desiredPath
+      } else {
+        window.location.reload()
+      }
+    }
+  },
 }
 </script>
+
 
 <style lang="scss" scoped>
 .title {
@@ -194,7 +321,6 @@ export default {
   display: flex;
   height: 130px;
   max-width: 1200px;
-  cursor: pointer;
 }
 
 .item1 {
@@ -267,4 +393,29 @@ button {
 textarea {
   resize: none;
 }
+
+select {
+  width: 200px; /* Chiều rộng cố định cho hộp chọn */
+  max-width: 100%; /* Đảm bảo nó không vượt quá chiều rộng của cha */
+}
+
+.error {
+  font-family: 'Comfortaa', Helvetica;
+  top: 100%;
+  color: red;
+  font-size: 1.1em;
+  align-self: center;
+  font-weight: bold;
+}
+
+.infor-required {
+  font-family: 'Comfortaa', Helvetica;
+  top: 100%;
+  color: #1f2833;
+  font-size: 1.1em;
+  align-self: center;
+  font-weight: bold;
+
+}
+
 </style>

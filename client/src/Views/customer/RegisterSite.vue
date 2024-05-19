@@ -23,11 +23,11 @@
               />
               <br />
               <div v-if="registerIn === false" class="error">
-                  <p>{{ status }}</p>
-                </div>
-                <div v-else class="infor-required">
-                  <p>Information required</p>
-                </div>
+                <p>{{ status }}</p>
+              </div>
+              <div v-else class="infor-required">
+                <p>Information required</p>
+              </div>
               <button type="submit">ĐĂNG KÝ</button>
             </div>
           </form>
@@ -74,7 +74,7 @@ export default defineComponent({
       password: '',
       con_password: '',
       status: '',
-      registerIn: true,
+      registerIn: true
     }
   },
 
@@ -83,21 +83,20 @@ export default defineComponent({
       if (this.password !== this.con_password) {
         this.status = 'Mật khẩu không trùng khớp'
         this.registerIn = false
-      }
-      else {
+      } else {
         try {
-        const response = await axios.post('http://localhost:5000/register', {
-          name: this.name,
-          email: this.email,
-          password: this.password
-        })
-        console.log(response.data)
-        if (response.data.registered) {
-          window.location.assign('#/Success')
+          const response = await axios.post('http://localhost:5000/register', {
+            name: this.name,
+            email: this.email,
+            password: this.password
+          })
+          console.log(response.data)
+          if (response.data.registered) {
+            window.location.assign('#/Success')
+          }
+        } catch (error) {
+          console.error(error)
         }
-      } catch (error) {
-        console.error(error)
-      }
       }
     },
     redirectToLogin() {
