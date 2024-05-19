@@ -1,53 +1,53 @@
 <template>
-  <div class="header-loggin">
-    <div class="navbar">
-      <div type="button" class="grid-item1" @click="redirectToHomepage">
-        <img
-          style="height: 100px"
-          class="img"
-          alt="Img"
-          src="https://c.animaapp.com/UGutMkT8/img/da6c9e2e3c8f4d8abaf5e7e4c325ee24--1--1-1@2x.png"
-        />
-      </div>
-
-      <TinTC
-        type="button"
-        class="grid-item2"
-        div-class-name="TIN-t-c-instance phuc_nav"
-        text="Trang chủ"
-        @click="redirectToHomepage"
-      />
-
-      <!-- type="button" @click="redirectToListOfCourt" -->
-      <div class="frame grid-item4" style="z-index: 3">
-        <div class="frame-1">
-          <div class="phuc_nav" type="button" @click="togglePlaceMenu">
-            <img
-              class="icon-location"
-              alt="Icon location"
-              src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
-            />
-            <div class="text-wrapper-2 select-btn">{{ selectedDistrict || 'Địa điểm' }}</div>
-          </div>
-          <div class="content" :class="{ show: isMenuVisible }">
-            <div class="search">
-              <span class="uil--search-alt"></span>
-              <input type="text" placeholder="Tìm kiếm" @keyup="handleKeyUp" />
-            </div>
-            <ul class="options">
-              <li v-for="(dis, index) in districtTemp" :key="index" @click="updateName(dis)">
-                {{ dis }}
-              </li>
-            </ul>
-          </div>
+    <div class="header-loggin">
+      <div class="navbar">
+        <div type="button" @click="redirectToHomepage" class="grid-item1">
+          <img
+            style="height: 100px"
+            class="img"
+            alt="Img"
+            src="https://c.animaapp.com/UGutMkT8/img/da6c9e2e3c8f4d8abaf5e7e4c325ee24--1--1-1@2x.png"
+          />
         </div>
-        <div class="frame-2 phuc_nav" type="button">
-          <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
-          <div class="ch-nh-t">
-            <div v-if="isDateTimeVisible"> Ngày tháng </div>
-            <div>{{ selectedDayOfWeek }}</div>
-            <!-- <input v-model="mytime" class="datepick" type="text" placeholder="Ngày tháng" /> -->
-            <div>{{ mytime }}</div>
+  
+        <TinTC
+          type="button"
+          @click="redirectToHomepage"
+          class="grid-item2"
+          divClassName="TIN-t-c-instance phuc_nav"
+          text="Trang chủ"
+        />
+  
+        <!-- type="button" @click="redirectToListOfCourt" -->
+        <div class="frame grid-item4" style="z-index: 3">
+          <div class="frame-1">
+            <div class="phuc_nav" type="button" @click="togglePlaceMenu">
+              <img
+                class="icon-location"
+                alt="Icon location"
+                src="https://c.animaapp.com/UGutMkT8/img/---icon--location--1@2x.png"
+              />
+              <div class="text-wrapper-2 select-btn">{{ selectedDistrict || 'Địa điểm' }}</div>
+            </div>
+            <div class="content" :class="{ show: isMenuVisible }">
+              <div class="search">
+                <span class="uil--search-alt"></span>
+                <input type="text" placeholder="Tìm kiếm" @keyup="handleKeyUp" />
+              </div>
+              <ul class="options">
+                <li v-for="(dis, index) in districtTemp" :key="index" @click="updateName(dis)">
+                  {{ dis }}
+                </li>
+              </ul>
+            </div>
+          </div>
+  
+          <div class="frame-2 phuc_nav" type="button">
+            <img class="vector" alt="Vector" src="https://c.animaapp.com/UGutMkT8/img/vector-1.svg" />
+            <div class="ch-nh-t"> 
+              <div v-if="isDateTimeVisible"> Ngày tháng </div>
+              <div>{{ selectedDayOfWeek }}</div>
+              <div>{{ mytime }}</div>
           </div>
           </div>
   
