@@ -56,6 +56,7 @@ import { defineComponent } from 'vue'
 // import TinTC from "../components/items/TinTC.vue";
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
+import axios from 'axios'
 
 export default defineComponent({
   name: 'HeaderLoggin',
@@ -95,6 +96,18 @@ export default defineComponent({
         this.loggedIn = false
         this.status = 'Mật khẩu không trùng khớp'
         console.log(this.status)
+      }
+      else {
+        const response = await axios.post('http://localhost:5000/login/resetPwd', {
+          email: this.email,
+          password: this.newPassword
+        })
+        if (response.data.status === 'Successful'){
+          window.location.assign('#/Login')
+        } else {
+          this.loggedIn = false
+          this.status = response.data.status
+        }
       }
     }
   }

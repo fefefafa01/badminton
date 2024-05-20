@@ -55,6 +55,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt");
 const port = 5000;
 const usersRouter = require("./routes/users.js");
 const loginRouter = require("./routes/login.js");

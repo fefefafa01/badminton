@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 const nodeMailer = require("nodemailer");
+const bcrypt = require('bcrypt');
 
 router.post('/', async(req, res) => {
     console.log(req.body);
@@ -20,6 +21,8 @@ router.post('/', async(req, res) => {
         if (lastestID.length > 0)
             {checkid = lastestID[0].customer_id + 1;}
         else{checkid = 1}
+
+        const hashedPass = await bcrypt.hash(req.body.password, 10)
 
         //gửi thông báo đã đăng kí thành công tới email khách hàng
         const username = req.body.email.split('@')[0];
@@ -93,7 +96,7 @@ router.post('/', async(req, res) => {
         const createNewCustomer = await db.query(
             `insert into customer (name, customer_id, email, password, created_date)
             values ($1, $2, $3, $4, CURRENT_DATE)`,
-            [req.body.name, checkid, req.body.email, req.body.password]
+            [req.body.name, checkid, req.body.email, hashedPass]
         );
         res.json({ registered: true, status: "Successful"});
         console.log("Successful");

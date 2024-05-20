@@ -144,21 +144,21 @@
                 </div>
                 <hr />
 
-                <a href="#" class="sub-menu-link" @click="redirectToProfile">
+                <div class="sub-menu-link" @click="redirectToProfile">
                   <img src="../../assets/images/Profile.png" alt="" />
                   <span class="p">Trang cá nhân</span>
                   <span class="trans">></span>
-                </a>
-                <a href="#" class="sub-menu-link" @click="redirectToHistory">
+                </div>
+                <div class="sub-menu-link" @click="redirectToHistory">
                   <img src="../../assets/images/history.png" alt="" />
                   <span class="p">Lịch sử đặt sân</span>
                   <span class="trans">></span>
-                </a>
-                <a href="#" class="sub-menu-link" @click="logout">
+                </div>
+                <div class="sub-menu-link" @click="logout">
                   <img src="../../assets/images/Logout.png" alt="" />
                   <span class="p">Logout</span>
                   <span class="trans">></span>
-                </a>
+                </div>
               </div>
             </div>
           </div>
