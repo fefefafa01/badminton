@@ -32,8 +32,15 @@
             <tr v-for="(row, rowIndex) in rows" :key="rowIndex">
               <td class="frameTitle">{{ row.name }}</td>
               <td class="frame" v-for="(cell, cellIndex) in row.schedule" :key="cellIndex">
-                <div v-if="cell === 'circle'" class="frame"><div class="circle"></div></div>
-                <div v-else-if="cell === 'filled'" class="filled"></div>
+                <div
+                  v-if="cell.type === 'circle'"
+                  :id="`frame_${row.name}_${times[cellIndex]}`"
+                  :class="{ filled1: !cell.active, filled: cell.active }"
+                  @click="selectFrame(row.name, times[cellIndex], rowIndex, cellIndex)"
+                >
+                  <div class="circle"></div>
+                </div>
+                <div v-else-if="cell.type === 'filled'" class="filled"></div>
               </td>
             </tr>
           </tbody>
@@ -53,7 +60,17 @@
         </div>
       </div>
     </div>
-
+    <div id="app" class="container1">
+      <div class="booking-title">Sân đã chọn:</div>
+      <div v-for="(slot, index) in slots" :key="index" class="booking-slot">
+        <div class="slot-info">
+          <div class="slot-name">{{ slot.name }}</div>
+          <div class="slot-time">{{ slot.time }}</div>
+        </div>
+        <button class="delete-btn" @click="removeSlot(index)">Xóa</button>
+      </div>
+      <button class="confirm-btn" @click="confirmBooking">Xác nhận</button>
+    </div>
     <FooterBar />
   </div>
 </template>
@@ -70,132 +87,9 @@ export default {
   data() {
     return {
       item: null,
-      times: [
-        '6:00',
-        '7:00',
-        '8:00',
-        '9:00',
-        '10:00',
-        '11:00',
-        '12:00',
-        '13:00',
-        '14:00',
-        '15:00',
-        '16:00',
-        '17:00',
-        '18:00',
-        '19:00',
-        '20:00',
-        '21:00',
-        '22:00',
-        '23:00',
-        '24:00'
-      ],
-      rows: [
-        { name: 'Sân 1', schedule: Array(19).fill('circle') },
-        {
-          name: 'Sân 2',
-          schedule: [
-            'circle',
-            'circle',
-            'circle',
-            'filled',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'filled',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle'
-          ]
-        },
-        {
-          name: 'Sân 3',
-          schedule: [
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'filled',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle'
-          ]
-        },
-        { name: 'Sân 4', schedule: Array(19).fill('circle') },
-        {
-          name: 'Sân 5',
-          schedule: [
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'filled',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle'
-          ]
-        },
-        {
-          name: 'Sân 6',
-          schedule: [
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'filled',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'circle',
-            'filled',
-            'circle',
-            'circle',
-            'circle',
-            'circle'
-          ]
-        },
-        { name: 'Sân 7', schedule: Array(19).fill('circle') },
-        { name: 'Sân 8', schedule: Array(19).fill('circle') },
-        { name: 'Sân 9', schedule: Array(19).fill('circle') },
-        { name: 'Sân 10', schedule: Array(19).fill('circle') },
-        { name: 'Sân 11', schedule: Array(19).fill('circle') }
-      ],
+      times: [],
+      rows: [],
+      slots: [],
       courts: []
     }
   },
@@ -211,12 +105,53 @@ export default {
         const response = await axios.post('http://localhost:5000/CourtDetail', {
           item: this.item
         })
-
-        console.log(response)
+        for (var i = this.item.start_time; i <= this.item.end_time; i++) {
+          this.times.push(`${i}:00`)
+        }
+        for (var i = 1; i <= response.data.count; i++) {
+          this.rows.push(this.initializeRows(i, this.item.end_time - this.item.start_time + 1))
+        }
       } catch (error) {
         // Handle error
         console.error(error)
       }
+    },
+    initializeRows(num_of_court, count_time) {
+      const circleArray = Array(count_time)
+        .fill()
+        .map(() => ({
+          type: 'circle', // Loại ô ban đầu là 'circle'
+          active: false // Trạng thái ban đầu là không hoạt động
+        }))
+      return {
+        name: `Sân ${num_of_court}`,
+        schedule: circleArray
+      }
+    },
+    removeSlot(index) {
+      // Lấy thông tin của slot
+      const slot = this.slots[index]
+
+      // Tìm chỉ số của court và time trong rows và times
+      const courtIndex = this.rows.findIndex((row) => row.name === slot.name)
+      const timeIndex = this.times.indexOf(slot.time.split(' - ')[0]) // Lấy phần đầu của chuỗi thời gian, ví dụ "9:00 - 10:00"
+
+      // Cập nhật trạng thái của ô tương ứng trong rows
+      if (courtIndex !== -1 && timeIndex !== -1) {
+        this.rows[courtIndex].schedule[timeIndex].active = false // Đặt lại trạng thái active là false
+        this.rows[courtIndex].schedule[timeIndex].type = 'circle' // Đặt lại loại ô là 'circle' nếu cần
+      }
+
+      // Xóa slot khỏi mảng slots
+      this.slots.splice(index, 1)
+    },
+    selectFrame(court, time, courtIndex, timeIndex) {
+      if (courtIndex !== -1 && timeIndex !== -1) {
+        // Đánh dấu ô này là đã được chọn
+        this.rows[courtIndex].schedule[timeIndex].type = 'filled' // Thay đổi loại của cell
+        this.rows[courtIndex].schedule[timeIndex].active = true // Đặt trạng thái hoạt động là true
+      }
+      this.slots.push({ name: court, time: `${time} - ${parseInt(time) + 1}:00` })
     }
   }
 }
@@ -287,8 +222,26 @@ export default {
   padding: 5px;
   vertical-align: middle;
 }
-
 .table-custom .filled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #c5c6c7;
+}
+.table-custom .filled1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #45a29e;
+}
+.table-custom .filled1:hover {
+  background-color: #1f2833;
+}
+.table-custom .frameTime {
   position: absolute;
   top: 0;
   left: 0;
@@ -298,8 +251,6 @@ export default {
 }
 .table-custom .frame {
   position: relative;
-  background-color: #45a29e;
-  transition: background-color 0.2s ease;
 }
 .table-custom .frameTitle {
   font-size: 18px;
@@ -307,6 +258,9 @@ export default {
   background-color: #45a29e;
 }
 .table-custom .frame:hover {
+  background-color: #1f2833;
+}
+.frame:hover {
   background-color: #1f2833;
 }
 .table-custom .circle {
@@ -366,5 +320,60 @@ export default {
 }
 .status-unavailable {
   background-color: #c5c6c7;
+}
+.container1 {
+  background-color: #0b0c10;
+  color: white;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  width: 400px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  margin-left: 60px;
+}
+.booking-title {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+.booking-slot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.slot-info {
+  width: 205px;
+  background-color: #4caf50;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+}
+.slot-time {
+  width: 120px;
+  display: flex;
+  margin-right: 5px;
+  font-size: 17px;
+}
+.slot-name {
+  width: 80px;
+  display: flex;
+  margin-right: 10px;
+  font-size: 17px;
+}
+.delete-btn,
+.confirm-btn {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.confirm-btn {
+  background-color: #008cba;
 }
 </style>
