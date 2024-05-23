@@ -71,8 +71,13 @@ export default {
     },
 
     redirectToCourt(item) {
-      localStorage.setItem('yardDetails', JSON.stringify(item))
-      window.location.href = '#/CourtDetail'
+      if(localStorage.getItem('mytime')) {
+        localStorage.setItem('yardDetails', JSON.stringify(item))
+        window.location.href = '#/CourtDetail'
+      }
+      else {
+        alert("Vui lòng nhập ngày đặt sân");
+      }
     }
   }
 }
