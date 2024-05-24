@@ -1,31 +1,30 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const db = require('../db/index');
 const nodeMailer = require("nodemailer");
 const bcrypt = require('bcrypt');
 
 router.post('/', async(req, res) => {
-    console.log(req.body);
-    const regInfo = await db.query(
-        "Select * from customer where email = $1",
-        [req.body.email]);
-    if (regInfo.length > 0) {
+    // console.log(req.body);
+    const { email, name, password} = req.body;
+    console.log({ email, name, password });
+    const { data:regInfo, error:regError } = await db.from('customer').select('*').eq('email', email)
+    // const regInfo = await db.query(
+    //     "Select * from customer where email = $1",
+    //     [req.body.email]);
+    if (regError) {
+        console.error(regError)
+        return;
+    }
+    if ( regInfo && regInfo.length > 0) {
         res.json({ registered: false, status: 'Email Exist'})
-        console.log("Email Exist", req.body.email)
+        console.log("Email Exist", email)
     }
     else{
-        var checkid = 0;
-        const lastestID = await db.query(
-            "select * from customer order by customer_id desc"
-        )
-        if (lastestID.length > 0)
-            {checkid = lastestID[0].customer_id + 1;}
-        else{checkid = 1}
-
-        const hashedPass = await bcrypt.hash(req.body.password, 10)
+        const hashedPass = await bcrypt.hash(password, 10)
 
         //gửi thông báo đã đăng kí thành công tới email khách hàng
-        const username = req.body.email.split('@')[0];
+        const username = email.split('@')[0];
 
         const html = `
         <!DOCTYPE html>
@@ -84,7 +83,7 @@ router.post('/', async(req, res) => {
     
         const info = await transporter.sendMail({
             from: 'hcmutbcb@gmail.com',
-            to: req.body.email,
+            to: email,
             subject: 'Xác nhận đăng kí vào BCB thành công',
             html: html,
         })
@@ -92,12 +91,22 @@ router.post('/', async(req, res) => {
         console.log("Message sent: " + info.messageId);
         //kết thúc gửi thông báo đã đăng kí thành công tới email khách hàng
 
-
-        const createNewCustomer = await db.query(
-            `insert into customer (name, customer_id, email, password, created_date)
-            values ($1, $2, $3, $4, CURRENT_DATE)`,
-            [req.body.name, checkid, req.body.email, hashedPass]
-        );
+        const { data: createNewCustomer, error: errorCreate } = await db
+                .from('customer')
+                .insert([
+                    { name: name, email: email, password: hashedPass },
+                ])
+                .select();
+        if (errorCreate) {
+            console.error(errorCreate);
+            return;
+        }        
+        console.log(createNewCustomer)
+        // const createNewCustomer = await db.query(
+        //     `insert into customer (name, customer_id, email, password, created_date)
+        //     values ($1, $2, $3, $4, CURRENT_DATE)`,
+        //     [req.body.name, checkid, req.body.email, hashedPass]
+        // );
         res.json({ registered: true, status: "Successful"});
         console.log("Successful");
     }     

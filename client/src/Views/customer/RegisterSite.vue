@@ -49,10 +49,12 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent} from 'vue'
 import axios from 'axios'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
+import { supabase } from '@/supabase/init'
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   components: {
@@ -60,11 +62,12 @@ export default defineComponent({
     FooterBar
   },
   setup() {
+    const router = useRouter();
     const options = {
       rewind: true,
       gap: '1rem'
     }
-    return { options }
+    return { options, router }
   },
 
   data() {
@@ -97,6 +100,23 @@ export default defineComponent({
         } catch (error) {
           console.error(error)
         }
+        // try {
+        //   const { error } = await supabase.auth.signUp({
+        //     email: this.email,
+        //     password: this.password,
+        //     name: this.name,
+        //   });
+        //   if (error) throw error;
+        //   this.router.push({ name: "Success" });
+        // } catch (error) {
+        //   this.status = error.message;
+        //   this.registerIn = false;
+        //   setTimeout(() => {
+        //     this.status = null;
+        //     this.registerIn = false;
+        //   }, 5000);
+        // }
+        // return;
       }
     },
     redirectToLogin() {

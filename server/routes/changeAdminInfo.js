@@ -1,19 +1,28 @@
 const express  = require('express');
 const router = express.Router();
-const db  = require('../db');
+const db  = require('../db/index');
 
 router.post('/info', async(req, res) => {
     console.log(req.body);
+    const { email, curEmail, curName } = req.body;
     if (req.body.email != req.body.curEmail){
-        const checkChangeInfo = await db.query(
-            "Select * From admin where email = $1",
-            [req.body.email]
-        );
+        // const checkChangeInfo = await db.query(
+        //     "Select * From admin where email = $1",
+        //     [req.body.email]
+        // );
+        const { data: checkChangeInfo, error: ErrorInfo } = await db
+            .from('admin')
+            .select("*")
+            .eq('email', email)
         if (checkChangeInfo.length == 0) {
-            const checkExistance = await db.query(
-                "Select * From admin Where email = $1 And name = $2",
-                [req.body.curEmail, req.body.curName]
-            )
+            // const checkExistance = await db.query(
+            //     "Select * From admin Where email = $1 And name = $2",
+            //     [req.body.curEmail, req.body.curName]
+            // )
+            const { data: checkExistance, error: errorExistance } = await db
+                .from("admin")
+                .select("*")
+                .eq('')
             if (checkExistance.length > 0) {
                 await db.query(
                     "Update admin Set email = $1, name = $2 Where email = $3 and name = $4",
