@@ -54,21 +54,41 @@ router.post('/', async(req, res) => {
 });
 
 router.post('/resetPwd', async(req, res) => {
-    const resetInfo = await db.query(
-        `Select * from customer where email = $1`, [
-            req.body.email
-        ]);
-        const hashPass = await bcrypt.hash(req.body.password, 10);
-        if (resetInfo.length > 0) {
-            await db.query(
-                `update customer set password = $1 where email = $2`, 
-                [hashPass, req.body.email]
-            )
-            res.json({status: 'Successful'})
-        }
-        else {
-            res.json({status: "Wrong Email"})
-        }
+    // const resetInfo = await db.query(
+    //     `Select * from customer where email = $1`, [
+    //         req.body.email
+    //     ]);
+    const { email, password } = req.body
+    const { data: resetInfo, error: errorReset } = await db
+        .from("customer")
+        .select("*")
+        .eq("email", email)
+    
+    if (errorReset) {
+        console.error(errorReset);
+        return;
+    }    
+
+    const hashPass = await bcrypt.hash(password, 10);
+    if (resetInfo.length > 0) {
+        // await db.query(
+        //     `update customer set password = $1 where email = $2`,
+        //     [hashPass, req.body.email]
+        // )
+        const { error } = await db
+            .from('customer')
+            .update({ password: hashPass})
+            .eq("email", email)
+            .select()
+        if (error) {
+            console.error(errorReset);
+            return;
+        }    
+        res.json({status: 'Successful'})
+    }
+    else {
+        res.json({status: "Wrong Email"})
+    }
 })
 
 module.exports = router;

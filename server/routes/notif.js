@@ -2,8 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-// const db = require("../db/index");
-const { createClient } = require('@supabase/supabase-js');
+const db = require("../db/index");
 
 // router.get("/", async (req, res) => {
 // 	const notifData = await db.query(`Select * from notification order by notification_id asc`);
@@ -16,10 +15,6 @@ const { createClient } = require('@supabase/supabase-js');
 // });
 
 // module.exports = router;
-
-const supabaseUrl = 'https://vxitllncvfyiozcpfzgs.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ4aXRsbG5jdmZ5aW96Y3BmemdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYzODQzMjYsImV4cCI6MjAzMTk2MDMyNn0.a088hUhrFv8bLkro2PLpkkpscCnsRDKu7nKXu5r2BRo';
-const db = createClient(supabaseUrl, supabaseKey);
 
 router.get("/", async (req, res) => {
     let { data: notifData, error } = await db
