@@ -1,27 +1,47 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const db = require('../db/index');
 
 router.post('/', async(req, res) => {
+    const { district } = req.body
     // if(req.body.district) {
     //     res.json({ hap: true, status: "Successful"});
     // }
-    if (req.body.district == "" || req.body.district == "Tất cả") {
-        var yardInfo = await db.query(
-            "Select * from badminton_yard");
-        if (yardInfo.length > 0) {
+    if (district == "" || district == "Tất cả") {
+        // var yardInfo = await db.query(
+        //     "Select * from badminton_yard");
+        const { data: yardInfo, error: errorYard } = await db
+            .from("badminton_yard")
+            .select("*")
+        
+        if (errorYard) {
+            console.error(errorYard);
+            return;
+        }    
+
+        if (yardInfo && yardInfo.length > 0) {
             console.log("Court found");
+            res.json({ data: yardInfo, status: "Successful"});
         }
-        res.json({ data: yardInfo, status: "Successful"});
     }
     else {
-        var yardInfo = await db.query(
-            "Select * from badminton_yard where address like $1", 
-            '%'+[req.body.district] + '%');
+        // var yardInfo = await db.query(
+        //     "Select * from badminton_yard where address like $1", 
+        //     '%'+[req.body.district] + '%');
+        const { data:yardInfo, error: errorYard } = await db
+            .form("badminton_yard")
+            .select("*")
+            .ilike("address", `%${district}%`) 
+        
+        if ( errorYard ) {
+            console.error(errorYard)
+            return;
+        }    
         if (yardInfo.length > 0) {
             console.log("Court found");
+            res.json({ data: yardInfo, status: "Successful"});
         }
-        res.json({ data: yardInfo, status: "Successful"});
+        
     }
 });
 

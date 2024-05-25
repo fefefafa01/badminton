@@ -140,7 +140,7 @@
               <div class="sub-menu">
                 <div class="user-info">
                   <img src="../../assets/images/TAI KHOAN.png" alt="this is logo" />
-                  <h3>Khoa</h3>
+                  <h3>{{name}}</h3>
                 </div>
                 <hr />
 
@@ -191,6 +191,7 @@ export default {
   },
   data() {
     return {
+      name: localStorage.getItem('user_name'),
       district: [
         'Tất cả',
         'Quận 1',
@@ -453,7 +454,16 @@ export default {
     },
     checkLoginStatus() {
       const isLoggedIn = localStorage.getItem('loggedIn')
-      this.isLoggedIn = isLoggedIn === 'true'
+      const isAdmin = localStorage.getItem('AdminloggedIn')
+      if (isLoggedIn) {
+        this.isLoggedIn = isLoggedIn === 'true'
+      }
+      else if (isAdmin) {
+        this.isLoggedIn = isAdmin === 'true'
+      }
+      else{
+        this.isLoggedIn = false
+      }
     },
     updateName(selectedLi) {
       // this.selectedDistrict = selectedLi;

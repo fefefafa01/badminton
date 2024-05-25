@@ -44,6 +44,7 @@ import { useDarkModeStore } from '@/stores/darkMode'
 import { useRouter } from 'vue-router'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
+// import { supabase } from '@/supabase/init'
 
 export default defineComponent({
   components: {

@@ -22,8 +22,8 @@ const tableClient = async () => {
   const response = await axios.post('http://localhost:5000/overView/tablePayments')
   console.log(response.data.table)
   table.clientData = response.data.table
-  console.log('table.clientData', table.clientData[0])
-  console.log('table.clientData[0].yard_id', table.clientData[0].yard_id)
+  console.log('table.clientData', table.clientData)
+  console.log('table.clientData[0].name', table.clientData[0].name)
 }
 onMounted(() => {
   tableClient()
@@ -108,13 +108,13 @@ const checked = (isChecked, client) => {
       <tr v-for="client in itemsPaginated" :key="client.id">
         <TableCheckboxCell v-if="checkable" @checked="checked($event, client)" />
         <td class="border-b-0 lg:w-6 before:hidden">
-          <UserAvatar :username="client.name" class="w-24 h-24 mx-auto lg:w-6 lg:h-6" />
+          <UserAvatar :username="client.customer.name" class="w-24 h-24 mx-auto lg:w-6 lg:h-6" />
         </td>
         <td data-label="Customer">
-          {{ client.name }}
+          {{ client.customer.name }}
         </td>
         <td data-label="Owner">
-          {{ client.owner_name }}
+          {{ client.yard_owner.owner_name }}
         </td>
         <td data-label="Payment">
           {{ client.total_cost }}
