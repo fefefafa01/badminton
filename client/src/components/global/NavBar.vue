@@ -257,7 +257,7 @@ export default {
         localStorage.setItem('mytime', this.mytime)
         localStorage.setItem('selectedDayOfWeek', this.selectedDayOfWeek)
         const currentPath = window.location.hash
-        if ((currentPath = '#/CourtDetail')) {
+        if (currentPath == '#/CourtDetail') {
           window.location.reload()
         }
       }
