@@ -69,7 +69,7 @@
         </div>
         <button class="delete-btn" @click="removeSlot(index)">Xóa</button>
       </div>
-      <button class="confirm-btn" @click="confirmBooking">Xác nhận</button>
+      <button class="confirm-btn" @click="confirmBooking()">Xác nhận</button>
     </div>
     <FooterBar />
   </div>
@@ -87,10 +87,12 @@ export default {
   data() {
     return {
       item: null,
+      date: null,
       times: [],
       rows: [],
       slots: [],
-      courts: []
+      courts: [],
+      unValidSlots: [],
     }
   },
 
@@ -100,17 +102,26 @@ export default {
 
   methods: {
     async CourtDetailStatus() {
+      this.date = localStorage.getItem('mytime')
       this.item = JSON.parse(localStorage.getItem('yardDetails'))
       try {
+        
         const response = await axios.post('http://localhost:5000/CourtDetail', {
-          item: this.item
+          item: this.item,
+          date: this.date
         })
+        var frame = response.data.frame
         for (var i = this.item.start_time; i <= this.item.end_time; i++) {
           this.times.push(`${i}:00`)
         }
         for (var i = 1; i <= response.data.count; i++) {
           this.rows.push(this.initializeRows(i, this.item.end_time - this.item.start_time + 1))
         }
+        for (var i = 0; i < frame.length; i++) {
+          this.rows[frame[i].court_num - 1].schedule[frame[i].time_slot - this.item.start_time].active = true
+          this.rows[frame[i].court_num - 1].schedule[frame[i].time_slot - this.item.start_time].type = 'filled'
+        }
+        console.log(this.rows);
       } catch (error) {
         // Handle error
         console.error(error)
@@ -152,6 +163,22 @@ export default {
         this.rows[courtIndex].schedule[timeIndex].active = true // Đặt trạng thái hoạt động là true
       }
       this.slots.push({ name: court, time: `${time} - ${parseInt(time) + 1}:00` })
+    },
+    async confirmBooking() {
+      try {
+        debugger;
+        const response = await axios.post('http://localhost:5000/saveFrame', {
+          date: this.date,
+          slots: this.slots,
+          yard_id: this.item.yard_id
+        })
+        if (response.data.status == "Successful") {
+          window.location.reload()
+        }
+      } catch (error) {
+        // Handle error
+        console.error(error)
+      }
     }
   }
 }

@@ -67,6 +67,7 @@ const changeAdminInfo = require("./routes/changeAdminInfo.js")
 const overView = require("./routes/overView.js")
 const CourtDetail = require("./routes/CourtDetail")
 const joinYard = require("./routes/joinYard.js")
+const saveFrame = require("./routes/saveFrame.js")
 
 const app = express();
 app.use(cors());
@@ -83,5 +84,6 @@ app.use("/changeAdminInfo", changeAdminInfo);
 app.use("/overView", overView)
 app.use("/CourtDetail", CourtDetail)
 app.use("/joinYard", joinYard)
+app.use("/saveFrame", saveFrame)
 
 app.listen(port, () => console.log("listening on port " + port));

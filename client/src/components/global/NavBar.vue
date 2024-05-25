@@ -235,6 +235,7 @@ export default {
     this.checkLoginStatus()
   },
   mounted() {
+    this.selectedDistrict = localStorage.getItem('selectedDistrict')
     this.wrapper = document.querySelector('.wrapper')
     this.options = document.querySelector('.options')
     this.districtTemp = this.district
@@ -256,6 +257,10 @@ export default {
         this.isDateTimeVisible = false
         localStorage.setItem('mytime', this.mytime)
         localStorage.setItem('selectedDayOfWeek', this.selectedDayOfWeek)
+        const currentPath = window.location.hash
+        if ((currentPath = '#/CourtDetail')) {
+          window.location.reload()
+        }
       }
     })
     const storedMytime = localStorage.getItem('mytime')
@@ -421,7 +426,14 @@ export default {
       window.location.href = '#/home'
     },
     redirectToListOfCourt() {
-      window.location.href = '#/ListOfCourt'
+      const currentPath = window.location.hash
+      const desiredPath = '#/ListOfCourt'
+
+      if (currentPath !== desiredPath) {
+        window.location.href = '#/ListOfCourt'
+      } else {
+        window.location.reload()
+      }
     },
     redirecttoJoinYard() {
       const currentPath = window.location.hash
