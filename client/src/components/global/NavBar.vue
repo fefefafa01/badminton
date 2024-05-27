@@ -489,8 +489,14 @@ export default {
       this.isSubMenuOpen = !this.isSubMenuOpen
     },
     logout() {
+      const currentPath = window.location.hash
+
       localStorage.removeItem('loggedIn')
-      window.location.href = '#/home'
+      if (currentPath !== '#/home') {
+        window.location.href = '#/home'
+      } else {
+        window.location.reload()
+      }      
     },
 
     toggleSlider() {

@@ -15,7 +15,7 @@ router.post('/', async(req, res) => {
             const match = await bcrypt.compare(password, loginInfo[0].password);
             if (match) {
             // if (req.body.password === loginInfo[0].password) {
-                res.json({ loggedIn: true, status: "Successful", name: loginInfo[0].name, email: email});
+                res.json({ loggedIn: true, status: "Successful", name: loginInfo[0].name, email: email, customerId: loginInfo[0].customer_id});
             }
             else {
                 res.json({ loggedIn: false, status: "Wrong Password"});
