@@ -29,9 +29,9 @@ router.post('/', async(req, res) => {
         //     "Select * from badminton_yard where address like $1", 
         //     '%'+[req.body.district] + '%');
         const { data:yardInfo, error: errorYard } = await db
-            .form("badminton_yard")
+            .from("badminton_yard")
             .select("*")
-            .ilike("address", `%${district}%`) 
+            .like("address", `%${district}%`) 
         
         if ( errorYard ) {
             console.error(errorYard)
