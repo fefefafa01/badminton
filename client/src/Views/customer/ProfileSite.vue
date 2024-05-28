@@ -20,7 +20,11 @@
               <span>Lịch sử đặt sân</span>
             </div>
             <hr />
-            <div class="item">
+            <div class="item" v-if="isAdmin" @click="redirectToAdmin">
+              <img src="@/assets/images/Change_password.png" alt="user-img" />
+              <span>Quay lại trang Admin</span>
+            </div>
+            <div class="item" v-else @click="redirectToResetPwd">
               <img src="@/assets/images/Change_password.png" alt="user-img" />
               <span>Đổi mật khẩu</span>
             </div>
@@ -189,6 +193,7 @@ const slicedBangTinData = ref([])
 const isMenuOpen = ref(false)
 const name = localStorage.getItem('user_name')
 const email = localStorage.getItem('user_email')
+const isAdmin = localStorage.getItem('AdminloggedIn')
 // Khai báo mảng items chứa thông tin về các sân cầu lông
 const items = ref([
   {
@@ -225,6 +230,14 @@ const redirectToProfile = () => {
 
 const redirectToHistory = () => {
   window.location.href = '#/History'
+}
+
+const redirectToAdmin = () => {
+  window.location.href = '#/admin/dashboard'
+}
+
+const redirectToResetPwd = () => {
+  window.location.href = '#/ResetPwd'
 }
 
 const logout = () => {
@@ -391,7 +404,7 @@ const logout = () => {
 .item1,
 .item2 {
   display: flex;
-  height: 130px;
+  height: 180px;
   width: 100%;
   // cursor: pointer;
   transition: transform 0.5s;
@@ -421,11 +434,11 @@ const logout = () => {
   flex: 82%; /* Chiếm 80% */
   font-family: 'Comfortaa';
   color: #ffffff;
-  font-size: 18px;
+  font-size: 1.5em;
 }
 
 .court-name {
-  font-size: x-large;
+  font-size: 1.5em;
 }
 .item2 {
   background-color: #45a29e;

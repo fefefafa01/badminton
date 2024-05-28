@@ -365,11 +365,11 @@ export default defineComponent({
   flex: 82%; /* Chiếm 80% */
   font-family: 'Comfortaa';
   color: #ffffff;
-  font-size: 22px;
+  font-size: 1.5em;
 }
 
 .court-name {
-  font-size: xx-large;
+  font-size: 1.5em;
 }
 .item2 {
   background-color: #45a29e;

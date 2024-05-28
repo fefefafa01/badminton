@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
           total_cost: total_cost, // Giả sử date là một biến chứa ngày tháng
       });
       if (insertPaymentError) {
-        console.error('Error inserting data:', insertPaymentError);
+        // console.error('Error inserting data:', insertPaymentError);
       }
 
     for (const slot of slots) {

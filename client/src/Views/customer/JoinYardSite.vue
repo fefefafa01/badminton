@@ -144,7 +144,6 @@
 <script>
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
-import Pagination from '@/components/items/Pagination.vue'
 import vueAwesomePaginate from '@/components/items/vue-awesome-paginate.vue'
 import axios from 'axios'
 import { reactive, onMounted } from 'vue'
@@ -153,7 +152,6 @@ export default {
   components: {
     NavBar,
     FooterBar,
-    Pagination,
     vueAwesomePaginate
   },
   data() {

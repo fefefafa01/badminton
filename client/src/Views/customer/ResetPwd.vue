@@ -5,22 +5,34 @@
       <div class="container">
         <div class="login">
           <h2>ĐẶT LẠI MẬT KHẨU</h2>
-          <form @submit.prevent="login">
+          <form @submit.prevent="resetPwd">
             <div class="form-group">
               <div class="input">
-                <input v-model="email" type="email" placeholder="Số điện thoại/Email" required />
-                <div v-if="loggedIn === false" class="error">
-                  <p>{{ status }}</p>
-                </div>
+                <input
+                  v-model="newPassword"
+                  type="password"
+                  placeholder="Vui lòng nhập mật khẩu mới"
+                  required
+                />
               </div>
               <div class="input">
-                <input v-model="password" type="password" placeholder="Mật khẩu" required />
-                <div v-if="loggedIn === false" class="error">
-                  <p>{{ status }}</p>
-                </div>
+                <input 
+                  v-model="confirmPassword" 
+                  type="password" 
+                  placeholder="Vui lòng nhập lại mật khẩu mới" 
+                  required 
+                  />
                 <span @click="redirectToForgetPwd">Bạn quên mật khẩu?</span>
               </div>
-              <button type="submit">ĐĂNG NHẬP</button>
+              <br />
+              <br />
+              <div v-if="loggedIn === false" class="error">
+                <p>{{ status }}</p>
+              </div>
+              <div v-else class="infor-required">
+                <p>Information required</p>
+              </div>
+              <button type="submit">Đổi mật khẩu</button>
             </div>
           </form>
         </div>
@@ -36,6 +48,7 @@ import { defineComponent } from 'vue'
 // import TinTC from "../components/items/TinTC.vue";
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
+import axios from 'axios'
 
 export default defineComponent({
   name: 'HeaderLoggin',
@@ -57,14 +70,42 @@ export default defineComponent({
 
   data() {
     return {
-      product: 'PC GVN Gaming AMD R5-5600X/ VGA RTX 3050',
-      accessory: 'RTX 4090 32GB Z790 1TB i9 14900K',
-      price: '19.190.000₫'
+      // product: 'PC GVN Gaming AMD R5-5600X/ VGA RTX 3050',
+      // accessory: 'RTX 4090 32GB Z790 1TB i9 14900K',
+      // price: '19.190.000₫'
+      email: window.localStorage.getItem('user_email'),
+      status: '',
+      newPassword: '',
+      confirmPassword: '',
+      loggedIn: true,
     }
   },
   methods: {
-    redirectToLogin() {
-      window.location.href = '#/Login'
+    redirectToSucess() {
+      window.location.href = '#/profile'
+    },
+    redirectToForgetPwd() {
+      window.location.href = '#/ForgetPwd'
+    },
+    async resetPwd() {
+      console.log(this.newPassword)
+      console.log(this.confirmPassword)
+      if (this.newPassword !== this.confirmPassword) {
+        this.loggedIn = false
+        this.status = 'Mật khẩu không trùng khớp'
+        console.log(this.status)
+      } else {
+        const response = await axios.post('http://localhost:5000/login/resetPwd', {
+          email: this.email,
+          password: this.newPassword
+        })
+        if (response.data.status === 'Successful') {
+          window.location.assign('#/profile')
+        } else {
+          this.loggedIn = false
+          this.status = response.data.status
+        }
+      }
     }
   }
 })
@@ -99,6 +140,7 @@ export default defineComponent({
 
 .login h2 {
   color: #45a29e;
+  font-size: 1.5em
 }
 
 form {
@@ -165,8 +207,16 @@ select:-webkit-autofill:focus {
   font-size: 1.1em;
 }
 
+.infor-required {
+  font-family: 'Comfortaa', Helvetica;
+  top: 100%;
+  color: white;
+  font-size: 1.1em;
+  align-self: center;
+}
+
+
 .form-group button {
-  margin-top: 30px;
   background-color: #1f2833;
   color: white;
   border: solid 1px #45a29e;

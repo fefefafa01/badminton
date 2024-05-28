@@ -7,11 +7,10 @@
           <h2>CHÀO MỪNG ĐẾN VỚI BK-ECOMERCIAL!</h2>
           <!-- <h2>ECOMERCIAL!</h2> -->
           <br />
-          <span>Tài khoản của bạn đã được đăng ký thành công</span>
+          <span>Đổi mật khẩu thành công</span>
           <br />
-          <div>VUI LÒNG ĐĂNG NHẬP ĐỂ TIẾP TỤC</div>
           <br />
-          <button @click="redirectToLogin">ĐĂNG NHẬP</button>
+          <button @click="redirectToHomepage">Quay lại trang chủ</button>
         </div>
       </div>
     </div>
@@ -62,8 +61,8 @@ import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 
 // Hàm điều hướng đến trang đăng nhập
-const redirectToLogin = () => {
-  window.location.href = '#/Login'
+const redirectToHomepage = () => {
+  window.location.href = '#/home'
 }
 </script>
 
@@ -104,6 +103,6 @@ const redirectToLogin = () => {
   border-radius: 50px;
   width: 200px;
   height: 50px;
-  font-size: 1.2em
+  font-size: 1.2em;
 }
 </style>
