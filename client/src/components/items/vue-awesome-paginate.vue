@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { toRef, type PropType } from "vue";
-import { computed } from "vue";
+import { toRef, type PropType } from 'vue'
+import { computed } from 'vue'
 
 // -------------------- //
 // ---> Properties <--- //
@@ -9,359 +9,348 @@ const props = defineProps({
   // Configuration props
   totalItems: {
     type: Number,
-    required: true,
+    required: true
   },
   itemsPerPage: {
     type: Number,
     default: 10,
     validator: (value: number) => {
       if (value <= 0) {
-        const message = "itemsPerPage attribute must be greater than 0.";
-        console.error(message);
-        throw new TypeError(message);
+        const message = 'itemsPerPage attribute must be greater than 0.'
+        console.error(message)
+        throw new TypeError(message)
       }
-      return true;
-    },
+      return true
+    }
   },
   currentPage: {
     type: Number,
     default: 1,
     validator: (value: number) => {
-      const message = "currentPage attribute must be greater than 0.";
+      const message = 'currentPage attribute must be greater than 0.'
       if (value <= 0) {
-        console.error(message);
-        throw new TypeError(message);
+        console.error(message)
+        throw new TypeError(message)
       }
-      return true;
-    },
+      return true
+    }
   },
   modelValue: {
     type: Number,
     required: true,
     validator: (value: number) => {
-      const message = "v-model is required and must be greater than 0.";
+      const message = 'v-model is required and must be greater than 0.'
       if (value <= 0) {
-        console.error(message);
-        throw new TypeError(message);
+        console.error(message)
+        throw new TypeError(message)
       }
-      return true;
-    },
+      return true
+    }
   },
   maxPagesShown: {
     type: Number,
     default: 5,
     validator: (value: number) => {
-      const message = "maxPagesShown attribute must be greater than 0.";
+      const message = 'maxPagesShown attribute must be greater than 0.'
       if (value <= 0) {
-        console.error(message);
-        throw new TypeError(message);
+        console.error(message)
+        throw new TypeError(message)
       }
-      return true;
-    },
+      return true
+    }
   },
   dir: {
-    type: String as PropType<"ltr" | "rtl">,
-    default: "ltr",
+    type: String as PropType<'ltr' | 'rtl'>,
+    default: 'ltr',
     validator: (value: string) => {
-      const message = 'dir attribute must be either "ltr" or "rtl".';
-      if (value !== "ltr" && value !== "rtl") {
-        console.error(message);
-        throw new TypeError(message);
+      const message = 'dir attribute must be either "ltr" or "rtl".'
+      if (value !== 'ltr' && value !== 'rtl') {
+        console.error(message)
+        throw new TypeError(message)
       }
-      return true;
-    },
+      return true
+    }
   },
   type: {
-    type: String as PropType<"link" | "button">,
-    default: "button",
+    type: String as PropType<'link' | 'button'>,
+    default: 'button',
     validator: (value: string) => {
-      const validTypess = ["link", "button"];
-      const message =
-        "type attribute must be one of the following: " +
-        validTypess.join(", ");
+      const validTypess = ['link', 'button']
+      const message = 'type attribute must be one of the following: ' + validTypess.join(', ')
       if (validTypess.indexOf(value) === -1) {
-        console.error(message);
-        throw new TypeError(message);
+        console.error(message)
+        throw new TypeError(message)
       }
-      return true;
-    },
+      return true
+    }
   },
   onClick: {
     type: Function,
-    default: () => {},
+    default: () => {}
   },
   locale: {
-    type: String as PropType<"en" | "ar" | "ir">,
-    default: "en",
+    type: String as PropType<'en' | 'ar' | 'ir'>,
+    default: 'en',
     validator: (value: string) => {
-      const validLocales = ["en", "ar", "ir"];
-      const message =
-        "locale attribute must be one of the following: " +
-        validLocales.join(", ");
+      const validLocales = ['en', 'ar', 'ir']
+      const message = 'locale attribute must be one of the following: ' + validLocales.join(', ')
       if (validLocales.indexOf(value) === -1) {
-        console.error(message);
-        throw new TypeError(message);
+        console.error(message)
+        throw new TypeError(message)
       }
-      return true;
-    },
+      return true
+    }
   },
   prevButtonContent: {
     type: String,
-    default: "<",
+    default: '<'
   },
   nextButtonContent: {
     type: String,
-    default: ">",
+    default: '>'
   },
   hidePrevNext: {
     type: Boolean,
-    default: false,
+    default: false
   },
   hidePrevNextWhenEnds: {
     type: Boolean,
-    default: false,
+    default: false
   },
   showBreakpointButtons: {
     type: Boolean,
-    default: true,
+    default: true
   },
   disableBreakpointButtons: {
     type: Boolean,
-    default: false,
+    default: false
   },
   startingBreakpointContent: {
     type: String,
-    default: "...",
+    default: '...'
   },
   endingBreakpointButtonContent: {
     type: String,
-    default: "...",
+    default: '...'
   },
   showJumpButtons: {
     type: Boolean,
-    default: false,
+    default: false
   },
   linkUrl: {
     type: String,
-    default: "#",
+    default: '#'
   },
   backwardJumpButtonContent: {
     type: String,
-    default: "<<",
+    default: '<<'
   },
   forwardJumpButtonContent: {
     type: String,
-    default: ">>",
+    default: '>>'
   },
   disablePagination: {
     type: Boolean,
-    default: false,
+    default: false
   },
   showEndingButtons: {
     type: Boolean,
-    default: false,
+    default: false
   },
   firstPageContent: {
     type: String,
-    default: "First",
+    default: 'First'
   },
   lastPageContent: {
     type: String,
-    default: "Last",
+    default: 'Last'
   },
 
   // Class props
   backButtonClass: {
     type: String,
-    default: "back-button",
+    default: 'back-button'
   },
   nextButtonClass: {
     type: String,
-    default: "next-button",
+    default: 'next-button'
   },
   firstButtonClass: {
     type: String,
-    default: "first-button",
+    default: 'first-button'
   },
   lastButtonClass: {
     type: String,
-    default: "last-button",
+    default: 'last-button'
   },
   numberButtonsClass: {
     type: String,
-    default: "number-buttons",
+    default: 'number-buttons'
   },
   startingBreakpointButtonClass: {
     type: String,
-    default: "starting-breakpoint-button",
+    default: 'starting-breakpoint-button'
   },
   endingBreakPointButtonClass: {
     type: String,
-    default: "ending-breakpoint-button",
+    default: 'ending-breakpoint-button'
   },
   firstPageButtonClass: {
     type: String,
-    default: "first-page-button",
+    default: 'first-page-button'
   },
   lastPageButtonClass: {
     type: String,
-    default: "last-page-button",
+    default: 'last-page-button'
   },
 
   // use this selector above all the other selectors because of css specificity
   paginateButtonsClass: {
     type: String,
-    default: "paginate-buttons",
+    default: 'paginate-buttons'
   },
   disabledPaginateButtonsClass: {
     type: String,
-    default: "disabled-paginate-buttons",
+    default: 'disabled-paginate-buttons'
   },
   activePageClass: {
     type: String,
-    default: "active-page",
+    default: 'active-page'
   },
   paginationContainerClass: {
     type: String,
-    default: "pagination-container",
+    default: 'pagination-container'
   },
   disabledBreakPointButtonClass: {
     type: String,
-    default: "disabled-breakpoint-button",
+    default: 'disabled-breakpoint-button'
   },
   backwardJumpButtonClass: {
     type: String,
-    default: "backward-jump-button",
+    default: 'backward-jump-button'
   },
   forwardJumpButtonClass: {
     type: String,
-    default: "forward-jump-button",
+    default: 'forward-jump-button'
   },
   disabledBackwardJumpButtonClass: {
     type: String,
-    default: "disabled-backward-jump-button",
+    default: 'disabled-backward-jump-button'
   },
   disabledBackButtonClass: {
     type: String,
-    default: "disabled-back-button",
+    default: 'disabled-back-button'
   },
   disabledFirstButtonClass: {
     type: String,
-    default: "disabled-first-button",
+    default: 'disabled-first-button'
   },
   disabledLastButtonClass: {
     type: String,
-    default: "disabled-last-button",
+    default: 'disabled-last-button'
   },
   disabledNextButtonClass: {
     type: String,
-    default: "disabled-next-button",
+    default: 'disabled-next-button'
   },
   disabledForwardJumpButtonClass: {
     type: String,
-    default: "disabled-forward-jump-button",
-  },
-});
+    default: 'disabled-forward-jump-button'
+  }
+})
 
 if (props.currentPage && !props.modelValue) {
   throw new Error(
-    "currentPage/current-page is now deprecated, use v-model instead to set the current page."
-  );
+    'currentPage/current-page is now deprecated, use v-model instead to set the current page.'
+  )
 }
 
 if (!props.modelValue) {
-  throw new TypeError(`v-model is required for the paginate component.`);
+  throw new TypeError(`v-model is required for the paginate component.`)
 }
 
 // -------------- //
 // ---> Refs <--- //
 // -------------- //
-const currentPageRef = toRef(props, "modelValue");
+const currentPageRef = toRef(props, 'modelValue')
 
 // ---------------- //
 // ---> Events <--- //
 // ---------------- //
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue'])
 
 // ----------------- //
 // ---> Methods <--- //
 // ----------------- //
 const onClickHandler = (number: number) => {
   // if number is equal to the current page, do nothing
-  if (number === currentPageRef.value) return;
+  if (number === currentPageRef.value) return
 
   // if number is greater than the total pages, do nothing
-  if (number > totalPages.value) return;
+  if (number > totalPages.value) return
 
   // if number is less than 1, do nothing
-  if (number < 1) return;
+  if (number < 1) return
 
   // if pagination is disabled, do nothing
-  if (props.disablePagination) return;
+  if (props.disablePagination) return
 
-  emit("update:modelValue", number);
-  props.onClick(number);
-};
+  emit('update:modelValue', number)
+  props.onClick(number)
+}
 const NumbersLocale = (number: number) => {
   switch (props.locale) {
-    case "en":
-      return number;
-    case "ar":
-      return number.toLocaleString("ar-SA");
-    case "ir":
-      return number.toLocaleString("fa-IR");
+    case 'en':
+      return number
+    case 'ar':
+      return number.toLocaleString('ar-SA')
+    case 'ir':
+      return number.toLocaleString('fa-IR')
     default:
-      return number;
+      return number
   }
-};
+}
 const navigationHandler = (page: number) => {
-  if (props.type !== "link") return "";
-  return props.linkUrl.replace("[page]", page.toString());
-};
+  if (props.type !== 'link') return ''
+  return props.linkUrl.replace('[page]', page.toString())
+}
 
 // ----------------------------- //
 // ---> Computed properties <--- //
 // ----------------------------- //
 //calculating total pages
-const totalPages = computed(() =>
-  Math.ceil(props.totalItems / props.itemsPerPage)
-);
+const totalPages = computed(() => Math.ceil(props.totalItems / props.itemsPerPage))
 // Pagination logic
 const paginate = computed(() => {
-  let startPage: number, endPage: number;
+  let startPage: number, endPage: number
   // if total pages are less than maximum pages to be displayed (maxPagesShown), then show all pages
   if (totalPages.value <= props.maxPagesShown) {
-    startPage = 1;
-    endPage = totalPages.value;
+    startPage = 1
+    endPage = totalPages.value
   } else {
     // total pages is more than maxPagesShown...
     // calculating start and end pages
-    let maxPagesShownBeforeCurrentPage = Math.floor(props.maxPagesShown / 2);
-    let maxPagesShownAfterCurrentPage = Math.ceil(props.maxPagesShown / 2) - 1;
+    let maxPagesShownBeforeCurrentPage = Math.floor(props.maxPagesShown / 2)
+    let maxPagesShownAfterCurrentPage = Math.ceil(props.maxPagesShown / 2) - 1
     if (currentPageRef.value <= maxPagesShownBeforeCurrentPage) {
       // current page is at the start of the pagination
-      startPage = 1;
-      endPage = props.maxPagesShown;
-    } else if (
-      currentPageRef.value + maxPagesShownAfterCurrentPage >=
-      totalPages.value
-    ) {
+      startPage = 1
+      endPage = props.maxPagesShown
+    } else if (currentPageRef.value + maxPagesShownAfterCurrentPage >= totalPages.value) {
       // current page is at the end of the pagination
-      startPage = totalPages.value - props.maxPagesShown + 1;
-      endPage = totalPages.value;
+      startPage = totalPages.value - props.maxPagesShown + 1
+      endPage = totalPages.value
     } else {
       // current page is somewhere in the middle of the pagination
-      startPage = currentPageRef.value - maxPagesShownBeforeCurrentPage;
-      endPage = currentPageRef.value + maxPagesShownAfterCurrentPage;
+      startPage = currentPageRef.value - maxPagesShownBeforeCurrentPage
+      endPage = currentPageRef.value + maxPagesShownAfterCurrentPage
     }
   }
   // create an array of pages to be displayed
-  let pages = Array.from(Array(endPage + 1 - startPage).keys()).map(
-    (i) => startPage + i
-  );
+  let pages = Array.from(Array(endPage + 1 - startPage).keys()).map((i) => startPage + i)
 
-  if (props.dir === "rtl") {
-    pages = pages.reverse();
+  if (props.dir === 'rtl') {
+    pages = pages.reverse()
   }
 
   return {
@@ -371,71 +360,61 @@ const paginate = computed(() => {
     totalPages: totalPages,
     startPage: startPage,
     endPage: endPage,
-    pages: pages,
-  };
-});
+    pages: pages
+  }
+})
 // rtl check
-const isRtl = computed(() => props.dir === "rtl");
+const isRtl = computed(() => props.dir === 'rtl')
 
 // ---------------------------------- //
 // ---> Components If Conditions <--- //
 // ---------------------------------- //
 const backButtonIfCondition = computed(() => {
-  if (isRtl.value)
-    return (
-      !props.hidePrevNextWhenEnds || currentPageRef.value !== totalPages.value
-    );
+  if (isRtl.value) return !props.hidePrevNextWhenEnds || currentPageRef.value !== totalPages.value
 
-  return !props.hidePrevNextWhenEnds || currentPageRef.value !== 1;
-});
+  return !props.hidePrevNextWhenEnds || currentPageRef.value !== 1
+})
 const nextButtonIfCondition = computed(() => {
-  if (isRtl.value)
-    return !props.hidePrevNextWhenEnds || currentPageRef.value !== 1;
+  if (isRtl.value) return !props.hidePrevNextWhenEnds || currentPageRef.value !== 1
 
-  return (
-    !props.hidePrevNextWhenEnds || currentPageRef.value !== totalPages.value
-  );
-});
+  return !props.hidePrevNextWhenEnds || currentPageRef.value !== totalPages.value
+})
 const startingBreakPointButtonIfCondition = computed(() => {
   if (isRtl.value) {
-    return paginate.value.pages[0] < totalPages.value - 1;
+    return paginate.value.pages[0] < totalPages.value - 1
   }
 
-  return paginate.value.pages[0] >= 3;
-});
+  return paginate.value.pages[0] >= 3
+})
 const endingBreakPointButtonIfCondition = computed(() => {
   if (isRtl.value) {
-    return paginate.value.pages[paginate.value.pages.length - 1] >= 3;
+    return paginate.value.pages[paginate.value.pages.length - 1] >= 3
   }
 
-  return (
-    paginate.value.pages[paginate.value.pages.length - 1] < totalPages.value - 1
-  );
-});
+  return paginate.value.pages[paginate.value.pages.length - 1] < totalPages.value - 1
+})
 const firstButtonIfCondition = computed(() => {
   if (isRtl.value) {
-    return paginate.value.pages[0] < totalPages.value;
+    return paginate.value.pages[0] < totalPages.value
   }
 
-  return paginate.value.pages[0] >= 2;
-});
+  return paginate.value.pages[0] >= 2
+})
 const lastButtonIfCondition = computed(() => {
   if (isRtl.value) {
-    return paginate.value.pages[paginate.value.pages.length - 1] >= 2;
+    return paginate.value.pages[paginate.value.pages.length - 1] >= 2
   }
 
-  return (
-    paginate.value.pages[paginate.value.pages.length - 1] < totalPages.value
-  );
-});
+  return paginate.value.pages[paginate.value.pages.length - 1] < totalPages.value
+})
 const firstPageButtonIfCondition = computed(() => {
-  if (currentPageRef.value === 1) return false;
-  return true;
-});
+  if (currentPageRef.value === 1) return false
+  return true
+})
 const lastPageButtonIfCondition = computed(() => {
-  if (currentPageRef.value === totalPages.value) return false;
-  return true;
-});
+  if (currentPageRef.value === totalPages.value) return false
+  return true
+})
 
 // --------------------------- //
 // ---> Validations Check <--- //
@@ -447,17 +426,15 @@ const lastPageButtonIfCondition = computed(() => {
 // }
 
 // if type attribute is link, then linkUrl attribute is required
-if (props.type === "link" && props.linkUrl === "#") {
-  console.error(`linkUrl attribute is required if type attribute is 'link'`);
-  throw new TypeError(
-    `linkUrl attribute is required if type attribute is 'link'`
-  );
+if (props.type === 'link' && props.linkUrl === '#') {
+  console.error(`linkUrl attribute is required if type attribute is 'link'`)
+  throw new TypeError(`linkUrl attribute is required if type attribute is 'link'`)
 }
 
 // if type attribute is link, then linkUrl string must contain "[page]"
-if (props.type === "link" && !props.linkUrl.includes("[page]")) {
-  console.error(`linkUrl attribute must contain '[page]' substring`);
-  throw new TypeError(`linkUrl attribute must contain '[page]' substring`);
+if (props.type === 'link' && !props.linkUrl.includes('[page]')) {
+  console.error(`linkUrl attribute must contain '[page]' substring`)
+  throw new TypeError(`linkUrl attribute must contain '[page]' substring`)
 }
 </script>
 
@@ -473,7 +450,7 @@ if (props.type === "link" && !props.linkUrl.includes("[page]")) {
         :class="[
           firstPageButtonClass,
           paginateButtonsClass,
-          disablePagination ? disabledPaginateButtonsClass : '',
+          disablePagination ? disabledPaginateButtonsClass : ''
         ]"
         :disabled="disablePagination"
       >
@@ -505,7 +482,7 @@ if (props.type === "link" && !props.linkUrl.includes("[page]")) {
           backwardJumpButtonClass,
           paginateButtonsClass,
           disablePagination ? disabledPaginateButtonsClass : '',
-          disablePagination ? disabledBackwardJumpButtonClass : '',
+          disablePagination ? disabledBackwardJumpButtonClass : ''
         ]"
         :disabled="disablePagination"
       >
@@ -519,17 +496,13 @@ if (props.type === "link" && !props.linkUrl.includes("[page]")) {
     <li v-if="!hidePrevNext && backButtonIfCondition">
       <component
         :is="type === 'button' ? 'button' : 'a'"
-        :href="
-          navigationHandler(isRtl ? currentPageRef + 1 : currentPageRef - 1)
-        "
-        @click.prevent="
-          onClickHandler(isRtl ? currentPageRef + 1 : currentPageRef - 1)
-        "
+        :href="navigationHandler(isRtl ? currentPageRef + 1 : currentPageRef - 1)"
+        @click.prevent="onClickHandler(isRtl ? currentPageRef + 1 : currentPageRef - 1)"
         :class="[
           backButtonClass,
           paginateButtonsClass,
           disablePagination ? disabledPaginateButtonsClass : '',
-          disablePagination ? disabledBackButtonClass : '',
+          disablePagination ? disabledBackButtonClass : ''
         ]"
         :disabled="disablePagination"
       >
@@ -549,7 +522,7 @@ if (props.type === "link" && !props.linkUrl.includes("[page]")) {
           firstButtonClass,
           paginateButtonsClass,
           disablePagination ? disabledPaginateButtonsClass : '',
-          disablePagination ? disabledFirstButtonClass : '',
+          disablePagination ? disabledFirstButtonClass : ''
         ]"
         :disabled="disablePagination"
       >
@@ -585,7 +558,7 @@ if (props.type === "link" && !props.linkUrl.includes("[page]")) {
           paginateButtonsClass,
           disableBreakpointButtons || disablePagination
             ? `${disabledPaginateButtonsClass} ${disabledBreakPointButtonClass}`
-            : '',
+            : ''
         ]"
       >
         <slot name="starting-breakpoint-button">
@@ -604,7 +577,7 @@ if (props.type === "link" && !props.linkUrl.includes("[page]")) {
           paginateButtonsClass,
           numberButtonsClass,
           page === currentPageRef ? activePageClass : '',
-          disablePagination ? disabledPaginateButtonsClass : '',
+          disablePagination ? disabledPaginateButtonsClass : ''
         ]"
         :disabled="disablePagination"
       >
@@ -640,7 +613,7 @@ if (props.type === "link" && !props.linkUrl.includes("[page]")) {
           paginateButtonsClass,
           disableBreakpointButtons || disablePagination
             ? `${disabledPaginateButtonsClass} ${disabledBreakPointButtonClass}`
-            : '',
+            : ''
         ]"
       >
         <slot name="ending-breakpoint-button">
@@ -659,7 +632,7 @@ if (props.type === "link" && !props.linkUrl.includes("[page]")) {
           lastButtonClass,
           paginateButtonsClass,
           disablePagination ? disabledPaginateButtonsClass : '',
-          disablePagination ? disabledLastButtonClass : '',
+          disablePagination ? disabledLastButtonClass : ''
         ]"
         :disabled="disablePagination"
       >
@@ -671,17 +644,13 @@ if (props.type === "link" && !props.linkUrl.includes("[page]")) {
     <li v-if="!hidePrevNext && nextButtonIfCondition">
       <component
         :is="type === 'button' ? 'button' : 'a'"
-        :href="
-          navigationHandler(isRtl ? currentPageRef - 1 : currentPageRef + 1)
-        "
-        @click.prevent="
-          onClickHandler(isRtl ? currentPageRef - 1 : currentPageRef + 1)
-        "
+        :href="navigationHandler(isRtl ? currentPageRef - 1 : currentPageRef + 1)"
+        @click.prevent="onClickHandler(isRtl ? currentPageRef - 1 : currentPageRef + 1)"
         :class="[
           paginateButtonsClass,
           nextButtonClass,
           disablePagination ? disabledPaginateButtonsClass : '',
-          disablePagination ? disabledNextButtonClass : '',
+          disablePagination ? disabledNextButtonClass : ''
         ]"
         :disabled="disablePagination"
       >
@@ -713,7 +682,7 @@ if (props.type === "link" && !props.linkUrl.includes("[page]")) {
           forwardJumpButtonClass,
           paginateButtonsClass,
           disablePagination ? disabledPaginateButtonsClass : '',
-          disablePagination ? disabledForwardJumpButtonClass : '',
+          disablePagination ? disabledForwardJumpButtonClass : ''
         ]"
         :disabled="disablePagination"
       >
@@ -732,7 +701,7 @@ if (props.type === "link" && !props.linkUrl.includes("[page]")) {
         :class="[
           lastPageButtonClass,
           paginateButtonsClass,
-          disablePagination ? disabledPaginateButtonsClass : '',
+          disablePagination ? disabledPaginateButtonsClass : ''
         ]"
         :disabled="disablePagination"
       >

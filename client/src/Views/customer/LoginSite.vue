@@ -105,11 +105,11 @@ export default defineComponent({
           localStorage.setItem('user_id', response.data.customerId)
           this.status = response.data.status
           console.log(this.status)
-          if(localStorage.getItem('booking')){
-            localStorage.removeItem('booking');
+          if (localStorage.getItem('booking')) {
+            localStorage.removeItem('booking')
             window.history.go(-1)
           }
-          window.location.assign('#/home') 
+          window.location.assign('#/home')
         } else if (response.data.AdminloggedIn) {
           localStorage.setItem('AdminloggedIn', true)
           localStorage.setItem('role', 'admin')

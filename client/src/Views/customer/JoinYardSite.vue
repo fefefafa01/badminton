@@ -21,18 +21,18 @@
             <div class="right-part flex">
               <div class="col-8 pr-10">
                 <div class="court-name">{{ item.name }}</div>
-                <p  style="font-size: 1.2em">
+                <p style="font-size: 1.2em">
                   <i class="fas fa-home text-white"></i>
                   {{ item.address }}
                 </p>
               </div>
               <div class="col">
                 <p style="font-size: 1.2em">
-                  <i class="fas fa-home text-white" ></i>
+                  <i class="fas fa-home text-white"></i>
                   price: {{ item.price }}vnd
                 </p>
                 <p style="font-size: 1.2em">
-                  <i class="fas fa-home text-white" ></i>
+                  <i class="fas fa-home text-white"></i>
                   date: {{ item.date }}
                 </p>
               </div>
@@ -48,7 +48,6 @@
             />
           </div>
         </div>
-        
       </div>
       <div class="col flex flex-col items-center">
         <div class="title">
@@ -146,7 +145,7 @@
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 import Pagination from '@/components/items/Pagination.vue'
-import vueAwesomePaginate from "@/components/items/vue-awesome-paginate.vue";
+import vueAwesomePaginate from '@/components/items/vue-awesome-paginate.vue'
 import axios from 'axios'
 import { reactive, onMounted } from 'vue'
 
@@ -155,7 +154,7 @@ export default {
     NavBar,
     FooterBar,
     Pagination,
-    vueAwesomePaginate,
+    vueAwesomePaginate
   },
   data() {
     return {
@@ -192,13 +191,13 @@ export default {
   },
   computed: {
     itemsPaginated() {
-      return this.news.slice(this.perPage * (this.currentPage -1), this.perPage * (this.currentPage))
+      return this.news.slice(this.perPage * (this.currentPage - 1), this.perPage * this.currentPage)
     },
     numPages() {
       return Math.ceil(this.news.length / this.perPage)
     },
     rows() {
-      return this.news.length;
+      return this.news.length
     },
     filteredData() {
       if (!this.selectedDistrict || this.selectedDistrict === 'Tất cả') {

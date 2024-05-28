@@ -31,14 +31,14 @@
           </div>
         </div>
         <div class="lg:px-6" style="padding: 0.75rem">
-            <vueAwesomePaginate
-              :total-items="place.length"
-              v-model="currentPage"
-              :items-per-page="perPage"
-              :max-pages-shown="3"
-              :on-click="clickHandler"
-            />
-          </div>
+          <vueAwesomePaginate
+            :total-items="place.length"
+            v-model="currentPage"
+            :items-per-page="perPage"
+            :max-pages-shown="3"
+            :on-click="clickHandler"
+          />
+        </div>
       </div>
     </div>
     <FooterBar />
@@ -48,13 +48,13 @@
 <script>
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
-import vueAwesomePaginate from "@/components/items/vue-awesome-paginate.vue"
+import vueAwesomePaginate from '@/components/items/vue-awesome-paginate.vue'
 import axios from 'axios'
 export default {
   components: {
     NavBar,
     FooterBar,
-    vueAwesomePaginate,
+    vueAwesomePaginate
   },
   data() {
     return {
@@ -65,8 +65,11 @@ export default {
   },
   computed: {
     itemsPaginated() {
-      return this.place.slice(this.perPage * (this.currentPage - 1), this.perPage * (this.currentPage ))
-    },
+      return this.place.slice(
+        this.perPage * (this.currentPage - 1),
+        this.perPage * this.currentPage
+      )
+    }
   },
   created() {
     this.ListOfCourtStatus()

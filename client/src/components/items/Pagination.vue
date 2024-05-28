@@ -25,96 +25,95 @@ export default {
       console.log(this.totalPages)
       // When on the first page
       if (this.currentPage === 1) {
-        return 1;
+        return 1
       }
       // When on the last page
       if (this.currentPage === this.totalPages) {
-        return this.totalPages - Math.min(this.maxVisibleButtons, this.totalPages) + 1;
+        return this.totalPages - Math.min(this.maxVisibleButtons, this.totalPages) + 1
       }
       // When in between
-      return this.currentPage - 1;
+      return this.currentPage - 1
     },
     pages() {
-      const range = [];
+      const range = []
 
-      for (let i = this.startPage;
+      for (
+        let i = this.startPage;
         i <= Math.min(this.startPage + this.maxVisibleButtons - 1, this.totalPages);
-        i+= 1 ) {
+        i += 1
+      ) {
         range.push({
           name: i,
           isDisabled: i === this.currentPage
-        });
+        })
       }
 
-      return range;
+      return range
     },
 
     isInFirstPage() {
-      return this.currentPage === 1;
+      return this.currentPage === 1
     },
     isInLastPage() {
-      return this.currentPage === this.totalPages;
-    },
+      return this.currentPage === this.totalPages
+    }
   },
   methods: {
     onClickFirstPage() {
-      this.$emit('pagechanged', 1);
+      this.$emit('pagechanged', 1)
     },
     onClickPreviousPage() {
-      this.$emit('pagechanged', this.currentPage - 1);
+      this.$emit('pagechanged', this.currentPage - 1)
     },
     onClickPage(page) {
-      this.$emit('pagechanged', page);
+      this.$emit('pagechanged', page)
     },
     onClickNextPage() {
-      this.$emit('pagechanged', this.currentPage + 1);
+      this.$emit('pagechanged', this.currentPage + 1)
     },
     onClickLastPage() {
-      this.$emit('pagechanged', this.totalPages);
+      this.$emit('pagechanged', this.totalPages)
     },
     isPageActive(page) {
-      return this.currentPage === page;
+      return this.currentPage === page
     }
   }
-};
+}
 </script>
 <template>
   <ul class="pagination">
     <li class="pagination-item">
-      <button type="button" @click="onClickFirstPage" :disabled="isInFirstPage">
-        First
-      </button>
+      <button type="button" @click="onClickFirstPage" :disabled="isInFirstPage">First</button>
     </li>
 
     <li class="pagination-item">
-      <button type="button" @click="onClickPreviousPage" :disabled="isInFirstPage">
-        Previous
-      </button>
+      <button type="button" @click="onClickPreviousPage" :disabled="isInFirstPage">Previous</button>
     </li>
 
     <li v-for="page in pages" class="pagination-item">
-      <button type="button" @click="onClickPage(page.name)" :disabled="page.isDisabled" :class="{ active: isPageActive(page.name) }">
+      <button
+        type="button"
+        @click="onClickPage(page.name)"
+        :disabled="page.isDisabled"
+        :class="{ active: isPageActive(page.name) }"
+      >
         {{ page.name }}
       </button>
     </li>
 
     <li class="pagination-item">
-      <button type="button" @click="onClickNextPage" :disabled="isInLastPage">
-        Next
-      </button>
+      <button type="button" @click="onClickNextPage" :disabled="isInLastPage">Next</button>
     </li>
 
     <li class="pagination-item">
-      <button type="button" @click="onClickLastPage" :disabled="isInLastPage">
-        Last
-      </button>
+      <button type="button" @click="onClickLastPage" :disabled="isInLastPage">Last</button>
     </li>
   </ul>
 </template>
 
 <style>
-button{
-  color: white
+button {
+  color: white;
 }
 .pagination {
   list-style-type: none;
@@ -125,7 +124,7 @@ button{
 }
 
 .active {
-  background-color: #4AAE9B;
+  background-color: #4aae9b;
   color: #ffffff;
 }
 </style>

@@ -7,7 +7,7 @@
           <img src="@/assets/images/TAI KHOAN.png" alt="user-img" />
           <div class="profile-txt">
             <span>Tài khoản của</span>
-            <h3>{{name}}</h3>
+            <h3>{{ name }}</h3>
           </div>
           <div :class="['profile-bar', { 'open-menu': isMenuOpen }]">
             <div class="item" @click="redirectToProfile">
@@ -42,11 +42,11 @@
           <div class="self-info col-xs-12 col-md-5">
             <div class="group">
               <div class="label">Họ và tên</div>
-              <div class="detail">{{name}}</div>
+              <div class="detail">{{ name }}</div>
             </div>
             <div class="group">
               <div class="label">Email</div>
-              <div class="detail">{{email}}</div>
+              <div class="detail">{{ email }}</div>
             </div>
           </div>
           <div class="self-info col-xs-12 col-md-5">
@@ -56,7 +56,7 @@
             </div>
             <div class="group">
               <div class="label">Tên tài khoản</div>
-              <div class="detail">{{email}}</div>
+              <div class="detail">{{ email }}</div>
             </div>
           </div>
         </div>
@@ -180,7 +180,7 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
-import { data } from 'autoprefixer';
+import { data } from 'autoprefixer'
 
 // Khai báo các biến sử dụng `ref` để tạo ra các biến phản ứng
 const notifData = ref([])
@@ -236,7 +236,7 @@ const logout = () => {
 <style lang="scss" scoped>
 .container {
   width: 100%;
-//  min-height: 500px;
+  //  min-height: 500px;
   height: fit-content;
   padding-top: 50px;
   padding-bottom: 20px;

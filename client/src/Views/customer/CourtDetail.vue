@@ -103,7 +103,7 @@ export default {
 
   methods: {
     async CourtDetailStatus() {
-      this.user_id = localStorage.getItem('user_id') 
+      this.user_id = localStorage.getItem('user_id')
       this.date = localStorage.getItem('mytime')
       this.item = JSON.parse(localStorage.getItem('yardDetails'))
       try {
@@ -169,44 +169,44 @@ export default {
           this.rows[courtIndex].schedule[timeIndex].active = true // Đặt trạng thái hoạt động là true
         }
         this.slots.push({ name: court, time: `${time} - ${parseInt(time) + 1}:00` })
-      }
-      else {
+      } else {
         localStorage.setItem('booking', true)
-        window.location.href = '#/Login';
-      } 
+        window.location.href = '#/Login'
+      }
     },
     async confirmBooking() {
-        if (this.slots != '') {
-          let confirmMsg = `Tổng số tiền là ${this.item.average_price * this.slots.length} đồng \n Bạn có muốn chuyển đến trang thanh toán?`
-          if(confirm(confirmMsg)) {
-            var paymentInfo = {
-              date: this.date,
-              slots: this.slots,
-              yard_id: this.item.yard_id,
-              total_cost: this.item.average_price * this.slots.length,
-              user_id: this.user_id
-            }
-            localStorage.setItem('paymentInfo', JSON.stringify(paymentInfo))
-            window.location.href = '#/Payment';
+      if (this.slots != '') {
+        let confirmMsg = `Tổng số tiền là ${
+          this.item.average_price * this.slots.length
+        } đồng \n Bạn có muốn chuyển đến trang thanh toán?`
+        if (confirm(confirmMsg)) {
+          var paymentInfo = {
+            date: this.date,
+            slots: this.slots,
+            yard_id: this.item.yard_id,
+            total_cost: this.item.average_price * this.slots.length,
+            user_id: this.user_id
           }
-          
-          // try {
-          //   const response = await axios.post('http://localhost:5000/saveFrame', {
-          //     date: this.date,
-          //     slots: this.slots,
-          //     yard_id: this.item.yard_id
-          //   })
-          //   if (response.data.status == "Successful") {
-          //     window.location.reload()
-          //   }
-          // } catch (error) {
-          //   // Handle error
-          //   console.error(error)
-          // }
+          localStorage.setItem('paymentInfo', JSON.stringify(paymentInfo))
+          window.location.href = '#/Payment'
         }
-        else {
-          alert("Vui lòng chọn khung thời gian bạn muốn đặt.")
-        }
+
+        // try {
+        //   const response = await axios.post('http://localhost:5000/saveFrame', {
+        //     date: this.date,
+        //     slots: this.slots,
+        //     yard_id: this.item.yard_id
+        //   })
+        //   if (response.data.status == "Successful") {
+        //     window.location.reload()
+        //   }
+        // } catch (error) {
+        //   // Handle error
+        //   console.error(error)
+        // }
+      } else {
+        alert('Vui lòng chọn khung thời gian bạn muốn đặt.')
+      }
     }
   }
 }

@@ -60,14 +60,14 @@
           </div>
         </div>
         <div class="lg:px-6" style="padding: 0.75rem">
-            <vueAwesomePaginate
-              :total-items="data.length"
-              v-model="currentPage"
-              :items-per-page="perPage"
-              :max-pages-shown="3"
-              :on-click="clickHandler"
-            />
-        </div>    
+          <vueAwesomePaginate
+            :total-items="data.length"
+            v-model="currentPage"
+            :items-per-page="perPage"
+            :max-pages-shown="3"
+            :on-click="clickHandler"
+          />
+        </div>
       </div>
     </div>
     <FooterBar />
@@ -133,35 +133,39 @@ export default defineComponent({
           courtName: 'Sân cầu lông Thiên Vân',
           address: '57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh',
           phoneNumber: '0913 404 924'
-        }, {
+        },
+        {
           imageSrc: 'https://limosa.vn/wp-content/uploads/2023/08/san-cau-long-cay-keo.jpg',
           courtName: 'Sân cầu lông ABC',
           address: '710/53/2, Lũy Bán Bích, Tân Thành, Tân Phú, Thành phố Hồ Chí Minh',
           phoneNumber: '0983 916 646'
-        }, {
+        },
+        {
           imageSrc:
             'https://sieuthicaulong.vn/images/badminton-yard/1688728199_gallery_san-cau-long-tan-phuc-1.jpg',
           courtName: 'Sân cầu lông Tấn Phúc',
           address: '36/48 Huỳnh Thiện Lộc, Hoà Thanh, Tân Phú, Thành phố Hồ Chí Minh',
           phoneNumber: '0903 938 919'
-        }, {
+        },
+        {
           imageSrc:
             'https://badmintonw.com/uploads/images/gioi-thieu-san-cau-long-tao-dan-diem-den-li-tuong-cho-long-thu-quan-1-10.png',
           courtName: 'Sân cầu lông Viettel',
           address: '57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh',
           phoneNumber: '0913404924'
-        }, {
+        },
+        {
           imageSrc: 'https://sieuthicaulong.vn/images/badminton-yard/1688381528_gallery_22.PNG',
           courtName: 'Sân cầu lông Lam Sơn',
           address: '320/1 Đ. Trần Bình Trọng, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
           phoneNumber: '0909 222 958'
         }
-      ],
+      ]
     }
   },
   computed: {
     itemsPaginated() {
-      return this.data.slice(this.perPage * (this.currentPage-1), (this.perPage * (this.currentPage ) ))
+      return this.data.slice(this.perPage * (this.currentPage - 1), this.perPage * this.currentPage)
     }
   },
 

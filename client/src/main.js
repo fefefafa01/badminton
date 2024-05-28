@@ -19,10 +19,7 @@ const pinia = createPinia()
 // Create Vue app
 const app = createApp(App)
 app.use(VueSplide)
-app.use(VueAwesomePaginate)
-.use(router)
-.use(pinia)
-.mount('#app')
+app.use(VueAwesomePaginate).use(router).use(pinia).mount('#app')
 
 // Init main store
 const mainStore = useMainStore(pinia)
