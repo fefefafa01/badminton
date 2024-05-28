@@ -92,7 +92,8 @@ export default {
       rows: [],
       slots: [],
       courts: [],
-      unValidSlots: []
+      unValidSlots: [],
+      user_id: ''
     }
   },
 
@@ -102,6 +103,7 @@ export default {
 
   methods: {
     async CourtDetailStatus() {
+      this.user_id = localStorage.getItem('user_id') 
       this.date = localStorage.getItem('mytime')
       this.item = JSON.parse(localStorage.getItem('yardDetails'))
       try {
@@ -160,28 +162,51 @@ export default {
       this.slots.splice(index, 1)
     },
     selectFrame(court, time, courtIndex, timeIndex) {
-      if (courtIndex !== -1 && timeIndex !== -1) {
-        // Đánh dấu ô này là đã được chọn
-        this.rows[courtIndex].schedule[timeIndex].type = 'filled' // Thay đổi loại của cell
-        this.rows[courtIndex].schedule[timeIndex].active = true // Đặt trạng thái hoạt động là true
+      if (localStorage.getItem('loggedIn')) {
+        if (courtIndex !== -1 && timeIndex !== -1) {
+          // Đánh dấu ô này là đã được chọn
+          this.rows[courtIndex].schedule[timeIndex].type = 'filled' // Thay đổi loại của cell
+          this.rows[courtIndex].schedule[timeIndex].active = true // Đặt trạng thái hoạt động là true
+        }
+        this.slots.push({ name: court, time: `${time} - ${parseInt(time) + 1}:00` })
       }
-      this.slots.push({ name: court, time: `${time} - ${parseInt(time) + 1}:00` })
+      else {
+        localStorage.setItem('booking', true)
+        window.location.href = '#/Login';
+      } 
     },
     async confirmBooking() {
-      try {
-        debugger
-        const response = await axios.post('http://localhost:5000/saveFrame', {
-          date: this.date,
-          slots: this.slots,
-          yard_id: this.item.yard_id
-        })
-        if (response.data.status == 'Successful') {
-          window.location.reload()
+        if (this.slots != '') {
+          let confirmMsg = `Tổng số tiền là ${this.item.average_price * this.slots.length} đồng \n Bạn có muốn chuyển đến trang thanh toán?`
+          if(confirm(confirmMsg)) {
+            var paymentInfo = {
+              date: this.date,
+              slots: this.slots,
+              yard_id: this.item.yard_id,
+              total_cost: this.item.average_price * this.slots.length,
+              user_id: this.user_id
+            }
+            localStorage.setItem('paymentInfo', JSON.stringify(paymentInfo))
+            window.location.href = '#/Payment';
+          }
+          
+          // try {
+          //   const response = await axios.post('http://localhost:5000/saveFrame', {
+          //     date: this.date,
+          //     slots: this.slots,
+          //     yard_id: this.item.yard_id
+          //   })
+          //   if (response.data.status == "Successful") {
+          //     window.location.reload()
+          //   }
+          // } catch (error) {
+          //   // Handle error
+          //   console.error(error)
+          // }
         }
-      } catch (error) {
-        // Handle error
-        console.error(error)
-      }
+        else {
+          alert("Vui lòng chọn khung thời gian bạn muốn đặt.")
+        }
     }
   }
 }

@@ -125,6 +125,14 @@ const routes = [
   },
   {
     meta: {
+      title: 'Payment Page'
+    },
+    path: '/Payment',
+    name: 'Payment',
+    component: () => import('@/Views/customer/Payment.vue')
+  },
+  {
+    meta: {
       title: 'Register Page'
     },
     path: '/Register',

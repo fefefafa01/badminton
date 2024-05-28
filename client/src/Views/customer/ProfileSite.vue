@@ -7,7 +7,7 @@
           <img src="@/assets/images/TAI KHOAN.png" alt="user-img" />
           <div class="profile-txt">
             <span>Tài khoản của</span>
-            <h3>Khoa</h3>
+            <h3>{{name}}</h3>
           </div>
           <div :class="['profile-bar', { 'open-menu': isMenuOpen }]">
             <div class="item" @click="redirectToProfile">
@@ -42,11 +42,11 @@
           <div class="self-info col-xs-12 col-md-5">
             <div class="group">
               <div class="label">Họ và tên</div>
-              <div class="detail">Khoa Đăng</div>
+              <div class="detail">{{name}}</div>
             </div>
             <div class="group">
               <div class="label">Email</div>
-              <div class="detail">dangkhoa0521@gmail.com</div>
+              <div class="detail">{{email}}</div>
             </div>
           </div>
           <div class="self-info col-xs-12 col-md-5">
@@ -56,7 +56,7 @@
             </div>
             <div class="group">
               <div class="label">Tên tài khoản</div>
-              <div class="detail">dangkhoa0521@gmail.com</div>
+              <div class="detail">{{email}}</div>
             </div>
           </div>
         </div>
@@ -180,13 +180,15 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
+import { data } from 'autoprefixer';
 
 // Khai báo các biến sử dụng `ref` để tạo ra các biến phản ứng
 const notifData = ref([])
 const bangTinData = ref([])
 const slicedBangTinData = ref([])
 const isMenuOpen = ref(false)
-
+const name = localStorage.getItem('user_name')
+const email = localStorage.getItem('user_email')
 // Khai báo mảng items chứa thông tin về các sân cầu lông
 const items = ref([
   {
@@ -207,21 +209,6 @@ const items = ref([
 // Sử dụng `onMounted` để thực hiện các thao tác lấy dữ liệu khi component được gắn vào DOM
 onMounted(async () => {
   try {
-    // Lấy dữ liệu thông báo
-    const notif = await axios.get('http://localhost:5000/notif')
-    notifData.value = notif.data.notifData
-
-    // Lấy dữ liệu bangTin
-    const bangTin = await axios.get('http://localhost:5000/bangtin')
-    bangTinData.value = bangTin.data.bangTinData
-
-    // Cắt dữ liệu bangTinData thành các mảng nhỏ hơn
-    const slicedData = []
-    for (let i = 0; i < bangTinData.value.length; i += 3) {
-      slicedData.push(bangTinData.value.slice(i, i + 3))
-    }
-    slicedBangTinData.value = slicedData
-    console.log(slicedBangTinData)
   } catch (error) {
     console.error(error)
   }
@@ -281,11 +268,20 @@ const logout = () => {
   }
 }
 
+.image-profile:hover {
+  /* Màu sắc khi hover */
+  color: red; /* hoặc màu bạn muốn thay đổi khi hover */
+}
+
 .profile-txt {
   color: white;
   text-align: center;
   font-size: 1.5em;
   width: 100%;
+  transition-duration: 0.4s;
+}
+.profile-txt:hover {
+  color: mistyrose;
 }
 
 .profile-bar {

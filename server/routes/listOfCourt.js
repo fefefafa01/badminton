@@ -35,7 +35,7 @@ router.post('/', async(req, res) => {
         const { data:yardInfo, error: errorYard } = await db
             .from("badminton_yard")
             .select("*")
-            .ilike("address", `%${district}%`) 
+            .like("address", `%${district}%`) 
         
         if ( errorYard ) {
             console.error(errorYard)

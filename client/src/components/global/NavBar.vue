@@ -249,21 +249,20 @@ export default {
     const daysOfWeek = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy']
 
     flatpickr('.frame-2', {
-  dateFormat: 'd/m/Y',
-  onChange: (selectedDates) => {
-    const date = selectedDates[0]
-    this.selectedDayOfWeek = daysOfWeek[date.getDay()]
-    this.mytime = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()  // Corrected month calculation
-    this.isDateTimeVisible = false
-    localStorage.setItem('mytime', this.mytime)
-    localStorage.setItem('selectedDayOfWeek', this.selectedDayOfWeek)
-    const currentPath = window.location.hash
-    if (currentPath === '#/CourtDetail') {  // Use '===' for comparison
-      window.location.reload()
-    }
-  }
-})
-
+      dateFormat: 'd/m/Y',
+      onChange: (selectedDates) => {
+        const date = selectedDates[0]
+        this.selectedDayOfWeek = daysOfWeek[date.getDay()]
+        this.mytime = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()
+        this.isDateTimeVisible = false
+        localStorage.setItem('mytime', this.mytime)
+        localStorage.setItem('selectedDayOfWeek', this.selectedDayOfWeek)
+        const currentPath = window.location.hash
+        if (currentPath == '#/CourtDetail') {
+          window.location.reload()
+        }
+      }
+    })
     const storedMytime = localStorage.getItem('mytime')
     const storedSelectedDay = localStorage.getItem('selectedDayOfWeek')
     if (storedMytime) {

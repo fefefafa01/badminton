@@ -13,17 +13,16 @@ router.post('/',async (req, res) => {
         return;
     }    
     const { data: frame, error: errorFrame } = await db
-        .from("frame")
-        .select("time_slot, court:court_id(court_num)")
-        .eq("court.yard_id", item.yard_id)
+        .from("frame_court")
+        .select("time_slot, court_num")
+        .eq("yard_id", item.yard_id)
         .eq("time_frame", date)
-        .distinct()
+        
     if (errorFrame) {
         console.error(errorFrame)
         return;
     }  
-    
-    if (courtIds && courtIds.length > 0 && frame && frame.length > 0) {
+    if (courtIds && courtIds.length > 0) {
         res.json({ data: item, count: courtIds.length, frame: frame, status: "Successful" })
     }
 });
