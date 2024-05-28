@@ -23,13 +23,17 @@ router.post('/', async(req, res) => {
             console.log("Court found");
             res.json({ data: yardInfo, status: "Successful"});
         }
+        else {
+            console.log("No Court found");
+            res.json({data: [], status: "Failed"})
+        }
     }
     else {
         // var yardInfo = await db.query(
         //     "Select * from badminton_yard where address like $1", 
         //     '%'+[req.body.district] + '%');
         const { data:yardInfo, error: errorYard } = await db
-            .form("badminton_yard")
+            .from("badminton_yard")
             .select("*")
             .ilike("address", `%${district}%`) 
         

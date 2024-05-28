@@ -92,7 +92,7 @@ export default {
       rows: [],
       slots: [],
       courts: [],
-      unValidSlots: [],
+      unValidSlots: []
     }
   },
 
@@ -105,7 +105,6 @@ export default {
       this.date = localStorage.getItem('mytime')
       this.item = JSON.parse(localStorage.getItem('yardDetails'))
       try {
-        
         const response = await axios.post('http://localhost:5000/CourtDetail', {
           item: this.item,
           date: this.date
@@ -118,10 +117,14 @@ export default {
           this.rows.push(this.initializeRows(i, this.item.end_time - this.item.start_time + 1))
         }
         for (var i = 0; i < frame.length; i++) {
-          this.rows[frame[i].court_num - 1].schedule[frame[i].time_slot - this.item.start_time].active = true
-          this.rows[frame[i].court_num - 1].schedule[frame[i].time_slot - this.item.start_time].type = 'filled'
+          this.rows[frame[i].court_num - 1].schedule[
+            frame[i].time_slot - this.item.start_time
+          ].active = true
+          this.rows[frame[i].court_num - 1].schedule[
+            frame[i].time_slot - this.item.start_time
+          ].type = 'filled'
         }
-        console.log(this.rows);
+        console.log(this.rows)
       } catch (error) {
         // Handle error
         console.error(error)
@@ -166,13 +169,13 @@ export default {
     },
     async confirmBooking() {
       try {
-        debugger;
+        debugger
         const response = await axios.post('http://localhost:5000/saveFrame', {
           date: this.date,
           slots: this.slots,
           yard_id: this.item.yard_id
         })
-        if (response.data.status == "Successful") {
+        if (response.data.status == 'Successful') {
           window.location.reload()
         }
       } catch (error) {

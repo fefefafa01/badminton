@@ -4,10 +4,12 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './Router'
 import { useMainStore } from '@/stores/main.js'
+import { VueAwesomePaginate } from 'vue-awesome-paginate'
 
 import VueSplide from '@splidejs/vue-splide'
 import '@splidejs/vue-splide/css'
 import 'bootstrap/dist/css/bootstrap.css'
+import 'vue-awesome-paginate/dist/style.css'
 
 import './css/main.css'
 
@@ -17,7 +19,10 @@ const pinia = createPinia()
 // Create Vue app
 const app = createApp(App)
 app.use(VueSplide)
-app.use(router).use(pinia).mount('#app')
+app.use(VueAwesomePaginate)
+.use(router)
+.use(pinia)
+.mount('#app')
 
 // Init main store
 const mainStore = useMainStore(pinia)

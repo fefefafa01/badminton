@@ -7,7 +7,7 @@
       </div>
       <div class="container">
         <div
-          v-for="(item, index) in place"
+          v-for="(item, index) in itemsPaginated"
           :key="index"
           :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
           class="w-100"
@@ -30,6 +30,15 @@
             </p>
           </div>
         </div>
+        <div class="lg:px-6" style="padding: 0.75rem">
+            <vueAwesomePaginate
+              :total-items="place.length"
+              v-model="currentPage"
+              :items-per-page="perPage"
+              :max-pages-shown="3"
+              :on-click="clickHandler"
+            />
+          </div>
       </div>
     </div>
     <FooterBar />
@@ -39,18 +48,26 @@
 <script>
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
+import vueAwesomePaginate from "@/components/items/vue-awesome-paginate.vue"
 import axios from 'axios'
 export default {
   components: {
     NavBar,
-    FooterBar
+    FooterBar,
+    vueAwesomePaginate,
   },
   data() {
     return {
+      currentPage: 1,
+      perPage: 4,
       place: []
     }
   },
-
+  computed: {
+    itemsPaginated() {
+      return this.place.slice(this.perPage * (this.currentPage - 1), this.perPage * (this.currentPage ))
+    },
+  },
   created() {
     this.ListOfCourtStatus()
   },
@@ -71,13 +88,15 @@ export default {
     },
 
     redirectToCourt(item) {
-      if(localStorage.getItem('mytime')) {
+      if (localStorage.getItem('mytime')) {
         localStorage.setItem('yardDetails', JSON.stringify(item))
         window.location.href = '#/CourtDetail'
+      } else {
+        alert('Vui lòng nhập ngày đặt sân')
       }
-      else {
-        alert("Vui lòng nhập ngày đặt sân");
-      }
+    },
+    clickHandler(page) {
+      console.log(page)
     }
   }
 }
@@ -104,7 +123,6 @@ export default {
   padding-bottom: 100px;
   display: flex;
   flex-direction: column;
-  min-height: 500px;
   align-items: center; /* Căn giữa theo chiều ngang */
 }
 

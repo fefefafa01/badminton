@@ -49,12 +49,12 @@
 </template>
 
 <script>
-import { defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 import axios from 'axios'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 import { supabase } from '@/supabase/init'
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   components: {
@@ -62,7 +62,7 @@ export default defineComponent({
     FooterBar
   },
   setup() {
-    const router = useRouter();
+    const router = useRouter()
     const options = {
       rewind: true,
       gap: '1rem'

@@ -84,10 +84,10 @@ router.post('/resetPwd', async(req, res) => {
             console.error(errorReset);
             return;
         }    
-        res.json({status: 'Successful'})
+        res.json({status: 'Successful',email:email ,newPassword: hashPass})
     }
     else {
-        res.json({status: "Wrong Email"})
+        res.json({status: "Wrong Email", email: email})
     }
 })
 

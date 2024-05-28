@@ -1,7 +1,7 @@
 <template>
   <div class="back_ground">
     <NavBar />
-    <div class="container">
+    <div class="container flex min-h-screen">
       <div class="bar">
         <div class="image-profile" type="button" @click="toggleMenu">
           <img src="@/assets/images/TAI KHOAN.png" alt="user-img" />
@@ -249,7 +249,7 @@ const logout = () => {
 <style lang="scss" scoped>
 .container {
   width: 100%;
-  min-height: 500px;
+//  min-height: 500px;
   height: fit-content;
   padding-top: 50px;
   padding-bottom: 20px;
@@ -397,7 +397,7 @@ const logout = () => {
   display: flex;
   height: 130px;
   width: 100%;
-  cursor: pointer;
+  // cursor: pointer;
   transition: transform 0.5s;
 }
 

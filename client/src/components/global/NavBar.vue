@@ -51,7 +51,7 @@
           </div>
         </div>
 
-        <div class="frame-3 phuc_nav" type="button">
+        <!-- <div class="frame-3 phuc_nav" type="button">
           <img
             class="icon-clock"
             alt="Icon clock"
@@ -67,7 +67,7 @@
               <div>{{ selectedToTime }}</div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <!-- frame-4 -->
         <div class="frame-4 grid-item4" style="z-index: 3">
@@ -140,7 +140,7 @@
               <div class="sub-menu">
                 <div class="user-info">
                   <img src="../../assets/images/TAI KHOAN.png" alt="this is logo" />
-                  <h3>{{name}}</h3>
+                  <h3>{{ name }}</h3>
                 </div>
                 <hr />
 
@@ -249,20 +249,21 @@ export default {
     const daysOfWeek = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy']
 
     flatpickr('.frame-2', {
-      dateFormat: 'd/m/Y',
-      onChange: (selectedDates) => {
-        const date = selectedDates[0]
-        this.selectedDayOfWeek = daysOfWeek[date.getDay()]
-        this.mytime = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()
-        this.isDateTimeVisible = false
-        localStorage.setItem('mytime', this.mytime)
-        localStorage.setItem('selectedDayOfWeek', this.selectedDayOfWeek)
-        const currentPath = window.location.hash
-        if ((currentPath = '#/CourtDetail')) {
-          window.location.reload()
-        }
-      }
-    })
+  dateFormat: 'd/m/Y',
+  onChange: (selectedDates) => {
+    const date = selectedDates[0]
+    this.selectedDayOfWeek = daysOfWeek[date.getDay()]
+    this.mytime = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()  // Corrected month calculation
+    this.isDateTimeVisible = false
+    localStorage.setItem('mytime', this.mytime)
+    localStorage.setItem('selectedDayOfWeek', this.selectedDayOfWeek)
+    const currentPath = window.location.hash
+    if (currentPath === '#/CourtDetail') {  // Use '===' for comparison
+      window.location.reload()
+    }
+  }
+})
+
     const storedMytime = localStorage.getItem('mytime')
     const storedSelectedDay = localStorage.getItem('selectedDayOfWeek')
     if (storedMytime) {
@@ -350,6 +351,8 @@ export default {
         }
         this.minPrice = minVal
         this.maxPrice = maxVal
+        this.minPriceShow = minVal
+        this.maxPriceShow = maxVal
         localStorage.setItem('minPrice', this.minPrice)
         localStorage.setItem('maxPrice', this.maxPrice)
       })
@@ -396,13 +399,13 @@ export default {
       })
     })
 
-    const storedMinPrice = localStorage.getItem('minPrice')
-    const storedMaxPrice = localStorage.getItem('maxPrice')
-    if (storedMinPrice) {
-      this.minPrice = storedMinPrice
-      this.maxPrice = storedMaxPrice
-      this.isPriceVisible = false
-    }
+    // const storedMinPrice = localStorage.getItem('minPrice')
+    // const storedMaxPrice = localStorage.getItem('maxPrice')
+    // if (storedMinPrice) {
+    //   this.minPrice = storedMinPrice
+    //   this.maxPrice = storedMaxPrice
+    //   this.isPriceVisible = false
+    // }
 
     if (this.minPrice) {
       this.seperator = '-'
@@ -457,11 +460,9 @@ export default {
       const isAdmin = localStorage.getItem('AdminloggedIn')
       if (isLoggedIn) {
         this.isLoggedIn = isLoggedIn === 'true'
-      }
-      else if (isAdmin) {
+      } else if (isAdmin) {
         this.isLoggedIn = isAdmin === 'true'
-      }
-      else{
+      } else {
         this.isLoggedIn = false
       }
     },
@@ -490,7 +491,16 @@ export default {
     },
     logout() {
       localStorage.removeItem('loggedIn')
-      window.location.href = '#/home'
+      localStorage.removeItem('AdminloggedIn')
+      const currentPath = window.location.hash
+
+      const desiredPath = '#/home'
+
+      if (currentPath !== desiredPath) {
+        window.location.href = desiredPath
+      } else {
+        window.location.reload()
+      }
     },
 
     toggleSlider() {

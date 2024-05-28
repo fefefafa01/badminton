@@ -14,6 +14,11 @@ router.post('/info', async(req, res) => {
             .from('admin')
             .select("*")
             .eq('email', email)
+        
+        if (ErrorInfo) {
+            console.error(ErrorInfo);
+            return;
+        }    
         if (checkChangeInfo.length == 0) {
             // const checkExistance = await db.query(
             //     "Select * From admin Where email = $1 And name = $2",
@@ -24,6 +29,11 @@ router.post('/info', async(req, res) => {
                 .select("*")
                 .eq('email', curEmail)
                 .eq('name', curName)
+            
+            if (errorExistance) {
+                console.error(errorExistance);
+                return;
+            }    
             if (checkExistance.length > 0) {
                 // await db.query(
                 //     "Update admin Set email = $1, name = $2 Where email = $3 and name = $4",

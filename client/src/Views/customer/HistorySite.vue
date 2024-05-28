@@ -1,7 +1,7 @@
 <template>
   <div class="back_ground">
     <NavBar />
-    <div class="container">
+    <div class="container min-h-screen">
       <div class="bar">
         <div class="image-profile" type="button" @click="toggleMenu">
           <img src="@/assets/images/TAI KHOAN.png" alt="user-img" />
@@ -32,12 +32,12 @@
           </div>
         </div>
       </div>
-      <div class="dashboard">
+      <div class="dashboard flex flex-col">
         <div class="title">
           <h2>LỊCH SỬ ĐẶT SÂN</h2>
         </div>
         <div
-          v-for="(item, index) in items"
+          v-for="(item, index) in itemsPaginated"
           :key="index"
           :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
           class="w-100"
@@ -59,6 +59,15 @@
             </p>
           </div>
         </div>
+        <div class="lg:px-6" style="padding: 0.75rem">
+            <vueAwesomePaginate
+              :total-items="data.length"
+              v-model="currentPage"
+              :items-per-page="perPage"
+              :max-pages-shown="3"
+              :on-click="clickHandler"
+            />
+        </div>    
       </div>
     </div>
     <FooterBar />
@@ -71,11 +80,13 @@ import { defineComponent, ref, onMounted } from 'vue'
 import axios from 'axios'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
+import vueAwesomePaginate from '@/components/items/vue-awesome-paginate.vue'
 
 export default defineComponent({
   components: {
     NavBar,
-    FooterBar
+    FooterBar,
+    vueAwesomePaginate
   },
 
   setup() {
@@ -112,42 +123,45 @@ export default defineComponent({
 
   data() {
     return {
+      currentPage: 1,
+      perPage: 4,
       isMenuOpen: false,
-      items: [
+      data: [
         {
           imageSrc:
             'https://sonsanepoxy.vn/wp-content/uploads/2023/07/lap-dat-he-thong-den-chieu-san-cau-long.jpg',
           courtName: 'Sân cầu lông Thiên Vân',
           address: '57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh',
           phoneNumber: '0913 404 924'
-        },
-        {
+        }, {
           imageSrc: 'https://limosa.vn/wp-content/uploads/2023/08/san-cau-long-cay-keo.jpg',
           courtName: 'Sân cầu lông ABC',
           address: '710/53/2, Lũy Bán Bích, Tân Thành, Tân Phú, Thành phố Hồ Chí Minh',
           phoneNumber: '0983 916 646'
-        },
-        {
+        }, {
           imageSrc:
             'https://sieuthicaulong.vn/images/badminton-yard/1688728199_gallery_san-cau-long-tan-phuc-1.jpg',
           courtName: 'Sân cầu lông Tấn Phúc',
           address: '36/48 Huỳnh Thiện Lộc, Hoà Thanh, Tân Phú, Thành phố Hồ Chí Minh',
           phoneNumber: '0903 938 919'
-        },
-        {
+        }, {
           imageSrc:
             'https://badmintonw.com/uploads/images/gioi-thieu-san-cau-long-tao-dan-diem-den-li-tuong-cho-long-thu-quan-1-10.png',
           courtName: 'Sân cầu lông Viettel',
           address: '57 Nguyễn Nghiêm, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh',
           phoneNumber: '0913404924'
-        },
-        {
+        }, {
           imageSrc: 'https://sieuthicaulong.vn/images/badminton-yard/1688381528_gallery_22.PNG',
           courtName: 'Sân cầu lông Lam Sơn',
           address: '320/1 Đ. Trần Bình Trọng, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
           phoneNumber: '0909 222 958'
         }
-      ]
+      ],
+    }
+  },
+  computed: {
+    itemsPaginated() {
+      return this.data.slice(this.perPage * (this.currentPage-1), (this.perPage * (this.currentPage ) ))
     }
   },
 
@@ -172,7 +186,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .container {
   width: 100%;
-  min-height: 500px;
   height: fit-content;
   padding-top: 50px;
   padding-bottom: 20px;
@@ -260,6 +273,8 @@ export default defineComponent({
 
 .dashboard {
   width: 100%;
+  min-height: 500px;
+  align-items: center;
   hr {
     margin: 5px 0 5px;
   }
@@ -272,7 +287,6 @@ export default defineComponent({
   h2 {
     color: white;
     font-weight: 500;
-    border-left: 3px solid white;
     padding-left: 10px;
     font-size: 30px;
     line-height: 1.5;

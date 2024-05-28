@@ -76,7 +76,7 @@ export default defineComponent({
       try {
         // const notif = await axios.get('http://localhost:5000/notif')
         // notifData.value = notif.data.notifData
-        const { data:notif } = await supabase.from('notification').select('*')
+        const { data: notif } = await supabase.from('notification').select('*')
         console.log(notif)
         notifData.value = notif
 

@@ -96,13 +96,12 @@ export default defineComponent({
         this.loggedIn = false
         this.status = 'Mật khẩu không trùng khớp'
         console.log(this.status)
-      }
-      else {
+      } else {
         const response = await axios.post('http://localhost:5000/login/resetPwd', {
           email: this.email,
           password: this.newPassword
         })
-        if (response.data.status === 'Successful'){
+        if (response.data.status === 'Successful') {
           window.location.assign('#/Login')
         } else {
           this.loggedIn = false

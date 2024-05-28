@@ -57,6 +57,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const port = 5000;
+const index = require("./routes/index.js")
 const usersRouter = require("./routes/users.js");
 const loginRouter = require("./routes/login.js");
 const registerRouter = require("./routes/register.js");
@@ -74,6 +75,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use("/index", index)
 app.use("/users", usersRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);

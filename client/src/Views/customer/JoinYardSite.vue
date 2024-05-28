@@ -8,7 +8,7 @@
         </div>
         <div class="container">
           <div
-            v-for="(item, index) in news"
+            v-for="(item, index) in itemsPaginated"
             :key="index"
             :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
             class="w-100"
@@ -21,24 +21,34 @@
             <div class="right-part flex">
               <div class="col-8 pr-10">
                 <div class="court-name">{{ item.name }}</div>
-                <p>
-                  <i class="fas fa-home text-white" style="font-size: 23px;"></i>
+                <p  style="font-size: 1.2em">
+                  <i class="fas fa-home text-white"></i>
                   {{ item.address }}
-                </p>  
+                </p>
               </div>
               <div class="col">
-                <p>
-                  <i class="fas fa-home text-white" style="font-size: 23px;"></i>
+                <p style="font-size: 1.2em">
+                  <i class="fas fa-home text-white" ></i>
                   price: {{ item.price }}vnd
                 </p>
-                <p>
-                  <i class="fas fa-home text-white" style="font-size: 23px;"></i>
+                <p style="font-size: 1.2em">
+                  <i class="fas fa-home text-white" ></i>
                   date: {{ item.date }}
                 </p>
               </div>
             </div>
           </div>
+          <div class="lg:px-6" style="padding: 0.75rem">
+            <vueAwesomePaginate
+              :total-items="news.length"
+              v-model="currentPage"
+              :items-per-page="perPage"
+              :max-pages-shown="3"
+              :on-click="clickHandler"
+            />
+          </div>
         </div>
+        
       </div>
       <div class="col flex flex-col items-center">
         <div class="title">
@@ -49,40 +59,71 @@
             <form @submit.prevent="Submit" class="flex flex-col items-center">
               <div class="flex justify-center items-center mb-4 w-100">
                 <label for="Yards" class="font-bold mr-5 text-lg">*Quận: </label>
-                <select name="" id="district" v-model="selectedDistrict" @change="filterCourts" class="col rounded-2xl cursor-pointer">
-                  <option v-for="district in district" :key="district" :value="district">{{ district }}</option>
+                <select
+                  name=""
+                  id="district"
+                  v-model="selectedDistrict"
+                  @change="filterCourts"
+                  class="col rounded-2xl cursor-pointer"
+                >
+                  <option v-for="district in district" :key="district" :value="district">
+                    {{ district }}
+                  </option>
                 </select>
               </div>
               <div class="flex justify-center items-center mb-4 w-100">
                 <label for="yards" class="font-bold mr-5 text-lg">*Sân: </label>
                 <select id="yards" v-model="selectedName" class="col rounded-2xl cursor-pointer">
-                  <option v-for="item in filteredNames" :key="item.id" :value="item.name">{{ item.name }}</option>
+                  <option v-for="item in filteredNames" :key="item.id" :value="item.name">
+                    {{ item.name }}
+                  </option>
                 </select>
               </div>
               <div class="flex justify-center items-center mb-4 w-100">
                 <label for="yards" class="font-bold mr-5 text-lg">*Địa chỉ: </label>
                 <select id="yards" v-model="selectedAddress" class="col rounded-2xl cursor-pointer">
-                  <option v-for="item in filteredAddress" :key="item.id" :value="item.address">{{ item.address }}</option>
+                  <option v-for="item in filteredAddress" :key="item.id" :value="item.address">
+                    {{ item.address }}
+                  </option>
                 </select>
               </div>
               <div class="flex justify-center items-center mb-4 w-100">
                 <label for="Yards" class="font-bold mr-5 text-lg">*Thứ: </label>
-                <select name="" id="date" v-model="selectedDate" class="col rounded-2xl cursor-pointer">
+                <select
+                  name=""
+                  id="date"
+                  v-model="selectedDate"
+                  class="col rounded-2xl cursor-pointer"
+                >
                   <option v-for="date in date" :key="date" :value="date">{{ date }}</option>
                 </select>
               </div>
               <div class="flex justify-center items-center mb-4 w-100">
                 <label for="Yards" class="font-bold mr-5 text-lg">*Giá: </label>
-                <select name="" id="price" v-model="selectedPrice" class="col rounded-2xl cursor-pointer">
-                  <option v-for="item in filteredPrices" :key="item.id" :value="item.average_price">{{ item.average_price }}</option>
+                <select
+                  name=""
+                  id="price"
+                  v-model="selectedPrice"
+                  class="col rounded-2xl cursor-pointer"
+                >
+                  <option v-for="item in filteredPrices" :key="item.id" :value="item.average_price">
+                    {{ item.average_price }}
+                  </option>
                 </select>
               </div>
-              
+
               <div class="mb-4 w-100">
                 <label for="Yards" class="block font-bold mr-5 text-lg">Mô tả </label>
-                <textarea name="des" v-model="selectedDes" id="" cols="40" rows="5" class="w-100 rounded-lg"></textarea>
+                <textarea
+                  name="des"
+                  v-model="selectedDes"
+                  id=""
+                  cols="40"
+                  rows="5"
+                  class="w-100 rounded-lg"
+                ></textarea>
               </div>
-              
+
               <div v-if="fillData === false" class="error">
                 <p>{{ status }}</p>
               </div>
@@ -104,15 +145,25 @@
 <script>
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
+import Pagination from '@/components/items/Pagination.vue'
+import vueAwesomePaginate from "@/components/items/vue-awesome-paginate.vue";
 import axios from 'axios'
+import { reactive, onMounted } from 'vue'
 
 export default {
   components: {
     NavBar,
-    FooterBar
+    FooterBar,
+    Pagination,
+    vueAwesomePaginate,
   },
   data() {
     return {
+      currentPage: 1,
+      perPage: 4,
+      table: reactive({
+        clientData: []
+      }),
       fillData: true,
       district: [
         'Tất cả',
@@ -126,15 +177,7 @@ export default {
         'Quận Bình Thạnh',
         'TP Thủ Đức'
       ],
-      date: [
-        'Thứ Hai',
-        'Thứ Ba',
-        'Thứ Tư',
-        'Thứ Năm',
-        'Thứ Sáu',
-        'Thứ Bảy',
-        'Chủ Nhật',
-      ],
+      date: ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'],
       data: [],
       selectedDistrict: '',
       selectedName: '',
@@ -144,71 +187,78 @@ export default {
       selectedDes: '',
       selectedImg: '',
       status: '',
-      news: [],
+      news: []
     }
   },
   computed: {
+    itemsPaginated() {
+      return this.news.slice(this.perPage * (this.currentPage -1), this.perPage * (this.currentPage))
+    },
+    numPages() {
+      return Math.ceil(this.news.length / this.perPage)
+    },
+    rows() {
+      return this.news.length;
+    },
     filteredData() {
       if (!this.selectedDistrict || this.selectedDistrict === 'Tất cả') {
-        return this.data;
+        return this.data
       }
-      return this.data.filter(item => item.address.includes(this.selectedDistrict));
+      return this.data.filter((item) => item.address.includes(this.selectedDistrict))
     },
     filteredNames() {
       if (this.selectedDistrict === 'Tất cả') {
-        return this.data;
+        return this.data
       }
-      return this.data.filter(item => {
-        return (item.address.includes(this.selectedDistrict)) &&
-               (!this.selectedPrice || item.average_price === this.selectedPrice);
-      });
+      return this.data.filter((item) => {
+        return (
+          item.address.includes(this.selectedDistrict) &&
+          (!this.selectedPrice || item.average_price === this.selectedPrice)
+        )
+      })
     },
     filteredAddress() {
       if (this.selectedDistrict === 'Tất cả') {
         if (!this.selectedName) {
-          return this.data;
-        }
-        else {
-          return this.data.filter(item => item.name === this.selectedName)
+          return this.data
+        } else {
+          return this.data.filter((item) => item.name === this.selectedName)
         }
       } else {
-        return this.data.filter(item => {
-            const isDistMatch = item.address.includes(this.selectedDistrict);
-            const isNameMatch = !this.selectedName || item.name === this.selectedName;
-            return isDistMatch && isNameMatch
-          }
-        )
+        return this.data.filter((item) => {
+          const isDistMatch = item.address.includes(this.selectedDistrict)
+          const isNameMatch = !this.selectedName || item.name === this.selectedName
+          return isDistMatch && isNameMatch
+        })
       }
     },
     filteredPrices() {
       if (this.selectedDistrict === 'Tất cả') {
         if (!this.selectedName) {
-          return this.data;
-        }
-        else {
-          return this.data.filter(item => item.name === this.selectedName)
+          return this.data
+        } else {
+          return this.data.filter((item) => item.name === this.selectedName)
         }
       } else {
-        return this.data.filter(item => {
-            const isDistMatch = item.address.includes(this.selectedDistrict);
-            const isNameMatch = !this.selectedName || item.name === this.selectedName;
-            return isDistMatch && isNameMatch
-          }
-        )
+        return this.data.filter((item) => {
+          const isDistMatch = item.address.includes(this.selectedDistrict)
+          const isNameMatch = !this.selectedName || item.name === this.selectedName
+          return isDistMatch && isNameMatch
+        })
       }
     }
   },
   watch: {
     selectedName(newVal) {
-      const selectedItem = this.data.find(item => item.name === newVal);
+      const selectedItem = this.data.find((item) => item.name === newVal)
       if (selectedItem) {
-        this.selectedImg = selectedItem.linkimg;
+        this.selectedImg = selectedItem.linkimg
       }
     }
   },
   created() {
-    this.ListOfNews();
-    this.GetItem(); 
+    this.ListOfNews()
+    this.GetItem()
   },
   methods: {
     async ListOfNews() {
@@ -225,25 +275,37 @@ export default {
       try {
         const response = await axios.post('http://localhost:5000/joinYard/selectItem')
         console.log(response.data.data)
-        this.data = response.data.data 
-        
+        this.data = response.data.data
       } catch (error) {
         console.error(error)
       }
     },
 
     async Submit() {
-      console.log("name:", this.selectedName,
-            "address:", this.selectedAddress,
-            "date:", this.selectedDate,
-            "price:", this.selectedPrice,
-            "linkImg:", this.selectedImg,
-            "desc:", this.selectedDes)
-      if (this.selectedAddress == '' || this.selectedDate == '' || this.selectedDistrict == '' || this.selectedName == '' || this.selectedPrice == ''){
-        this.fillData = false;
+      console.log(
+        'name:',
+        this.selectedName,
+        'address:',
+        this.selectedAddress,
+        'date:',
+        this.selectedDate,
+        'price:',
+        this.selectedPrice,
+        'linkImg:',
+        this.selectedImg,
+        'desc:',
+        this.selectedDes
+      )
+      if (
+        this.selectedAddress == '' ||
+        this.selectedDate == '' ||
+        this.selectedDistrict == '' ||
+        this.selectedName == '' ||
+        this.selectedPrice == ''
+      ) {
+        this.fillData = false
         this.status = 'Fill all * information'
-      }
-      else {
+      } else {
         try {
           const response = await axios.post('http://localhost:5000/joinYard/submit', {
             name: this.selectedName,
@@ -254,14 +316,10 @@ export default {
             desc: this.selectedDes
           })
           this.reloadPage()
-          
-        }
-        
-        catch (error) {
+        } catch (error) {
           console.error(error)
         }
       }
-      
     },
     redirectToCourt(item) {
       localStorage.setItem('yardDetails', JSON.stringify(item))
@@ -277,11 +335,13 @@ export default {
       } else {
         window.location.reload()
       }
+    },
+    clickHandler(page) {
+      console.log(page)
     }
-  },
+  }
 }
 </script>
-
 
 <style lang="scss" scoped>
 .title {
@@ -301,7 +361,7 @@ export default {
   width: 100%;
   height: auto;
   padding-top: 40px;
-  padding-bottom: 100px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: column;
   min-height: 500px;
@@ -319,7 +379,7 @@ export default {
 .item2 {
   z-index: 0;
   display: flex;
-  height: 130px;
+  height: 180px;
   max-width: 1200px;
 }
 
@@ -362,7 +422,7 @@ export default {
 }
 
 .court-name {
-  font-size: x-large;
+  font-size: xx-large;
 }
 
 .image-container {
@@ -415,7 +475,5 @@ select {
   font-size: 1.1em;
   align-self: center;
   font-weight: bold;
-
 }
-
 </style>
