@@ -3,23 +3,22 @@ const router = express.Router();
 const db = require("../db");
 
 router.post("/", async (req, res) => {
-  const date = req.body.date;
-  const slots = req.body.slots;
-  const yard_id = req.body.yard_id;
-  const total_cost = req.body.total_cost;
-  const user_id = req.body.user_id;
+  const { date, slots, yard_id, total_cost, user_id } = req.body;
   try {
-    let payment_id = date+slots[0].name+slots[0].time+yard_id;
-    const {  error: insertPaymentError} = await db
+    let description = date+slots[0].name+slots[0].time+yard_id;
+    const { data: payment, error: insertPaymentError} = await db
       .from('payment')
       .insert({
-          payment_id: payment_id,
           customer_id: user_id,
           total_cost: total_cost, // Giả sử date là một biến chứa ngày tháng
-      });
-      if (insertPaymentError) {
-        // console.error('Error inserting data:', insertPaymentError);
-      }
+          payment_description: description
+      })
+      .select();
+    if (insertPaymentError) {
+        console.error('Error inserting data:', insertPaymentError);
+    }  
+
+    console.log(payment)
 
     for (const slot of slots) {
       var temp = slot.name.split(" ");
@@ -41,23 +40,25 @@ router.post("/", async (req, res) => {
       }
 
       const court_id = courts.court_id; // Giả sử chỉ một bản ghi được trả về
-      const frame_id = court_id+date+time_slot
-      const {  error: insertError} = await db
+      const frame_desc = court_id+date+time_slot
+      const { data: frame, error: insertError } = await db
       .from('frame')
       .insert({
-          frame_id: frame_id,
+          frame_desc: frame_desc,
           court_id: court_id,
           time_frame: date, // Giả sử date là một biến chứa ngày tháng
           time_slot: time_slot // Giả sử time_slot là một biến chứa thông tin về khung giờ
-      });
+      })
+      .select();
       if (insertError) {
         console.error('Error inserting data:', insertError);
       }
       const {  error: insertErrorBooking} = await db
       .from('booking')
       .insert({
-          frame_id: frame_id,
-          payment_id: payment_id,
+          frame_id: frame[0].frame_id,
+          payment_id: payment[0].payment_id,
+          payment_desc: payment[0].payment_description,
       });
       if (insertErrorBooking) {
         console.error('Error inserting data:', insertErrorBooking);

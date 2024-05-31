@@ -3,7 +3,7 @@ const router = express.Router();
 const db  = require('../db/index');
 
 router.post('/info', async(req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { email, curEmail, curName, name } = req.body;
     if (req.body.email != req.body.curEmail){
         // const checkChangeInfo = await db.query(
@@ -107,7 +107,7 @@ router.post('/info', async(req, res) => {
 
 router.post('/password', async(req, res) => {
     const { email, curPass, password } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     // var checkPassword = await db.query(
     //   `Select * From admin Where email = $1 and password = $2`,
     //   [req.body.email, req.body.curPass]

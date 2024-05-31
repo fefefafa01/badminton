@@ -56,7 +56,7 @@ const handleLogout = () => {
       </div>
 
       <ul>
-        <AsideMenuItem :item="logoutItem" @menu-click="menuClick" @click="handleLogout" />
+        <AsideMenuItem :item="logoutItem" @click="handleLogout" />
       </ul>
     </div>
   </aside>

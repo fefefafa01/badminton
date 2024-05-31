@@ -37,7 +37,18 @@ router.post('/table', async(req, res) => {
   }
 })
 
-router.post('/tableYards', async(req, res) => {
+router.post('/changeUser', async(req, res) => {
+  console.log('access')
+  const {email, nameChanged, emailChanged} = req.body;
+  const { data: findUser, error: findError } = await db
+    .from('customer')
+    .select('*')
+    .update()
+    .eq('email', email)
+
+})
+
+router.post('/tableYards', async(req, res) => { 
   // const table = await db.query(
   //   `Select yard_id, badminton_yard.name, address, phone_num, owner_name
   //   From badminton_yard 
@@ -79,7 +90,7 @@ router.post('/tablePayments', async (req, res) => {
     return;
   }
   if (table && table.length > 0) {
-    console.log(table);
+    // console.log(table);
     res.json({table: table})  
   }    
   

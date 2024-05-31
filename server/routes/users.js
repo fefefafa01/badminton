@@ -9,7 +9,7 @@ router.get('/',async (req, res) => {
         res.json(rows)
     })
     .catch(error =>{
-        console.log(error)
+        console.error(error)
     })
 });
 

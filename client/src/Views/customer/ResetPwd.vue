@@ -16,12 +16,12 @@
                 />
               </div>
               <div class="input">
-                <input 
-                  v-model="confirmPassword" 
-                  type="password" 
-                  placeholder="Vui lòng nhập lại mật khẩu mới" 
-                  required 
-                  />
+                <input
+                  v-model="confirmPassword"
+                  type="password"
+                  placeholder="Vui lòng nhập lại mật khẩu mới"
+                  required
+                />
                 <span @click="redirectToForgetPwd">Bạn quên mật khẩu?</span>
               </div>
               <br />
@@ -77,7 +77,7 @@ export default defineComponent({
       status: '',
       newPassword: '',
       confirmPassword: '',
-      loggedIn: true,
+      loggedIn: true
     }
   },
   methods: {
@@ -140,7 +140,7 @@ export default defineComponent({
 
 .login h2 {
   color: #45a29e;
-  font-size: 1.5em
+  font-size: 1.5em;
 }
 
 form {
@@ -214,7 +214,6 @@ select:-webkit-autofill:focus {
   font-size: 1.1em;
   align-self: center;
 }
-
 
 .form-group button {
   background-color: #1f2833;

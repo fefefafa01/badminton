@@ -43,6 +43,13 @@ const currentPage = ref(0)
 
 const checkedRows = ref([])
 
+const userRowName = ref('')
+const userRowEmail = ref('')
+
+//afterChange
+const changedName = ref(userRowName.value)
+const changedEmail = ref(userRowEmail.value)
+
 const itemsPaginated = computed(() =>
   items.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
 )
@@ -80,18 +87,30 @@ const checked = (isChecked, client) => {
     checkedRows.value = remove(checkedRows.value, (row) => row.id === client.id)
   }
 }
+
+const ActiveModal = (client) => {
+  isModalActive.value = true
+  userRowName.value = client.name
+  userRowEmail.value = client.email
+}
 </script>
 
 <template>
-  <CardBoxModal v-model="isModalActive" title="Customer Information">
-    <input type="text" />
+    <CardBoxModal
+    v-model="isModalActive"
+    title="Thông tin khách hàng"
+    buttonLabel="Submit"
+    has-cancel
+    has-form
+    buttonType="submit"
+    submit="changeCustomer"
+  >
   </CardBoxModal>
 
   <CardBoxModal v-model="isModalDangerActive" title="Please confirm" button="danger" has-cancel>
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
   </CardBoxModal>
-
   <table>
     <thead>
       <tr>
@@ -117,14 +136,6 @@ const checked = (isChecked, client) => {
         <td data-label="Email">
           {{ client.email }}
         </td>
-        <!-- <td data-label="City">
-          {{ client.city }}
-        </td> -->
-        <!-- <td data-label="Progress" class="lg:w-32">
-          <progress class="flex w-2/5 self-center lg:w-full" max="100" :value="client.progress">
-            {{ client.progress }}
-          </progress>
-        </td> -->
         <td data-label="Created Date" class="lg:w-1 whitespace-nowrap">
           <small class="text-gray-500 dark:text-slate-400" :title="client.created">{{
             client.created_date
@@ -132,7 +143,7 @@ const checked = (isChecked, client) => {
         </td>
         <td class="before:hidden lg:w-1 whitespace-nowrap">
           <BaseButtons type="justify-start lg:justify-end" no-wrap>
-            <BaseButton color="info" :icon="mdiAccountEdit" small @click="isModalActive = true" />
+            <BaseButton color="info" :icon="mdiAccountEdit" small @click="ActiveModal(client)" />
             <BaseButton
               color="danger"
               :icon="mdiTrashCan"
@@ -144,6 +155,7 @@ const checked = (isChecked, client) => {
       </tr>
     </tbody>
   </table>
+
   <div class="p-3 lg:px-6 border-t border-gray-100 dark:border-slate-800">
     <BaseLevel>
       <BaseButtons>

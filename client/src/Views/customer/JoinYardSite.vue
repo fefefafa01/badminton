@@ -13,28 +13,30 @@
             :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
             class="w-100"
           >
-            <div class="left-part">
-              <div class="image-container">
-                <img :src="item.linkimg" alt="CourtBadminton" />
+            <div>
+              <div class="left-part">
+                <div class="image-container">
+                  <img :src="item.linkimg" alt="CourtBadminton" />
+                </div>
               </div>
-            </div>
-            <div class="right-part flex">
-              <div class="col-8 pr-10">
-                <div class="court-name">{{ item.name }}</div>
-                <p style="font-size: 1.2em">
-                  <i class="fas fa-home text-white"></i>
-                  {{ item.address }}
-                </p>
-              </div>
-              <div class="col">
-                <p style="font-size: 1.2em">
-                  <i class="fas fa-home text-white"></i>
-                  price: {{ item.price }}vnd
-                </p>
-                <p style="font-size: 1.2em">
-                  <i class="fas fa-home text-white"></i>
-                  date: {{ item.date }}
-                </p>
+              <div class="right-part flex">
+                <div class="col-8 pr-10">
+                  <div class="court-name">{{ item.name }}</div>
+                  <p style="font-size: 1.2em">
+                    <i class="fas fa-home text-white"></i>
+                    {{ item.address }}
+                  </p>
+                </div>
+                <div class="col">
+                  <p style="font-size: 1.2em">
+                    <i class="fas fa-home text-white"></i>
+                    price: {{ item.price }}vnd
+                  </p>
+                  <p style="font-size: 1.2em">
+                    <i class="fas fa-home text-white"></i>
+                    date: {{ item.date }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
