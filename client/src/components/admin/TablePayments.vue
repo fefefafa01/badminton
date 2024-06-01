@@ -22,8 +22,6 @@ const tableClient = async () => {
   const response = await axios.post('http://localhost:5000/overView/tablePayments')
   console.log(response.data.table)
   table.clientData = response.data.table
-  console.log('table.clientData', table.clientData)
-  console.log('table.clientData[0].name', table.clientData[0].name)
 }
 onMounted(() => {
   tableClient()
@@ -83,7 +81,7 @@ const checked = (isChecked, client) => {
 </script>
 
 <template>
-  <CardBoxModal v-model="isModalActive" title="Payment Information">
+  <!-- <CardBoxModal v-model="isModalActive" title="Payment Information">
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
   </CardBoxModal>
@@ -91,7 +89,7 @@ const checked = (isChecked, client) => {
   <CardBoxModal v-model="isModalDangerActive" title="Please confirm" button="danger" has-cancel>
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
-  </CardBoxModal>
+  </CardBoxModal> -->
 
   <table>
     <thead>
@@ -100,7 +98,7 @@ const checked = (isChecked, client) => {
         <th />
         <th>Customer</th>
         <th>Owner</th>
-        <th>Payment</th>
+        <!-- <th>Payment</th> -->
         <th />
       </tr>
     </thead>
@@ -113,9 +111,9 @@ const checked = (isChecked, client) => {
         <td data-label="Customer">
           {{ client.customer.name }}
         </td>
-        <td data-label="Owner">
+        <!-- <td data-label="Owner">
           {{ client.yard_owner.owner_name }}
-        </td>
+        </td> -->
         <td data-label="Payment">
           {{ client.total_cost }}
         </td>

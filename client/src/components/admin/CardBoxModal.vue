@@ -95,41 +95,55 @@ if (props.tableType === 'customer') {
     )
   }
 } else if (props.tableType === 'court') {
-  if (props.hasForm) {
-    FormChange = reactive({
-      id: props.data.yard_id,
-      name: props.data.name,
-      address: props.data.address,
-      phone: props.data.phone_num
-      // owner: props.data.owner_name,
-    })
+  FormChange = reactive({
+    id: props.data.yard_id,
+    name: props.data.name,
+    address: props.data.address,
+    phone: props.data.phone_num
+    // owner: props.data.owner_name,
+  })
 
-    watch(
-      () => props.data,
-      (newData) => {
-        FormChange.id = newData.id
-        FormChange.name = newData.name
-        FormChange.address = newData.address
-        FormChange.phone = newData.phone_num
-      },
-      { immediate: true }
-    )
-  }
+  watch(
+    () => props.data,
+    (newData) => {
+      FormChange.id = newData.yard_id
+      FormChange.name = newData.name
+      FormChange.address = newData.address
+      FormChange.phone = newData.phone_num
+    },
+    { immediate: true }
+  )
 }
 
 const confirm = async () => {
-  if (props.hasForm) {
-    console.log(FormChange)
-    await axios.post('http://localhost:5000/overView/changeUser', {
-      email: FormChange.curEmail,
-      nameChanged: FormChange.name,
-      emailChanged: FormChange.email
-    })
-  } else {
-    console.log(FormChange)
-    await axios.post('http://localhost:5000/overView/deleteUser', {
-      email: FormChange.email
-    })
+  if (props.tableType === 'customer') {
+    if (props.hasForm) {
+      console.log(FormChange)
+      await axios.post('http://localhost:5000/overView/changeUser', {
+        email: FormChange.curEmail,
+        nameChanged: FormChange.name,
+        emailChanged: FormChange.email
+      })
+    } else {
+      console.log(FormChange)
+      await axios.post('http://localhost:5000/overView/deleteUser', {
+        email: FormChange.email
+      })
+    }
+  } else if (props.tableType === 'court') {
+    if (props.hasForm) {
+      console.log(FormChange)
+      await axios.post('http://localhost:5000/overView/changeYards', {
+        id: FormChange.id,
+        name: FormChange.name,
+        address: FormChange.address,
+        phone: FormChange.phone
+      })
+    } else {
+      await axios.post('http://localhost:5000/overView/deleteYards', {
+        id: FormChange.id
+      })
+    }
   }
   window.location.reload()
 }

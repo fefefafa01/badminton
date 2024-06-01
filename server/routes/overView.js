@@ -148,8 +148,49 @@ router.post('/tableYards', async(req, res) => {
   }
 })
 
-router.post('/tableYards', async(req, res) => {
+router.post('/changeYards', async(req, res) => {
+  const { id, name, address, phone } = req.body
+  const { data: dataChange, error: errorChange } = await db
+    .from("badminton_yard")
+    .select("*")
+    .eq("yard_id", id)
+  if (errorChange) {
+    console.error(errorChange)
+    return
+  }  
+  if (dataChange && dataChange.length > 0) {
+    const { data: dataUpdate, error: errorUpdate } = await db
+      .from("badminton_yard")
+      .update({ name: name, address: address, phone_num: phone })
+      .eq("yard_id", id)
+      .select();
+    if (errorUpdate) {
+      console.error(errorUpdate)
+      return
+    }  
+    if (dataUpdate && dataUpdate.length > 0) {
+      res.json({changed: true, status: 'Success', name: dataUpdate[0].name, address: dataUpdate[0].address, phone_num: dataUpdate[0].phone_num})
+    }
+    else {
+      res.json({changed: false, status: 'Changed'})
+    }  
+  }
+  else {
+    res.json({changed: false, status: 'Yards not exist'})
+  }
+})
 
+router.post('/deleteYards', async (req, res) => {
+  const { id } = req.body
+  const { error } = await db
+    .from("badminton_yard")
+    .delete()
+    .eq("yard_id", id)
+  if (error) {
+    console.error(error);
+    return;
+  }  
+  res.json({deleted: true, status: 'delete'})
 })
 
 router.post('/tablePayments', async (req, res) => {
@@ -164,8 +205,7 @@ router.post('/tablePayments', async (req, res) => {
     .from("payment")
     .select(
       `total_cost,
-      customer:customer_id (name),
-      yard_owner:owner_id (owner_name)
+      customer:customer_id (name)
       `
     );
   if(errorTable) { 

@@ -12,6 +12,7 @@ router.post("/", async (req, res) => {
           customer_id: user_id,
           total_cost: total_cost, // Giả sử date là một biến chứa ngày tháng
           payment_description: description
+          
       })
       .select();
     if (insertPaymentError) {

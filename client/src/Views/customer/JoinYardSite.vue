@@ -7,13 +7,8 @@
           <span style="font-size: 40px">Danh sách bảng tin</span>
         </div>
         <div class="container">
-          <div
-            v-for="(item, index) in itemsPaginated"
-            :key="index"
-            :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }"
-            class="w-100"
-          >
-            <div>
+          <div v-for="(item, index) in itemsPaginated" :key="index" class="w-100">
+            <div :class="{ item1: index % 2 === 0, item2: index % 2 !== 0 }" class="w-100">
               <div class="left-part">
                 <div class="image-container">
                   <img :src="item.linkimg" alt="CourtBadminton" />
@@ -22,21 +17,29 @@
               <div class="right-part flex">
                 <div class="col-8 pr-10">
                   <div class="court-name">{{ item.name }}</div>
-                  <p style="font-size: 1.2em">
+                  <p style="font-size: 1em">
                     <i class="fas fa-home text-white"></i>
                     {{ item.address }}
                   </p>
                 </div>
                 <div class="col">
-                  <p style="font-size: 1.2em">
+                  <p style="font-size: 1em">
                     <i class="fas fa-home text-white"></i>
                     price: {{ item.price }}vnd
                   </p>
-                  <p style="font-size: 1.2em">
+                  <p style="font-size: 1em">
                     <i class="fas fa-home text-white"></i>
                     date: {{ item.date }}
                   </p>
                 </div>
+              </div>
+            </div>
+            <div class="desc">
+              <div :key="index" class="w-100 desc_item">
+                <p style="font-size: 1em">
+                  <i class="fas fa-home text-white"></i>
+                  {{ item.description }}
+                </p>
               </div>
             </div>
           </div>
@@ -186,7 +189,8 @@ export default {
       selectedDes: '',
       selectedImg: '',
       status: '',
-      news: []
+      news: [],
+      activeIndex: null // Thêm dòng này
     }
   },
   computed: {
@@ -335,8 +339,8 @@ export default {
         window.location.reload()
       }
     },
-    clickHandler(page) {
-      console.log(page)
+    clickHandler(pageNum) {
+      console.log(pageNum)
     }
   }
 }
@@ -378,18 +382,15 @@ export default {
 .item2 {
   z-index: 0;
   display: flex;
-  height: 180px;
+  height: 150px;
   max-width: 1200px;
+  box-shadow:
+    0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
 .item1 {
   background: rgba(69, 162, 158, 0.6);
-  transition: transform 0.5s;
-}
-
-.item1:hover {
-  z-index: 1;
-  transform: scaleX(1.02);
   transition: transform 0.5s;
 }
 
@@ -398,17 +399,49 @@ export default {
   transition: transform 0.5s;
 }
 
+.item1:hover, 
 .item2:hover {
   z-index: 1;
   transform: scaleX(1.02);
   transition: transform 0.5s;
 }
 
+.item1:hover + .desc .desc_item,
+.item2:hover + .desc .desc_item{
+  max-height: 100px;
+  transition: max-height 0.5s ease-out, color 0.25s;
+  color: white;
+}
+
+.desc {
+  padding-right: 0.25rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+}
+
+.desc_item {
+  max-height: 0px;
+  height: 100px;
+  max-width: 1200px;
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  background: #2d4f57;
+  transition: max-height 1s ease-in, color 1s;
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  color: transparent;
+}
+
+.item1:hover .desc_item{
+
+}
+
 .left-part {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 18%; /* Chiếm 20% */
+  flex: 20%; /* Chiếm 20% */
 }
 
 .right-part {
@@ -421,7 +454,7 @@ export default {
 }
 
 .court-name {
-  font-size: xx-large;
+  font-size: 1.5em;
 }
 
 .image-container {
