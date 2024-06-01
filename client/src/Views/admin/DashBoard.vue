@@ -155,9 +155,9 @@ const transactionBarItems = computed(() => mainStore.history)
 
       <SectionTitleLineWithButton :icon="mdiCreditCardOutline" title="Payments" />
 
-      <CardBox has-table>
+      <!-- <CardBox has-table>
         <TablePayments />
-      </CardBox>
+      </CardBox> -->
     </SectionMain>
   </LayoutAuthenticated>
 </template>

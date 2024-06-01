@@ -27,6 +27,7 @@ router.post('/table', async(req, res) => {
   const { data: table, error: errorTable } = await db
     .from('customer')
     .select('customer_id, name, email, password, created_date')
+    .order('customer_id', { ascending: true })
   
   if (errorTable) {
     console.error(errorTable)
@@ -38,15 +39,92 @@ router.post('/table', async(req, res) => {
 })
 
 router.post('/changeUser', async(req, res) => {
-  console.log('access')
+  console.log(req.body)
   const {email, nameChanged, emailChanged} = req.body;
-  const { data: findUser, error: findError } = await db
-    .from('customer')
-    .select('*')
-    .update()
-    .eq('email', email)
 
-})
+  if ( email != emailChanged ) {
+    const { data: findUser, error: findError } = await db
+      .from('customer')
+      .select('*')
+      .eq('email', emailChanged)
+    if (findError) {
+      console.error(findError);
+      return;
+    }
+
+    if (findUser.length == 0) {
+      const { data: checkExistance, error: errorExistance } = await db
+        .from("customer")
+        .select("*")
+        .eq("email", email)
+      if (errorExistance) {
+        console.error(errorExistance)
+        return
+      }  
+      if (checkExistance.length > 0) {
+        const { data: updateCustomer, error: errorUpdate } = await db
+          .from("customer")
+          .update({ email: emailChanged, name: nameChanged })
+          .eq("email", email)
+          .select();
+        if (errorUpdate) {
+          console.error(errorUpdate);
+          return;
+        }  
+
+        const { data: inforChanged, error: errorChange } = await db
+          .from("customer")
+          .select("*")
+          .eq("email", emailChanged)
+          .eq("name", nameChanged)
+        if (errorChange) {
+          console.error(errorChange);
+          return;
+        }
+        if (inforChanged && inforChanged.length > 0) {
+          res.json({changed: true, status: 'Success', email: inforChanged[0].email, name: inforChanged[0].name})
+        }  
+        else {
+          res.json({changed: false, status: 'Change Failed'})
+        }
+      }
+      else {
+        res.json({changed: false, status: 'Info not Exist'})
+      }
+    }
+    else if (findUser.length > 0) {
+      res.json({changed: false, status: 'Email Exist'})
+    }
+  }
+  else {
+    const { data, error: errorUpdate } = await db
+      .from("customer")
+      .update({ name: nameChanged })
+      .eq("email", email)
+      .select()
+    if (errorUpdate) {
+      console.error(errorUpdate);
+      return;
+    }
+    if (data) {
+      res.json({ changed: true, status: 'Success', email: email, name: nameChanged })
+    }  
+  }
+  
+});
+
+router.post('/deleteUser', async(req, res) => {
+  const { email } = req.body
+  const { error } = await db
+    .from("customer")
+    .delete()
+    .eq("email", email)
+  if (error) {
+    console.error(error);
+    return;
+  }  
+  res.json({deleted: true, status: 'delete'})
+});
 
 router.post('/tableYards', async(req, res) => { 
   // const table = await db.query(
@@ -60,6 +138,7 @@ router.post('/tableYards', async(req, res) => {
   const { data: table, error: errorTable } = await db
     .from('badminton_yard')
     .select('yard_id, name, address, phone_num, yard_owner (owner_id, owner_name)')
+    .order('yard_id', { ascending: true })
   if (errorTable) {
     console.error(errorTable)
     return;
@@ -67,6 +146,10 @@ router.post('/tableYards', async(req, res) => {
   if (table && table.length > 0) {
     res.json({table: table})
   }
+})
+
+router.post('/tableYards', async(req, res) => {
+
 })
 
 router.post('/tablePayments', async (req, res) => {

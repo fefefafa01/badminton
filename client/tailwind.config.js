@@ -20,6 +20,7 @@ module.exports = {
       maxHeight: {
         "screen-menu": "calc(100vh - 3.5rem)",
         modal: "calc(100vh - 160px)",
+        modal1: "calc(100vh - 80px)",
       },
       transitionProperty: {
         position: "right, left, top, bottom, margin, padding",

@@ -22,9 +22,8 @@ const tableClient = async () => {
   const response = await axios.post('http://localhost:5000/overView/table')
   console.log(response.data.table)
   table.clientData = response.data.table
-  console.log('table.clientData', table.clientData[0])
-  console.log('table.clientData[0].customer_id', table.clientData[0].customer_id)
 }
+
 onMounted(() => {
   tableClient()
 })
@@ -34,21 +33,14 @@ const mainStore = useMainStore()
 const items = computed(() => table.clientData)
 
 const isModalActive = ref(false)
-
 const isModalDangerActive = ref(false)
 
 const perPage = ref(5)
-
 const currentPage = ref(0)
 
 const checkedRows = ref([])
 
-const userRowName = ref('')
-const userRowEmail = ref('')
-
-//afterChange
-const changedName = ref(userRowName.value)
-const changedEmail = ref(userRowEmail.value)
+const selectedClient = ref({ name: '', email: '' })
 
 const itemsPaginated = computed(() =>
   items.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
@@ -60,23 +52,19 @@ const currentPageHuman = computed(() => currentPage.value + 1)
 
 const pagesList = computed(() => {
   const pagesList = []
-
   for (let i = 0; i < numPages.value; i++) {
     pagesList.push(i)
   }
-
   return pagesList
 })
 
 const remove = (arr, cb) => {
   const newArr = []
-
   arr.forEach((item) => {
     if (!cb(item)) {
       newArr.push(item)
     }
   })
-
   return newArr
 }
 
@@ -89,28 +77,37 @@ const checked = (isChecked, client) => {
 }
 
 const ActiveModal = (client) => {
+  selectedClient.value = { ...client }
   isModalActive.value = true
-  userRowName.value = client.name
-  userRowEmail.value = client.email
+}
+
+const DangerActive = (client) => {
+  selectedClient.value = { ...client }
+  isModalDangerActive.value = true
 }
 </script>
 
 <template>
-    <CardBoxModal
+  <CardBoxModal
     v-model="isModalActive"
     title="Thông tin khách hàng"
     buttonLabel="Submit"
+    table-type="customer"
+    :data="selectedClient"
     has-cancel
     has-form
-    buttonType="submit"
-    submit="changeCustomer"
-  >
-  </CardBoxModal>
+  />
 
-  <CardBoxModal v-model="isModalDangerActive" title="Please confirm" button="danger" has-cancel>
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </CardBoxModal>
+  <CardBoxModal
+    v-model="isModalDangerActive"
+    title="Xác nhận"
+    button-label="Delete"
+    table-type="customer"
+    button="danger"
+    :data="selectedClient"
+    has-cancel
+  />
+
   <table>
     <thead>
       <tr>
@@ -118,8 +115,6 @@ const ActiveModal = (client) => {
         <th />
         <th>Name</th>
         <th>Email</th>
-        <!-- <th>City</th>
-        <th>Progress</th> -->
         <th>Created Date</th>
         <th />
       </tr>
@@ -144,12 +139,7 @@ const ActiveModal = (client) => {
         <td class="before:hidden lg:w-1 whitespace-nowrap">
           <BaseButtons type="justify-start lg:justify-end" no-wrap>
             <BaseButton color="info" :icon="mdiAccountEdit" small @click="ActiveModal(client)" />
-            <BaseButton
-              color="danger"
-              :icon="mdiTrashCan"
-              small
-              @click="isModalDangerActive = true"
-            />
+            <BaseButton color="danger" :icon="mdiTrashCan" small @click="DangerActive(client)" />
           </BaseButtons>
         </td>
       </tr>

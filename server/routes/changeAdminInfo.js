@@ -5,7 +5,7 @@ const db  = require('../db/index');
 router.post('/info', async(req, res) => {
     // console.log(req.body);
     const { email, curEmail, curName, name } = req.body;
-    if (req.body.email != req.body.curEmail){
+    if (email != curEmail){
         // const checkChangeInfo = await db.query(
         //     "Select * From admin where email = $1",
         //     [req.body.email]
@@ -98,7 +98,7 @@ router.post('/info', async(req, res) => {
         }    
         
         if (data) {
-            res.json({changed: true, status: 'Success', email: req.body.email, name: req.body.name})
+            res.json({changed: true, status: 'Success', email: email, name: name })
         }
         
     }    
