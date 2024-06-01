@@ -399,7 +399,7 @@ export default {
   transition: transform 0.5s;
 }
 
-.item1:hover, 
+.item1:hover,
 .item2:hover {
   z-index: 1;
   transform: scaleX(1.02);
@@ -407,9 +407,11 @@ export default {
 }
 
 .item1:hover + .desc .desc_item,
-.item2:hover + .desc .desc_item{
+.item2:hover + .desc .desc_item {
   max-height: 100px;
-  transition: max-height 0.5s ease-out, color 0.25s;
+  transition:
+    max-height 0.5s ease-out,
+    color 0.25s;
   color: white;
 }
 
@@ -426,15 +428,16 @@ export default {
   border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
   background: #2d4f57;
-  transition: max-height 1s ease-in, color 1s;
+  transition:
+    max-height 1s ease-in,
+    color 1s;
   padding-left: 0.5rem;
   display: flex;
   align-items: center;
   color: transparent;
 }
 
-.item1:hover .desc_item{
-
+.item1:hover .desc_item {
 }
 
 .left-part {
