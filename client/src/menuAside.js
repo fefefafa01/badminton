@@ -14,7 +14,7 @@ import {
   mdiHomeExportOutline
 } from '@mdi/js'
 
-import logo from '@/assets/images/BCB logo.png'
+import logo from '@/assets/images/BCB_logo.png'
 
 export default [
   {

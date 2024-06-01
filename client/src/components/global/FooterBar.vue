@@ -4,7 +4,7 @@
       <div class="row text-md-left">
         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
           <h5 class="text-uppercase font-weight-bold">Saigon Software</h5>
-          <img src="@/assets/images/BCB logo.png" alt="this is logo" height="150" width="150" />
+          <img src="@/assets/images/BCB_logo.png" alt="this is logo" height="150" width="150" />
         </div>
         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
           <h5 class="text-uppercase mb-4 font-weight-bold">HỖ TRỢ KHÁCH HÀNG</h5>

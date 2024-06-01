@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen" style="display: flex">
     <div class="col-5 d-flex justify-content-center align-items-center txt">
-      <img src="@/assets/images/BCB logo.png" class="img" alt="this is logo" />
+      <img src="@/assets/images/BCB_logo.png" class="img" alt="this is logo" />
     </div>
     <div class="col-7 d-flex align-items-baseline aboutUs justify-content-center">
       <h1 class="txt mb-4">About Us</h1>
