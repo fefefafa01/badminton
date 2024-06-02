@@ -253,7 +253,7 @@ export default {
       onChange: (selectedDates) => {
         const date = selectedDates[0]
         this.selectedDayOfWeek = daysOfWeek[date.getDay()]
-        this.mytime = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()
+        this.mytime = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
         this.isDateTimeVisible = false
         localStorage.setItem('mytime', this.mytime)
         localStorage.setItem('selectedDayOfWeek', this.selectedDayOfWeek)
