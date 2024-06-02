@@ -9,6 +9,7 @@ import BaseButtons from '@/components/admin/BaseButtons.vue'
 import BaseButton from '@/components/admin/BaseButton.vue'
 import UserAvatar from '@/components/admin/UserAvatar.vue'
 import axios from 'axios'
+import { backend } from '@/ENV/index'
 
 defineProps({
   checkable: Boolean
@@ -19,7 +20,7 @@ const table = reactive({
 })
 
 const tableClient = async () => {
-  const response = await axios.post('http://localhost:5000/overView/tablePayments')
+  const response = await axios.post(backend + 'overView/tablePayments')
   console.log(response.data.table)
   table.clientData = response.data.table
 }

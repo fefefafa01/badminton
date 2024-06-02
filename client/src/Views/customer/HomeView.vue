@@ -53,6 +53,7 @@ import { defineComponent, ref, onMounted } from 'vue'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 import axios from 'axios'
+import { backend } from '@/ENV/index'
 import { supabase } from '@/supabase/init'
 
 export default defineComponent({
@@ -74,13 +75,13 @@ export default defineComponent({
 
     onMounted(async () => {
       try {
-        // const notif = await axios.get('http://localhost:5000/notif')
+        // const notif = await axios.get(backend + 'notif')
         // notifData.value = notif.data.notifData
         const { data: notif } = await supabase.from('notification').select('*')
         console.log(notif)
         notifData.value = notif
 
-        const bangTin = await axios.get('http://localhost:5000/bangtin')
+        const bangTin = await axios.get(backend + 'bangtin')
         bangTinData.value = bangTin.data.bangTinData
         console.log(bangTinData)
 

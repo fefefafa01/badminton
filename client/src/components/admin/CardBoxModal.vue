@@ -17,6 +17,7 @@ import OverlayLayer from '@/components/admin/OverlayLayer.vue'
 import CardBoxComponentTitle from '@/components/admin/CardBoxComponentTitle.vue'
 import FormField from '@/components/admin/FormField.vue'
 import FormControl from '@/components/admin/FormControl.vue'
+import { backend } from '@/ENV/index'
 
 const props = defineProps({
   title: {
@@ -119,28 +120,28 @@ const confirm = async () => {
   if (props.tableType === 'customer') {
     if (props.hasForm) {
       console.log(FormChange)
-      await axios.post('http://localhost:5000/overView/changeUser', {
+      await axios.post(backend + 'overView/changeUser', {
         email: FormChange.curEmail,
         nameChanged: FormChange.name,
         emailChanged: FormChange.email
       })
     } else {
       console.log(FormChange)
-      await axios.post('http://localhost:5000/overView/deleteUser', {
+      await axios.post(backend + 'overView/deleteUser', {
         email: FormChange.email
       })
     }
   } else if (props.tableType === 'court') {
     if (props.hasForm) {
       console.log(FormChange)
-      await axios.post('http://localhost:5000/overView/changeYards', {
+      await axios.post(backend + 'overView/changeYards', {
         id: FormChange.id,
         name: FormChange.name,
         address: FormChange.address,
         phone: FormChange.phone
       })
     } else {
-      await axios.post('http://localhost:5000/overView/deleteYards', {
+      await axios.post(backend + 'overView/deleteYards', {
         id: FormChange.id
       })
     }

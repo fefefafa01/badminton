@@ -51,6 +51,7 @@
 <script>
 import { defineComponent } from 'vue'
 import axios from 'axios'
+import { backend } from '@/ENV/index'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 import { supabase } from '@/supabase/init'
@@ -88,7 +89,7 @@ export default defineComponent({
         this.registerIn = false
       } else {
         try {
-          const response = await axios.post('http://localhost:5000/register', {
+          const response = await axios.post(backend + 'register', {
             name: this.name,
             email: this.email,
             password: this.password

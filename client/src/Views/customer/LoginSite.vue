@@ -40,6 +40,7 @@
 <script>
 import { defineComponent } from 'vue'
 import axios from 'axios'
+import { backend } from '@/ENV/index'
 import { useDarkModeStore } from '@/stores/darkMode'
 import { useRouter } from 'vue-router'
 import NavBar from '@/components/global/NavBar.vue'
@@ -90,7 +91,7 @@ export default defineComponent({
   methods: {
     async login() {
       try {
-        const response = await axios.post('http://localhost:5000/login', {
+        const response = await axios.post(backend + 'login', {
           email: this.email,
           password: this.password
         })

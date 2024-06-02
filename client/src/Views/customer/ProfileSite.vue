@@ -119,10 +119,10 @@ export default defineComponent({
 
     onMounted(async () => {
       try {
-        const notif = await axios.get('http://localhost:5000/notif')
+        const notif = await axios.get(backend + 'notif')
         notifData.value = notif.data.notifData
 
-        const bangTin = await axios.get('http://localhost:5000/bangtin')
+        const bangTin = await axios.get(backend + 'bangtin')
         bangTinData.value = bangTin.data.bangTinData
         console.log(bangTinData)
 
@@ -182,6 +182,7 @@ export default defineComponent({
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import { backend } from '@/ENV/index'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 import { data } from 'autoprefixer'

@@ -27,6 +27,7 @@ import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/admin/SectionTitleLineWithButton.vue'
 import SectionBannerStarOnGitHub from '@/components/admin/SectionBannerStarOnGitHub.vue'
 import axios from 'axios'
+import { backend } from '@/ENV/index'
 import { reactive } from 'vue'
 
 const chartData = ref(null)
@@ -42,7 +43,7 @@ const fillChartData = () => {
 }
 
 const countData = async () => {
-  const response = await axios.post('http://localhost:5000/overView/count')
+  const response = await axios.post(backend + 'overView/count')
   overviewData.client = response.data.client
   overviewData.payment = response.data.payment
   overviewData.court = response.data.court

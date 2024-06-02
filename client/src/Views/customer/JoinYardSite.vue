@@ -151,6 +151,7 @@ import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 import vueAwesomePaginate from '@/components/items/vue-awesome-paginate.vue'
 import axios from 'axios'
+import { backend } from '@/ENV/index'
 import { reactive, onMounted } from 'vue'
 
 export default {
@@ -266,7 +267,7 @@ export default {
   methods: {
     async ListOfNews() {
       try {
-        const response = await axios.post('http://localhost:5000/joinYard/takeNews')
+        const response = await axios.post(backend + 'joinYard/takeNews')
 
         console.log(response.data.data)
         this.news = response.data.data
@@ -276,7 +277,7 @@ export default {
     },
     async GetItem() {
       try {
-        const response = await axios.post('http://localhost:5000/joinYard/selectItem')
+        const response = await axios.post(backend + 'joinYard/selectItem')
         console.log(response.data.data)
         this.data = response.data.data
       } catch (error) {
@@ -310,7 +311,7 @@ export default {
         this.status = 'Fill all * information'
       } else {
         try {
-          const response = await axios.post('http://localhost:5000/joinYard/submit', {
+          const response = await axios.post(backend + 'joinYard/submit', {
             name: this.selectedName,
             address: this.selectedAddress,
             date: this.selectedDate,

@@ -49,6 +49,7 @@
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 import vueAwesomePaginate from '@/components/items/vue-awesome-paginate.vue'
+import { backend } from '@/ENV/index'
 import axios from 'axios'
 export default {
   components: {
@@ -78,7 +79,7 @@ export default {
   methods: {
     async ListOfCourtStatus() {
       try {
-        const response = await axios.post('http://localhost:5000/listOfCourt', {
+        const response = await axios.post(backend + 'listOfCourt', {
           district: localStorage.getItem('selectedDistrict')
         })
 

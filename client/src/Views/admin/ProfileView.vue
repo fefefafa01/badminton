@@ -14,6 +14,7 @@ import UserCard from '@/components/admin/UserCard.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/admin/SectionTitleLineWithButton.vue'
 import axios from 'axios'
+import { backend } from '@/ENV/index'
 
 // const mainStore = useMainStore()
 
@@ -29,7 +30,7 @@ const passwordForm = reactive({
 })
 
 const submitProfile = async () => {
-  const response = await axios.post('http://localhost:5000/changeAdminInfo/info', {
+  const response = await axios.post(backend + 'changeAdminInfo/info', {
     curName: localStorage.getItem('user_name'),
     curEmail: localStorage.getItem('user_email'),
     name: profileForm.name,
@@ -46,7 +47,7 @@ const submitProfile = async () => {
 }
 
 const submitPass = async () => {
-  await axios.post('http://localhost:5000/changeAdminInfo/password', {
+  await axios.post(backend + 'changeAdminInfo/password', {
     curPass: passwordForm.password_current,
     password: passwordForm.password,
     email: localStorage.getItem('user_email'),

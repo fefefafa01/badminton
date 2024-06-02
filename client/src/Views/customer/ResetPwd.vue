@@ -49,6 +49,7 @@ import { defineComponent } from 'vue'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 import axios from 'axios'
+import { backend } from '@/ENV/index'
 
 export default defineComponent({
   name: 'HeaderLoggin',
@@ -95,7 +96,7 @@ export default defineComponent({
         this.status = 'Mật khẩu không trùng khớp'
         console.log(this.status)
       } else {
-        const response = await axios.post('http://localhost:5000/login/resetPwd', {
+        const response = await axios.post(backend + 'login/resetPwd', {
           email: this.email,
           password: this.newPassword
         })

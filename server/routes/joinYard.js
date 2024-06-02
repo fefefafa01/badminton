@@ -49,6 +49,7 @@ router.post('/takeNews', async (req, res) => {
   const { data, error } = await db
     .from("court_news")
     .select("*")
+    .order('news_id', {ascending: true })
 
   if (error) {
     console.error(error);

@@ -77,6 +77,7 @@
 
 <script>
 import axios from 'axios'
+import { backend } from '@/ENV/index'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 export default {
@@ -107,7 +108,7 @@ export default {
       this.date = localStorage.getItem('mytime')
       this.item = JSON.parse(localStorage.getItem('yardDetails'))
       try {
-        const response = await axios.post('http://localhost:5000/CourtDetail', {
+        const response = await axios.post(backend + 'CourtDetail', {
           item: this.item,
           date: this.date
         })
@@ -192,7 +193,7 @@ export default {
         }
 
         // try {
-        //   const response = await axios.post('http://localhost:5000/saveFrame', {
+        //   const response = await axios.post(backend + 'saveFrame', {
         //     date: this.date,
         //     slots: this.slots,
         //     yard_id: this.item.yard_id

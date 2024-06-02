@@ -46,6 +46,7 @@ import { defineComponent } from 'vue'
 import NavBar from '@/components/global/NavBar.vue'
 import FooterBar from '@/components/global/FooterBar.vue'
 import axios from 'axios'
+import { backend } from '@/ENV/index'
 export default defineComponent({
   components: {
     NavBar,
@@ -69,7 +70,7 @@ export default defineComponent({
     },
     async confirmPayment() {
       try {
-        const response = await axios.post('http://localhost:5000/saveFrame', {
+        const response = await axios.post(backend + 'saveFrame', {
           date: this.paymentInfo.date,
           slots: this.paymentInfo.slots,
           yard_id: this.paymentInfo.yard_id,
