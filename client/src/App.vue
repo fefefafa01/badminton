@@ -40,8 +40,15 @@ body {
   padding: 60px;
 }
 .back_ground {
-  background-color: #1f2833;
+  background-color: #1f2833; /* Màu nền */
   display: flex;
   flex-direction: column;
+  background-image: url('./assets/images/badminton-icon-shuttlecock-net-badminton-stadium_hvgxvbcp__F0013.png'); /* Thay 'path_to_your_image' bằng đường dẫn đến hình ảnh của bạn */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100%;
+  width: 100%;
+  background-blend-mode: multiply; /* Đặt độ trong suốt từ 0 (hoàn toàn trong suốt) đến 1 (hoàn toàn không trong suốt) */
 }
 </style>

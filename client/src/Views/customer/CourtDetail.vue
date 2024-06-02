@@ -20,6 +20,20 @@
           </p>
         </div>
       </div>
+      <div class="rules">
+        <span
+          style="
+            display: flex;
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+            font-size: 25px;
+          "
+        >
+          Quy định:
+        </span>
+        <div class="rules-content" v-html="regulation"></div>
+      </div>
       <div class="mt-5">
         <table class="table table-custom">
           <thead>
@@ -94,7 +108,8 @@ export default {
       slots: [],
       courts: [],
       unValidSlots: [],
-      user_id: ''
+      user_id: '',
+      regulation: ''
     }
   },
 
@@ -107,6 +122,7 @@ export default {
       this.user_id = localStorage.getItem('user_id')
       this.date = localStorage.getItem('mytime')
       this.item = JSON.parse(localStorage.getItem('yardDetails'))
+      this.regulation = this.item.regulation.replaceAll('\n', '<br>')
       try {
         const response = await axios.post(backend + 'CourtDetail', {
           item: this.item,
@@ -223,6 +239,23 @@ export default {
   flex-direction: column;
   min-height: 500px;
   align-items: center; /* Căn giữa theo chiều ngang */
+}
+
+.rules {
+  padding: 10px;
+  margin-top: 50px;
+  border-radius: 20px;
+
+  height: 200px;
+  width: 80%;
+  background-color: rgb(69, 162, 157);
+  color: mistyrose;
+}
+
+.rules-content {
+  margin-top: 10px;
+  width: 100%;
+  font-size: 20px;
 }
 
 .item {
